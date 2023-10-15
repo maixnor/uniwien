@@ -1,0 +1,8 @@
+task n:
+	g++ task{{n}}/main.cpp -o out
+	./out
+
+
+clean:
+	rm out
+	rm task*/out
