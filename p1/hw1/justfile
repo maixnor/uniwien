@@ -1,5 +1,5 @@
 task n:
-	g++ task{{n}}/main.cpp -o out
+	clang++ task{{n}}/main.cpp -o out
 	./out
 
 
