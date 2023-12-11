@@ -1,0 +1,7 @@
+task n:
+	clang++ task{{n}}/main.cpp task{{n}}/Complex.cpp -o out
+	./out
+
+
+clean:
+	rm out
