@@ -1,0 +1,7 @@
+task n:
+	clang++ task{{n}}/main.cpp -o out
+	./out
+
+
+clean:
+	rm out
