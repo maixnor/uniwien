@@ -51,7 +51,9 @@
             # Register IRkernel if not already done
             Rscript -e "IRkernel::installspec(user = FALSE)" || true
 
-						code ./notebooks
+						# --wait for the process to not exit immediately
+						code --install-extension ms-toolsai.jupyter
+						code ./notebooks --wait
           '';
         };
       in
