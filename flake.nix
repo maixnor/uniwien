@@ -44,7 +44,7 @@
               kill $JUPYTER_PID
 
 							git add .
-							git commit -m "snapshot"
+							git commit -m "snapshot notebooks"
 							git push
             }
             trap cleanup EXIT
