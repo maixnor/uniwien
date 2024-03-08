@@ -1,0 +1,3 @@
+
+jupyter:
+	nix develop --impure
