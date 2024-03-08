@@ -54,6 +54,7 @@
 						# --wait for the process to not exit immediately
 						code --install-extension ms-toolsai.jupyter
 						code ./notebooks --wait
+						exit
           '';
         };
       in
