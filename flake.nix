@@ -9,10 +9,14 @@
   outputs = { self, nixpkgs, flake-utils, ... }: 
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-        myEnv = pkgs.mkShell {
+				pkgs = import nixpkgs { 
+					inherit system;
+
+					config = {
+						allowUnfree = true;
+					};
+				};
+        jupyterEnv = pkgs.mkShell {
           buildInputs = with pkgs; [
             (python3.withPackages (ps: with ps; [
               ipython
@@ -27,7 +31,8 @@
             ]))
             R
             rPackages.IRkernel
-            vscode
+            vscodium
+            vscode-extensions.ms-toolsai.jupyter
             # Add any R packages here, e.g., rPackages.ggplot2, rPackages.dplyr, etc.
           ];
           shellHook = ''
@@ -52,14 +57,13 @@
             Rscript -e "IRkernel::installspec(user = FALSE)" || true
 
 						# --wait for the process to not exit immediately
-						code --install-extension ms-toolsai.jupyter
 						code ./notebooks --wait
 						exit
           '';
         };
       in
       {
-        devShell = myEnv;
+        devShell = jupyterEnv;
       });
 }
 
