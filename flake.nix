@@ -32,8 +32,6 @@
             R
             rPackages.IRkernel
             vscodium
-            vscode-extensions.ms-toolsai.jupyter
-            # Add any R packages here, e.g., rPackages.ggplot2, rPackages.dplyr, etc.
           ];
           shellHook = ''
 						git pull --all
@@ -57,7 +55,8 @@
             Rscript -e "IRkernel::installspec(user = FALSE)" || true
 
 						# --wait for the process to not exit immediately
-						code ./notebooks --wait
+						codium --install-extension ms-toolsai.jupyter
+						codium ./notebooks --wait
 						exit
           '';
         };
