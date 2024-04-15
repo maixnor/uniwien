@@ -1,0 +1,17 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Welche beiden (apt) Kommandos hast du verwendet um alle Systemupdates einzuspielen?
+apt update && apt upgrade
+# Welche vim Version wurde ueber die Paketverwaltung installiert?
+vim 8.2
+# Im Zuge der Installation von vim wurden zwei weitere Pakete als Abhaengigkeiten installiert. Welche waren es?
+vim-runtime libgpm2
+# Welche Linux Kernel Version läuft aktuell auf dem System?
+Linux 5.10.0-28-amd64 x86_64
+# Welche Debian-Version ist am System installiert und was ist der Versions-Codename?
+11.3.0 bullseye
+# Welchen Kommandozeilen-Editor hast du dir ausgesucht?
+vim

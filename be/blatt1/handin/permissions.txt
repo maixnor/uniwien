@@ -1,0 +1,10 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Welcher Eintrag wurde in /var/log/auth.log geschrieben, nachdem alice auf /etc/shadow zugegriffen hat?
+Apr  3 03:29:24 12302260 sudo:    alice : user NOT in sudoers ; TTY=pts/1 ; PWD=/home/benjaminn ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+# Warum sind die Hashes in /etc/shadow nicht gleich
+salted hashes -> sonst waere ein rainbow table zu einfach
+

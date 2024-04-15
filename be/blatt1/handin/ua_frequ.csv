@@ -1,0 +1,54 @@
+nr,ua
+1054,Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0):
+275,Mozilla/5.0:
+199,Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36:
+142,Python-urllib/2.7:
+70,nutch-1.4/Nutch-1.4:
+24,ZmEu:
+19,Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36:
+13,Mozilla/4.0 (compatible; MSIE 4.01; Windows 98):
+10,Mozilla/4.0 (compatible; MSIE 6.0; Windows 98):
+10,masscan/1.0 (https://github.com/robertdavidgraham/masscan):
+8,Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.12) Gecko/20101026 Firefox/3.6.12:
+7,Mozilla/5.0 (Windows NT 5.1; rv:9.0.1) Gecko/20100101 Firefox/9.0.1:
+6,Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google favicon:
+6,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/6.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E):
+5,Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36:
+5,Mozilla/5.0 (compatible; Zollard; Linux):
+4,Python-urllib/1.17:
+4,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1):
+4,Java/1.7.0_60:
+3,PycURL/7.19.3 libcurl/7.35.0 GnuTLS/2.12.23 zlib/1.2.8 libidn/1.28 librtmp/2.3:
+3,Mozilla/5.0 (Windows NT 6.1; Win64; x64) KomodiaBot/1.0:
+3,Mozilla/5.0 (Windows NT 6.1; rv:24.0) Gecko/20100101 Firefox/24.0:
+3,Mozilla/5.0 (compatible; Muenster University of Applied Sciences; +http://fb02itsscan.fh-muenster.de):
+3,Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2):
+2,Python-httplib2/0.7.4 (gzip):
+2,Opera/9.0 (Windows NT 5.1; U; en):
+2,Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36:
+2,Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0:
+2,Mozilla/3.0 (compatible; Indy Library):
+2,LSSRocketCrawler/1.0 LightspeedSystems:
+1,Python-urllib/2.6:
+1,python-requests/0.12.1:
+1,Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.53 Safari/533.4:
+1,Mozilla/5.0 (X11; Ubuntu; Linux i686 on x86_64; rv:20.0) Gecko/20100101 Firefox/20.0:
+1,Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20140319 Firefox/24.0 Iceweasel/24.4.0:
+1,Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.77 Safari/537.1:
+1,Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13:
+1,Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.98 Safari/534.13:
+1,Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (FM Scene 4.6.1):
+1,Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.91 Safari/534.30:
+1,Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.68 Safari/534.24:
+1,Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/xxx.x (KHTML like Gecko) Safari/12x.x:
+1,Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.68 Safari/534.24:
+1,Mozilla/5.0 Galeon/1.0.2 (X11; Linux i686; U;) Gecko/20011224:
+1,Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1):
+1,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E):
+1,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.2):
+1,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322):
+1,Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; InfoPath.1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; MS-RTC LM 8; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729):
+1,Mozilla/2.0 (compatible; MSIE 3.0B; Win32):
+1,Morfeus Fucking Scanner:
+1,Lynx/2.8.8dev.2 libwww-FM/2.14 SSL-MM/1.4.1:
+1,Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 OpenSSL/0.9.8e-fips-rhel5:

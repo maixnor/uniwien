@@ -1,0 +1,5 @@
+
+# Warum?
+Vim ist fast so universell wie Linux, eine VM box ohne vim ist fast nicht anzutreffen.
+Die Keybinds sind wirklich geil, wenn man mit ihnen umgehen kann und z.b. mit gf zu files springen kann, wenn man ueber dem Pfad sich befindet
+

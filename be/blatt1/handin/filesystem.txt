@@ -1,0 +1,7 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Zum Ueberschreiben deiner Partition mit Nullen hast du vermutlich /dev/zero verwendet. Welche drei aehnlichen Device-Files gibt es analog zu /dev/zero noch?
+/dev/full    /dev/random    /dev/null

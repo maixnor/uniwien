@@ -1,0 +1,12 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Wie viele Logeintraege (= Zeilen) wurden insgesamt in den Logfiles aufgezeichnet?
+1915
+# Wie viele Bytes hat das groesste Logfile?
+68966
+# Welche IPs verwenden den User-Agent "Python-urllib/2.7"?
+212.129.3.193 222.129.234.80 91.121.18.214 91.121.98.175
+

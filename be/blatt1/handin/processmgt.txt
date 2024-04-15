@@ -1,0 +1,12 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Was wurde auf der Shell ausgegeben, nachdem das zombieland Programm ein SIGCHLD Signal (siehe Punkt 6) bekommen hat?
+[1]+  Killed                  ./zombieland 1000 &> ./output
+# Was wurde auf der Shell ausgegeben, nachdem das zombieland Programm ein SIGTERM Signal (siehe Punkt 8) bekommen hat?
+[1]+  Terminated              ./zombieland 1000 &> ./output
+# Welcher `Nice`-Wert wird standardmaessig fuer einen neuen Prozess gesetzt?
+0 -> Prio 20
+
