@@ -56,7 +56,7 @@
 
 						# --wait for the process to not exit immediately
 						codium --install-extension ms-toolsai.jupyter
-						codium ./notebooks --wait
+						codium . --wait
 						exit
           '';
         };
