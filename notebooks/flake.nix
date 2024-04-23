@@ -46,7 +46,7 @@
               echo "Stopping Jupyter server..."
               kill $JUPYTER_PID
 
-							git add .
+							git add ./notebooks
 							git commit -m "snapshot notebooks"
 							git push
             }
