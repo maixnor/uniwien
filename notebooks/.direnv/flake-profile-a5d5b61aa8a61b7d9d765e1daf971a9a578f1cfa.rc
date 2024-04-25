@@ -35,13 +35,13 @@ NIX_CC='/nix/store/ln6zld1ia7rxddmxgbpfhrmb42rbxdw8-gcc-wrapper-13.2.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=5a0r9ryx5z -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=qkz967bdxb -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
 NIX_HARDENING_ENABLE='bindnow format fortify fortify3 pic relro stackprotector strictoverflow'
 export NIX_HARDENING_ENABLE
-NIX_LDFLAGS='-rpath /home/maixnor/repo/uniwien/outputs/out/lib  -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib'
+NIX_LDFLAGS='-rpath /home/maixnor/repo/uniwien/notebooks/outputs/out/lib  -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib'
 export NIX_LDFLAGS
 NIX_NO_SELF_RPATH='1'
 NIX_STORE='/nix/store'
@@ -135,7 +135,7 @@ name='nix-shell-env'
 export name
 nativeBuildInputs=''
 export nativeBuildInputs
-out='/home/maixnor/repo/uniwien/outputs/out'
+out='/home/maixnor/repo/uniwien/notebooks/outputs/out'
 export out
 outputBin='out'
 outputDev='out'
@@ -166,7 +166,7 @@ preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
 declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
 preferLocalBuild='1'
 export preferLocalBuild
-prefix='/home/maixnor/repo/uniwien/outputs/out'
+prefix='/home/maixnor/repo/uniwien/notebooks/outputs/out'
 declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
 propagatedBuildInputs=''
 export propagatedBuildInputs
@@ -198,7 +198,7 @@ shellHook='						git pull --all
 
 						# --wait for the process to not exit immediately
 						codium --install-extension ms-toolsai.jupyter
-						codium ./notebooks --wait
+						codium . --wait
 						exit
 '
 export shellHook
