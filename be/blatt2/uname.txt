@@ -1,0 +1,5 @@
+
+The uname system call has the number 0x4C (or 0x44 on some older systems) under x86_64.
+
+The first syscall parameter is stored in the rdi register under x86_64.
+

@@ -1,17 +1,13 @@
-extern "C" {
-#include <sys/utsname.h>
+#include <stdio.h>
 #include <unistd.h>
-}
-#include <iostream>
+#include <sys/utsname.h>
 
 int main() {
-    struct utsname unameData;
-    uname(&unameData);
-    
-    std::cout << "Hostname: " << unameData.nodename << std::endl;
-    std::cout << "OS: " << unameData.sysname << std::endl;
-    std::cout << "Version: " << unameData.version << std::endl;
-    std::cout << "Release: " << unameData.release << std::endl;
-    
+    struct utsname buf;
+    uname(&buf);
+    printf("Hostname: %s\n", buf.nodename);
+    printf("OS: %s\n", buf.sysname);
+    printf("Version: %s\n", buf.version);
+    printf("Release: %s\n", buf.release);
     return 0;
 }
