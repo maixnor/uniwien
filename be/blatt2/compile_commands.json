@@ -1,0 +1,101 @@
+[
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/gcc",
+			"-std=gnu11",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-D_GNU_SOURCE",
+			"-o",
+			"uname",
+			"uname.c"
+		],
+		"file": "uname.c"
+	},
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/gcc",
+			"-std=gnu11",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-D_GNU_SOURCE",
+			"-o",
+			"statx",
+			"statx.c"
+		],
+		"file": "statx.c"
+	},
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/gcc",
+			"-std=gnu11",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-D_GNU_SOURCE",
+			"-o",
+			"killall",
+			"killall.c"
+		],
+		"file": "killall.c"
+	},
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/g++",
+			"-std=gnu++20",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-o",
+			"uname",
+			"uname.cpp"
+		],
+		"file": "uname.cpp"
+	},
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/g++",
+			"-std=gnu++20",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-o",
+			"statx",
+			"statx.cpp"
+		],
+		"file": "statx.cpp"
+	},
+	{
+		"directory": "/home/<your_mnr>",
+		"arguments": [
+			"/usr/bin/g++",
+			"-std=gnu++20",
+			"-Os",
+			"-pedantic",
+			"-Wall",
+			"-Wextra",
+			"-Werror",
+			"-o",
+			"killall",
+			"killall.cpp"
+		],
+		"file": "killall.cpp"
+	}
+]
