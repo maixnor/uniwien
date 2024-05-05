@@ -12,20 +12,25 @@ extern "C" {
 #include<iostream>
 #include<string>
 
+using namespace std;
+
 int main(int argc, const char *argv[]) {
      
     struct statx stats;
 
-    statx(argc, argv[1],AT_STATX_SYNC_AS_STAT,STATX_UID | STATX_GID, &stats);
-    std::cout << "UID: " << stats.stx_uid << ", GID: " << stats.stx_gid << "\n"; 
+    const char *arg_1 = argv[1];
 
-    statx(argc, argv[1],AT_STATX_SYNC_AS_STAT,STATX_SIZE, &stats);
-    std::cout << "Size: " << stats.stx_size << "\n";
+    statx(argc, arg_1, AT_STATX_SYNC_AS_STAT, STATX_UID | STATX_GID, &stats);
+    cout << "UID: " << stats.stx_uid << ", GID: " << stats.stx_gid << "\n"; 
 
-    statx(argc, argv[1],AT_STATX_SYNC_AS_STAT, STATX_MODE, &stats);
+    statx(argc, arg_1, AT_STATX_SYNC_AS_STAT, STATX_SIZE, &stats);
+    cout << "Size: " << stats.stx_size << "\n";
+
+    statx(argc, arg_1, AT_STATX_SYNC_AS_STAT, STATX_MODE, &stats);
     mode_t mode = stats.stx_mode & 0777;
     
-    std::string permissions;
+    string permissions = "";
+
     permissions += (mode & S_IRUSR) ? 'r' : '-';
     permissions += (mode & S_IWUSR) ? 'w' : '-';
     permissions += (mode & S_IXUSR) ? 'x' : '-';
@@ -36,6 +41,7 @@ int main(int argc, const char *argv[]) {
     permissions += (mode & S_IWOTH) ? 'w' : '-';
     permissions += (mode & S_IXOTH) ? 'x' : '-';
 
-    std::cout << permissions;
+    cout << permissions << endl;
+
     return EXIT_SUCCESS;
 }
