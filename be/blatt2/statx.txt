@@ -1,0 +1,8 @@
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Welche Kombination von `statx` mask Konstanten ergibt den Wert `0xa8`? (Tipp: `strace`)
+STATX_UID STATX_ATIME STATX_CTIME
+
