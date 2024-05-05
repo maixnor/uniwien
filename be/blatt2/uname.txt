@@ -4,7 +4,7 @@
 # die ganze Antwort in eine Zeile.
 #
 # Welche Nummer (in Hex-Dezimal mit Präfix "0x") hat der uname Syscall (unter x86_64)?
-0x319
+0x3f
 # In welchem Assembly-Register (unter x86\_64) wird der erste Syscall Parameter gespeichert?
 rdi register
 
