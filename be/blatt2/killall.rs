@@ -1,28 +1,32 @@
-
-extern crate libc;
 use std::fs;
-use libc::kill;
-use std::process;
+use std::io::{self, Read};
+use libc::*;
 
-fn main() {
+fn main() -> io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
     if args.len() < 2 {
-        process::exit(1);
+        eprintln!("Usage: {} <process_name>", args[0]);
+        std::process::exit(1);
     }
+    let to_kill = &args[1];
 
-    let proc_name = &args[1];
-
-    for entry in fs::read_dir("/proc").unwrap() {
+    for entry in fs::read_dir("/proc")? {
         if let Ok(entry) = entry {
-            if let Ok(pid_str) = entry.file_name().into_string() {
-                let path = format!("/proc/{}/cmdline", pid_str);
-                if let Ok(contents) = fs::read_to_string(&path) {
-                    if contents.contains(proc_name) {
-                        unsafe { kill (pid_str.parse::<i32>().unwrap(), libc::SIGKILL) };
+            let pid_file = entry.path().join("comm");
+            if let Ok(mut file) = fs::File::open(&pid_file) {
+                let mut cmdline = String::new();
+                file.read_to_string(&mut cmdline)?;
+                if cmdline.contains(to_kill) {
+                    if let Some(pid_str) = entry.file_name().to_str() {
+                        if let Ok(pid) = pid_str.parse::<i32>() {
+                            unsafe { kill(pid, libc::SIGKILL) } ;
+                        }
                     }
                 }
             }
         }
     }
+
+    Ok(())
 }
 
