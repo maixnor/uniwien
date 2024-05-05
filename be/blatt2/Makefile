@@ -1,4 +1,4 @@
-PROGS=uname statx killall
+PROGS=uname killall
 
 # For compiling .S (assembly) files
 AS=gcc
@@ -15,7 +15,7 @@ RFLAGS=--edition=2021 --extern libc=./libc.rlib -D warnings
 
 # For compiling .c files
 CC=gcc
-CFLAGS=-std=gnu11 -Os -pedantic -Wall -Wextra -Werror -D_GNU_SOURCE
+CFLAGS=-std=gnu11 -Os -pedantic -Wall -Wextra -Werror -D_GNU_SOURCE 
 
 # For compiling .cpp files
 CXX=g++

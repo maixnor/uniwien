@@ -1,24 +1,36 @@
-extern "C" {
-#include <sys/stat.h>
-#include <fcntl.h>
+#include <stdio.h>
 #include <unistd.h>
-#include <sys/syscall.h>
-}
-#include <iostream>
+#include <sys/statx.h>
 
-// Simplified example. Full implementation would check return values for errors.
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <path>\n";
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
         return 1;
     }
-    
-    struct statx buf;
-    syscall(SYS_statx, AT_FDCWD, argv[1], 0, STATX_BASIC_STATS, &buf);
-    
-    std::cout << "UID: " << buf.stx_uid << ", GID: " << buf.stx_gid << std::endl;
-    std::cout << "Size: " << buf.stx_size << std::endl;
-    // Permissions would require bitwise AND to extract and format properly.
-    
+
+    struct statx sb;
+    int result = statx(argv[1], &sb, STATX_BASIC_STATS);
+    if (result == -1) {
+        perror("statx");
+        return 1;
+    }
+
+    printf("UID: %u, GID: %u\n", sb.uid, sb.gid);
+    printf("Size: %zu\n", sb.size);
+    printf("%s\n", rwx_to_string(sb.mode));
+
     return 0;
+}
+
+// thank you llama3
+char *rwx_to_string(mode_t mode) {
+    static char buf[10];
+    sprintf(buf, "%c%c%c%c%c%c",
+             (mode & S_IRUGO) ? 'r' : '-',
+             (mode & S_IWUGO) ? 'w' : '-',
+             (mode & S_IXUGO) ? 'x' : '-',
+             (mode >> 6) & 7,
+             (mode >> 3) & 7,
+             mode & 7);
+    return buf;
 }
