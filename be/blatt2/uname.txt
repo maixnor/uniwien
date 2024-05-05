@@ -1,5 +1,10 @@
-
-The uname system call has the number 0x4C (or 0x44 on some older systems) under x86_64.
-
-The first syscall parameter is stored in the rdi register under x86_64.
+# Schreiben Sie die Antwort für jede der angegebenen
+# Fragen auf die Zeile nach der jeweiligen Frage, die
+# nicht mit einem "#" Symbol beginnt. Schreiben Sie
+# die ganze Antwort in eine Zeile.
+#
+# Welche Nummer (in Hex-Dezimal mit Präfix "0x") hat der uname Syscall (unter x86_64)?
+0x319
+# In welchem Assembly-Register (unter x86\_64) wird der erste Syscall Parameter gespeichert?
+rdi register
 
