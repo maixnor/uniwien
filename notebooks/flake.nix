@@ -25,12 +25,9 @@
               numpy
               pandas
               matplotlib
-              scipy
 							sympy
               # Add any additional Python packages here
             ]))
-            R
-            rPackages.IRkernel
             vscodium
           ];
           shellHook = ''
@@ -48,11 +45,8 @@
 
 							git add ./notebooks
 							git commit -m "snapshot notebooks"
-							git push
             }
             trap cleanup EXIT
-            # Register IRkernel if not already done
-            Rscript -e "IRkernel::installspec(user = FALSE)" || true
 
 						# --wait for the process to not exit immediately
 						codium --install-extension ms-toolsai.jupyter
