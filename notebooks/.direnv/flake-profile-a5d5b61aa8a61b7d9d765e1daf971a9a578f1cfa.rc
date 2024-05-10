@@ -35,21 +35,13 @@ NIX_CC='/nix/store/ln6zld1ia7rxddmxgbpfhrmb42rbxdw8-gcc-wrapper-13.2.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-<<<<<<< Updated upstream
-NIX_CFLAGS_COMPILE=' -frandom-seed=qkz967bdxb -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include'
-=======
 NIX_CFLAGS_COMPILE=' -frandom-seed=kdjxry9517 -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include -isystem /nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/include'
->>>>>>> Stashed changes
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
 NIX_HARDENING_ENABLE='bindnow format fortify fortify3 pic relro stackprotector strictoverflow'
 export NIX_HARDENING_ENABLE
-<<<<<<< Updated upstream
 NIX_LDFLAGS='-rpath /home/maixnor/repo/uniwien/notebooks/outputs/out/lib  -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib'
-=======
-NIX_LDFLAGS='-rpath /home/maixnor/uniwien/notebooks/outputs/out/lib  -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib -L/nix/store/lv0ywvv9sklsb8071p545lrcds2qnmxm-python3-3.11.8-env/lib'
->>>>>>> Stashed changes
 export NIX_LDFLAGS
 NIX_NO_SELF_RPATH='1'
 NIX_STORE='/nix/store'
@@ -143,11 +135,7 @@ name='nix-shell-env'
 export name
 nativeBuildInputs=''
 export nativeBuildInputs
-<<<<<<< Updated upstream
 out='/home/maixnor/repo/uniwien/notebooks/outputs/out'
-=======
-out='/home/maixnor/uniwien/notebooks/outputs/out'
->>>>>>> Stashed changes
 export out
 outputBin='out'
 outputDev='out'
@@ -178,11 +166,7 @@ preConfigurePhases=' updateAutotoolsGnuConfigScriptsPhase'
 declare -a preFixupHooks=('_moveToShare' '_multioutDocs' '_multioutDevs' )
 preferLocalBuild='1'
 export preferLocalBuild
-<<<<<<< Updated upstream
 prefix='/home/maixnor/repo/uniwien/notebooks/outputs/out'
-=======
-prefix='/home/maixnor/uniwien/notebooks/outputs/out'
->>>>>>> Stashed changes
 declare -a propagatedBuildDepFiles=('propagated-build-build-deps' 'propagated-native-build-inputs' 'propagated-build-target-deps' )
 propagatedBuildInputs=''
 export propagatedBuildInputs
