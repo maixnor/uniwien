@@ -46,9 +46,5 @@ ostream& operator<<(ostream&, const A_group&);
 vector<string> split(string s,char del);
 extern const vector<Adventurer> v_objects;
 
-#include"check.hr"  //Enthaelt Testroutinen, deren Kenntnis nicht zum Verstaendnis oder zum
-                    //
-                    //Loesen der Pruefungsaufgaben noetig ist
-
 #endif
 

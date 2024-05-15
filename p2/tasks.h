@@ -10,38 +10,52 @@
 #include<numeric>
 #include<memory>
 #include"vector.h"
-#include "adventurer.h"
+#include"adventurer.h"
 
 using namespace std;
 
 // AUFGABE 1
 pair<Adventurer, size_t> task1(const Vector<Adventurer>& v) {
     Adventurer result;
-    size_t maxE = 0;
-    for (const auto& adventurer : v) {
-        if (adventurer.get_a_class() == A_class::CLERIC || adventurer.get_a_class() == A_class::MONK) {
-            size_t eCount = count(adventurer.get_name(), 'e');
-            if (eCount > maxE) {
-                result = adventurer;
-                maxE = eCount;
-            }
-        }
-    }
-    
-    if (result.get_a_class() != A_class::CLERIC && result.get_a_class() != A_class::MONK) {
-        throw runtime_error("List does not contain a CLERIC or MONK");
-    }
-    
-    size_t countHigherWealth = 0;
-    for (const auto& adventurer : v) {
-        if (adventurer.get_wealth() > result.get_wealth()) {
-            ++countHigherWealth;
-        }
-    }
-    
-    return make_pair(result, countHigherWealth);
-}
 
+    // filter
+    std::vector<Adventurer> class_matches;
+    std::copy_if(
+        v.begin(),
+        v.end(),
+        std::back_inserter(class_matches),
+        [](const auto& x) { return x.get_a_class() == A_class::CLERIC || x.get_a_class() == A_class::MONK; }
+      );
+
+    // reduce
+    std::vector<pair<Adventurer, size_t>> eCounts;
+    std::transform(
+        class_matches.begin(),
+        class_matches.end(),
+        std::back_inserter(eCounts),
+        [] (const auto& x) { make_pair(x,  count(x.get_name().begin(), x.get_name().end(), 'e')); }
+      );
+
+    // sort + first
+    pair<Adventurer, size_t> highestECount;
+    highestECount = 
+      (* std::max_element(
+          eCounts.begin(),
+          eCounts.end(),
+          [] (const auto& a, const auto& b) { return a.second < b.second; }
+        ));
+    
+    // count
+    size_t wealth = highestECount.first.get_wealth();
+    size_t countHigherWealth = std::count_if(
+        v.begin(),
+        v.end(),
+        [&wealth] (const Adventurer& x) { return x.get_wealth() > wealth; }
+      );
+    
+
+    return make_pair(highestECount.first, countHigherWealth);
+}
 // AUFGABE 2
 
 

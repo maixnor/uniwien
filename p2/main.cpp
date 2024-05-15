@@ -19,7 +19,6 @@ int main() {
   // Der Vektor v_objects wird definiert und mit Daten befüllt.
   try {
 // AUFGABE 1
-/*
   std::cout << " ------------ Aufgabe 1 ---------- \n";
   {
     cout << "Test Aufgabe 1\n";
@@ -33,7 +32,7 @@ int main() {
     }
     try {
       Vector<Adventurer> big_V;
-      copy(v_objects, big_V);
+      std::copy(v_objects.begin(), v_objects.end(), big_V.begin());
       pair<Adventurer,size_t> res{task1(big_V)};
       std::cout << res.first << "\n" << res.second << "\n";
     }
@@ -67,8 +66,6 @@ int main() {
   }
   std::cout << " ------------ Ende Aufgabe 1 ---------- \n\n";
 // ENDE AUFGABE 1
-*/
-
 
 /*
 // AUFGABE 2
