@@ -1,105 +1,81 @@
+\section{Was für ein Tiger?}
 
-\section{Was fuer ein Tiger?}
+Schauen wir uns zunächst das vorgegebene Abstract\footnote{\url{https://arxiv.org/pdf/1906.05047}} an. Dabei sind alle Punkte markiert, die ich weiter recherchieren werde.
 
-Schauen wir uns zunaechst das vorgegebene Abstract\footnote{\url{https://arxiv.org/pdf/1906.05047}}
-an. Dabei sind alle diejenigen Punkte markiert, die ich weiter recherchieren werde.
+Wir stellen Tiger vor, ein Brillensystem, das Benutzern dabei hilft, die \textbf{20-20-20-Regel} anzuwenden, um die Symptome des \textbf{Computer Vision Syndroms} zu lindern. Es überwacht die Bildschirmaktivitäten des Benutzers und bietet Echtzeit-Feedback, um ihnen zu helfen, die Regel einzuhalten. Für eine präzise Erkennung der Bildschirmansicht entwickeln wir einen leichten multisensorischen Ansatz mit drei Sensorikmodalitäten: Farbe, \textbf{IMU} und \textbf{Lidar}. Außerdem gestalten wir das Echtzeit-Feedback, um Benutzer effektiv dabei zu unterstützen, die Regel einzuhalten. Unsere Evaluation zeigt, dass Tiger Bildschirmansichtsereignisse genau erkennt und unempfindlich gegenüber Unterschieden in Bildschirmtypen, Inhalten und Umgebungslicht ist. Unsere Benutzerstudie zeigt eine positive Wahrnehmung von Tiger hinsichtlich seiner Nützlichkeit, Akzeptanz und Echtzeit-Feedback.
 
-We propose Tiger, an eyewear system for helping users follow the \textbf{20-20-20 rule} to alleviate the \textbf{Computer Vision Syndrome} symptoms. It monitors user’s \textbf{screen viewing activities} and provides real-time feedback to help users follow the rule. For accurate screen viewing detection, we devise a light-weight multi-sensory fusion approach with three sensing modalities, color, \textbf{IMU}, and \textbf{lidar}. We also \textbf{design the real-time feedback} to effectively lead users to follow the rule. Our evaluation shows that Tiger accurately detects screen viewing events, and is robust to the differences in screen types, contents, and ambient light. Our user study shows positive perception of Tiger regarding its usefulness, acceptance, and real-time feedback.
-
-Um weitere Papers zu finden, verwende ich Google Scholar mit meinem SearXNG als Proxy. Alle Quellen (ausser anderweitig angegeben) finde ich ueber diese Methode.
+Um weitere Papers zu finden, verwende ich Google Scholar mit meinem SearXNG als Proxy. Alle Quellen (außer anderweitig angegeben) finde ich über diese Methode.
 
 \section{Recherche}
 
 \subsection{20-20-was}
 
-Das erste ist der erste Term mit dem ich nichts anfangen hab koennen. Von einer "20-20-20 Regel" habe ich bisher nichts zu tun gehabt, deswegen werde 
-ich mir dazu etwas Literatur\footnote{\url{https://journals.lww.com/ijo/fulltext/2023/05000/The_20_20_20_rule__Practicing_pattern_and.71.aspx}} anschauen.
+Zuerst war ich unsicher bezüglich des ersten Begriffs. Von einer "20-20-20-Regel" hatte ich bisher noch nichts gehört, deshalb werde ich mir dazu Literatur\footnote{\url{https://journals.lww.com/ijo/fulltext/2023/05000/The_20_20_20_rule__Practicing_pattern_and.71.aspx}} anschauen.
 
-Hier habe ich herausgefunden, dass die 20-20-20 Regel beschreibt nach 20 Minuten Bildschirmzeit 20 Sekunden in die Ferne zu schauen (>20 Fuss Entfernung). 
-Weiters bin ich auf Symptome gestossen, die durch die 20-20-20 Regel verhindert oder zumindest gelindert werden koennen.
-
-\newpage
+Hier habe ich herausgefunden, dass die 20-20-20-Regel besagt, dass man alle 20 Minuten für 20 Sekunden mindestens 20 Fuß (ungefähr 6 Meter) entfernt in die Ferne schauen soll. Weiterhin bin ich auf Symptome gestoßen, die durch die 20-20-20-Regel verhindert oder zumindest gelindert werden können.
 
 \begin{itemize}
-  \item doppelte Sicht
+  \item doppeltes Sehen
   \item juckende oder gereizte Augen
   \item Schwindel oder Kopfschmerzen
 \end{itemize}
 
-Ob es sich dabei - zumindest teilweise - 
-um das \textbf{Computer Vision Syndrome} handelt, werde ich jetzt herausfinden
+Ich werde nun herausfinden, ob diese Symptome teilweise dem \textbf{Computer Vision Syndrome} entsprechen.
 
 \subsection{Alptraum eines jeden Informatikers}
 
-Jetzt soll es also ein "Computer Vision Syndrome" geben. Jemanden der hauptberuflich auf Bildschirme starrt\footnote{Der Bug findet sich nicht von selbst!}
-macht das leicht nervoes. Allein nach dem Abstract dieses Papers\footnote{\url{https://www.sciencedirect.com/science/article/abs/pii/S0039625705000093}}
-stellt sich heraus, dass es sich tatsaechlich um aehnliche Symptome handelt, wie zuvor bereits bei der Quelle der 20-20-20 Regel. 
-Alle moeglichen Variationen dieser Symptome werden als Computer Vision Syndrome bezeichnet und treten offenbar bei vielen Erwachsenen auf.
+Es scheint also tatsächlich ein "Computer Vision Syndrome" zu geben. Für jemanden, der hauptberuflich Bildschirme betrachtet, ist das beunruhigend. Allein nach dem Abstract dieses Papers\footnote{\url{https://www.sciencedirect.com/science/article/abs/pii/S0039625705000093}} zeigt sich, dass es sich um ähnliche Symptome wie bei der 20-20-20-Regel handelt. Alle möglichen Variationen dieser Symptome werden als Computer Vision Syndrome bezeichnet und treten offenbar bei vielen Erwachsenen auf.
 
 \subsection{Aktiv - eher nicht}
 
-Das naechste was mir ins Auge gesprungen ist sind die \textbf{screen viewing activities} und ob es da mehr Unterscheidungen gibt als "schaut auf Bildschirm".
+Das nächste, was mir aufgefallen ist, sind die \textbf{screen viewing activities} und ob es dabei mehr Unterscheidungen gibt als nur "Bildschirm betrachten".
 
-Zunaechst kann ich nicht genau finden, wonach ich suche. Denn ich finde fast ausschliesslich Paper ueber Kinder, Jugendliche und junge Erwachsene.
-Aber ich habe ein neues Wort gelernt: "sedentary" - vor einem Bildschirm. Auch einiges bezueglich 
-Uebergewicht\footnote{\url{https://link.springer.com/article/10.1186/1471-2458-10-593}}
-und Verhaltensstoerungen\footnote{\url{https://publications.aap.org/pediatrics/article-abstract/126/5/e1011/65363/Children-s-Screen-Viewing-is-Related-to}}
-ist zu finden.
+Zuerst konnte ich nicht genau finden, wonach ich suchte, da ich fast ausschließlich Papers über Kinder, Jugendliche und junge Erwachsene fand. Aber ich habe ein neues Wort gelernt: "sedentär" - vor einem Bildschirm. Auch einiges bezüglich Übergewichtsproblemen\footnote{\url{https://link.springer.com/article/10.1186/1471-2458-10-593}} und Verhaltensstörungen\footnote{\url{https://publications.aap.org/pediatrics/article-abstract/126/5/e1011/65363/Children-s-Screen-Viewing-is-Related-to}} ist zu finden.
 
-Daher nehme ich an, dass sich bei diesem Wortlaut nicht um genauere Unterscheidungen geht, sondern mehr ein Ueberbegriff fuer jegliche Bildschirmzeit ist.
+Daher nehme ich an, dass es bei diesem Begriff nicht um genauere Unterscheidungen geht, sondern eher um einen Oberbegriff für jegliche Bildschirmzeit.
 
-\subsection{IH EM U}
+\subsection{IMU}
 
-IMU steht fuer Inertial Measurement Unit. Dieses kombiniert Gyroskop, Beschleunigungsmeter und Magnetometer zu einer Einheit, der IMU.
-Diese werden vielseitig verwendet, beispielsweise bei der Analyse von Gelenksbewegungen\footnote{\url{https://www.mdpi.com/1424-8220/14/4/6891}}
-in der Sportmedizin. Ich nehme mal stark an, dass es sich bei Motioncapture auch um diese Technologie handelt.
+IMU steht für Inertial Measurement Unit. Diese kombiniert Gyroskop, Beschleunigungsmesser und Magnetometer zu einer Einheit, der IMU.
+Diese werden vielseitig verwendet, beispielsweise bei der Analyse von Gelenksbewegungen\footnote{\url{https://www.mdpi.com/1424-8220/14/4/6891}} in der Sportmedizin. Ich nehme mal stark an, dass es sich bei Motion Capture auch um diese Technologie handelt.
 
 \section{Spekulazius}
 
 \subsection{Augenware}
 
-Im Abstract des urspruenglichen Papers wird von \textbf{eyewear} gesprochen. Ich nehme an, es wird eine Art Eye-Tracking Brille sein, mit der die
-Augenbewegungen festgehalten werden. Dadurch sind vermutlich einige Symptome des Computer Vision Syndrome erkennbar/messbar. Mit den IMU Sensoren
-werden vermutlich Bewegungen von Kopf und Koerper gemessen. Lidar kann ich mir nur vorstellen als Tracking der Umgebung, 
-beispielsweise Abstand zum Bildschirm, wobei dafuer denke ich billigere Sensoren genauso gut geeignet waeren.
+Im Abstract des ursprünglichen Papers wird von \textbf{eyewear} gesprochen. Ich nehme an, es handelt sich um eine Art Eye-Tracking-Brille, mit der die Augenbewegungen festgehalten werden können. Dadurch sind vermutlich einige Symptome des Computer Vision Syndroms erkennbar/messbar. Mit den IMU-Sensoren werden vermutlich Bewegungen von Kopf und Körper gemessen (der sich kaum bewegt, wenn man auf einen Bildschirm schaut), und mit Lidar wird wahrscheinlich der Abstand zum Bildschirm oder anderen Objekten gemessen.
 
 \subsection{20-20-20 Einhalten}
 
-Nachdem das Ziel das Einhalten der 20-20-20 Regel ist, wird vermutlich auf erste Anzeichen von Computer Vision Syndrome geachtet. 
-Vermutlich treten nach laengeren Zeiten vorm Bildschirm die Symptome selbst bei Einhaltung der Regel frueher oder oefter als alle 20 Minuten auf.
-Demnach kann gewarnt beziehungsweise erinnert werden, die 20-20-20 Regel jetzt anzuwenden und eine kurze Pause einzulegen.
+Da das Ziel das Einhalten der 20-20-20-Regel ist, wird vermutlich auf erste Anzeichen des Computer Vision Syndroms geachtet. Vermutlich treten nach längeren Zeiten vor dem Bildschirm die Symptome selbst bei Einhaltung der Regel früher oder öfter als alle 20 Minuten auf.
+Demnach kann gewarnt oder erinnert werden, die 20-20-20-Regel jetzt anzuwenden und eine kurze Pause einzulegen.
 
-Genauso wird es auch moeglich sein den Effekt der Pause besser zu messen und gegebenfalls die Pause laenger als nur 20 Sekunden
-zu gestalten, sollten alleine 20 Sekunden nicht ausreichen. Hier kommt mir gerade in den Sinn, dass Lidar gemeinsam mit Eye-Tracking auch 
-dafuer werden kann, um herauszufinden auf welche Objekte geschaut wird in der Pause und demnach ob die mindestens 7 Meter Entfernung 
-eingehalten werden.
+Es wird auch möglich sein, den Effekt der Pause besser zu messen und gegebenenfalls die Pause länger als nur 20 Sekunden zu gestalten, sollten alleine 20 Sekunden nicht ausreichen. Hier kommt mir gerade in den Sinn, dass Lidar zusammen mit Eye-Tracking auch dafür verwendet werden kann, um herauszufinden, auf welche Objekte in der Pause geschaut wird, und demnach ob die mindestens 7 Meter Entfernung eingehalten wird.
 
 \subsection{Aber bitte konstruktiv!}
 
-Wie koennte so ein real-time feedback aussehen? In primitivster Form eine teure Eieruhr, die alle 20 Minuten an die Pause erinnert.
-Weiters wird es Feedback dazu geben, wenn der Abstand zum Bildschirm zu gering ist oder die Helligkeit entsprechend der Umgebungsbeleuchtung
-zu hoch ist. Sollten Anzeichen eines Computer Vision Syndrome auftreten kann auch schon frueher als 20 Minuten eine Pause eingelegt werden
-und die Pause kann auch durch die Brille verifiziert und gegenbenenfalls verlaengert werden.
+Wie
+
+ könnte solch ein Echtzeit-Feedback aussehen? In primitivster Form eine teure Eieruhr, die alle 20 Minuten an die Pause erinnert. Weiterhin wird Feedback dazu gegeben, wenn der Abstand zum Bildschirm zu gering ist oder die Helligkeit entsprechend der Umgebungsbeleuchtung zu hoch ist. Sollten Anzeichen eines Computer Vision Syndroms auftreten, kann auch schon früher als alle 20 Minuten eine Pause eingelegt werden, und die Pause kann auch durch die Brille verifiziert und gegebenenfalls verlängert werden.
 
 \section{Konklusio}
 
-Ziel ist es eine sichere Moeglichkeit dem Benutzer zu bieten, um die 20-20-20 Regel einzuhalten. Dabei soll eine modifizierte Eye-Tracking Brille verwendet werden um zu erkennen, wann auf einen Bildschirm geschaut wird und jeweils zur richtigen Zeit eine Pause ankuendigt.
+Das Ziel ist es, eine sichere Möglichkeit für den Benutzer zu bieten, um die 20-20-20-Regel einzuhalten. Dabei soll eine modifizierte Eye-Tracking-Brille verwendet werden, um zu erkennen, wann auf einen Bildschirm geschaut wird und jeweils zur richtigen Zeit eine Pause anzuzeigen.
+
+\newpage
 
 \section{Appendix 1 - So verschieden}
 
 \subsection{Alarm!}
 
-Einen Punkt den ich ueberhaupt nicht bedacht habe ist wie das Feedback an den Benutzer gegeben wird. Die Implementation benutzt 
-einen Vibrationsmotor und LED Lichter, die der Benutzer sehen kann, um an eine Pause zu erinnern. 
+Einen Punkt, den ich überhaupt nicht bedacht habe, ist, wie das Feedback an den Benutzer gegeben wird. Die Implementierung verwendet einen Vibrationsmotor und LED-Lichter, die der Benutzer sehen kann, um an eine Pause zu erinnern.
 
 \subsection{Inhaltliche Fragen}
 
-Genauso habe ich nicht bedacht, dass ein Bildschirm mehr kann als nur Bilder anzeigen, sondern auch noch bewegte Bilder\footnote{ein wirklich radikaler Gedanken, muss ich zugeben} in Form von Videos oder Spielen.
+Ebenso habe ich nicht bedacht, dass ein Bildschirm mehr kann als nur Bilder anzeigen, sondern auch bewegte Bilder\footnote{ein wirklich radikaler Gedanke, muss ich zugeben} in Form von Videos oder Spielen.
 
 \section{Appendix 2 - Und doch so gleich}
 
 \subsection{Implementierung}
 
-Mein Gedanken mit einer Eye-Tracking Brille war vollkommen richtig. Es ist ein Raspberry Pi Zero auf einer Brille mit den angesprochenen 
-Sensoren. Der Farbsensor erkennt die unterschieden Lichtverhaeltnisse von digitalen Bildschirmen, mit dem IMU wird die Bewegung des Kopfes gemessen (der sich kaum bewegt, wenn man auf einen Bildschirm schaut) und mit Lidar der Abstund zum Bildschirm oder anderen Objekten. 
-
+Meine Gedanken zu einer Eye-Tracking-Brille waren vollkommen richtig. Es handelt sich um einen Raspberry Pi Zero auf einer Brille mit den angesprochenen Sensoren. Der Farbsensor erkennt die unterschiedlichen Lichtverhältnisse von digitalen Bildschirmen, mit dem IMU wird die Bewegung des Kopfes gemessen (der sich kaum bewegt, wenn man auf einen Bildschirm schaut), und mit Lidar wird der Abstand zum Bildschirm oder anderen Objekten gemessen.
