@@ -1,7 +1,7 @@
 
 \section{Was fuer ein Tiger?}
 
-Schauen wir uns zunaechst das vorgegebene Abstract\footnote{https://arxiv.org/pdf/1906.05047}
+Schauen wir uns zunaechst das vorgegebene Abstract\footnote{\url{https://arxiv.org/pdf/1906.05047}}
 an. Dabei sind alle diejenigen Punkte markiert, die ich weiter recherchieren werde.
 
 We propose Tiger, an eyewear system for helping users follow the \textbf{20-20-20 rule} to alleviate the \textbf{Computer Vision Syndrome} symptoms. It monitors user’s \textbf{screen viewing activities} and provides real-time feedback to help users follow the rule. For accurate screen viewing detection, we devise a light-weight multi-sensory fusion approach with three sensing modalities, color, \textbf{IMU}, and \textbf{lidar}. We also \textbf{design the real-time feedback} to effectively lead users to follow the rule. Our evaluation shows that Tiger accurately detects screen viewing events, and is robust to the differences in screen types, contents, and ambient light. Our user study shows positive perception of Tiger regarding its usefulness, acceptance, and real-time feedback.
@@ -17,6 +17,8 @@ ich mir dazu etwas Literatur\footnote{\url{https://journals.lww.com/ijo/fulltext
 
 Hier habe ich herausgefunden, dass die 20-20-20 Regel beschreibt nach 20 Minuten Bildschirmzeit 20 Sekunden in die Ferne zu schauen (>20 Fuss Entfernung). 
 Weiters bin ich auf Symptome gestossen, die durch die 20-20-20 Regel verhindert oder zumindest gelindert werden koennen.
+
+\newpage
 
 \begin{itemize}
   \item doppelte Sicht
@@ -40,8 +42,8 @@ Das naechste was mir ins Auge gesprungen ist sind die \textbf{screen viewing act
 
 Zunaechst kann ich nicht genau finden, wonach ich suche. Denn ich finde fast ausschliesslich Paper ueber Kinder, Jugendliche und junge Erwachsene.
 Aber ich habe ein neues Wort gelernt: "sedentary" - vor einem Bildschirm. Auch einiges bezueglich 
-Uebergewicht\footnote{https://link.springer.com/article/10.1186/1471-2458-10-593}
-und Verhaltensstoerungen\footnote{https://publications.aap.org/pediatrics/article-abstract/126/5/e1011/65363/Children-s-Screen-Viewing-is-Related-to}
+Uebergewicht\footnote{\url{https://link.springer.com/article/10.1186/1471-2458-10-593}}
+und Verhaltensstoerungen\footnote{\url{https://publications.aap.org/pediatrics/article-abstract/126/5/e1011/65363/Children-s-Screen-Viewing-is-Related-to}}
 ist zu finden.
 
 Daher nehme ich an, dass sich bei diesem Wortlaut nicht um genauere Unterscheidungen geht, sondern mehr ein Ueberbegriff fuer jegliche Bildschirmzeit ist.
@@ -49,7 +51,7 @@ Daher nehme ich an, dass sich bei diesem Wortlaut nicht um genauere Unterscheidu
 \subsection{IH EM U}
 
 IMU steht fuer Inertial Measurement Unit. Dieses kombiniert Gyroskop, Beschleunigungsmeter und Magnetometer zu einer Einheit, der IMU.
-Diese werden vielseitig verwendet, beispielsweise bei der Analyse von Gelenksbewegungen\footnote{https://www.mdpi.com/1424-8220/14/4/6891}
+Diese werden vielseitig verwendet, beispielsweise bei der Analyse von Gelenksbewegungen\footnote{\url{https://www.mdpi.com/1424-8220/14/4/6891}}
 in der Sportmedizin. Ich nehme mal stark an, dass es sich bei Motioncapture auch um diese Technologie handelt.
 
 \section{Spekulazius}
@@ -79,7 +81,25 @@ Weiters wird es Feedback dazu geben, wenn der Abstand zum Bildschirm zu gering i
 zu hoch ist. Sollten Anzeichen eines Computer Vision Syndrome auftreten kann auch schon frueher als 20 Minuten eine Pause eingelegt werden
 und die Pause kann auch durch die Brille verifiziert und gegenbenenfalls verlaengert werden.
 
+\section{Konklusio}
+
+Ziel ist es eine sichere Moeglichkeit dem Benutzer zu bieten, um die 20-20-20 Regel einzuhalten. Dabei soll eine modifizierte Eye-Tracking Brille verwendet werden um zu erkennen, wann auf einen Bildschirm geschaut wird und jeweils zur richtigen Zeit eine Pause ankuendigt.
+
 \section{Appendix 1 - So verschieden}
 
+\subsection{Alarm!}
+
+Einen Punkt den ich ueberhaupt nicht bedacht habe ist wie das Feedback an den Benutzer gegeben wird. Die Implementation benutzt 
+einen Vibrationsmotor und LED Lichter, die der Benutzer sehen kann, um an eine Pause zu erinnern. 
+
+\subsection{Inhaltliche Fragen}
+
+Genauso habe ich nicht bedacht, dass ein Bildschirm mehr kann als nur Bilder anzeigen, sondern auch noch bewegte Bilder\footnote{ein wirklich radikaler Gedanken, muss ich zugeben} in Form von Videos oder Spielen.
+
 \section{Appendix 2 - Und doch so gleich}
+
+\subsection{Implementierung}
+
+Mein Gedanken mit einer Eye-Tracking Brille war vollkommen richtig. Es ist ein Raspberry Pi Zero auf einer Brille mit den angesprochenen 
+Sensoren. Der Farbsensor erkennt die unterschieden Lichtverhaeltnisse von digitalen Bildschirmen, mit dem IMU wird die Bewegung des Kopfes gemessen (der sich kaum bewegt, wenn man auf einen Bildschirm schaut) und mit Lidar der Abstund zum Bildschirm oder anderen Objekten. 
 
