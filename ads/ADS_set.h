@@ -93,7 +93,7 @@ private:
 
         bool contains(const key_type &key) const {
             for (size_type i = 0; i < size; ++i) {
-                if (data[i] == key) return true;
+                if (key_equal{}(data[i],key)) return true;
             }
             return false;
         }
@@ -244,7 +244,6 @@ void ADS_set<Key, N>::rehash() {
         for (size_type j = 0; j < buckets[i].size; ++j) {
           size_type new_index = hasher{}(buckets[i].data[j]) % new_table_size;
           new_buckets[new_index].add(buckets[i].data[j]);
-
         }
     }
     delete[] buckets;
