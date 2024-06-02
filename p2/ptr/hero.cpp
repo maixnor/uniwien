@@ -72,7 +72,7 @@ bool Hero::fight(Monster& m) {
                                                   [](const auto& a, const auto& b) { return a.second < b.second; })->second;
         m.take_damage(damage);
         if (!m.is_dead()) {
-            take_damage(m.attack);
+            current_hp - m.get_attack();
         }
     }
     return current_hp > 0;

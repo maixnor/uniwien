@@ -13,7 +13,7 @@ public:
     void take_damage(unsigned dmg);
     bool is_dead() const;
     virtual std::string additional_information() const = 0;
-    unsigned get_allack();
+    unsigned get_attack();
 
     friend std::ostream& operator<<(std::ostream& o, const Monster& h);
 
