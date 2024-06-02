@@ -12,15 +12,15 @@ public:
     virtual unsigned calculate_damage(unsigned dmg) const = 0;
     void take_damage(unsigned dmg);
     bool is_dead() const;
+    unsigned get_attack() const;
     virtual std::string additional_information() const = 0;
-    unsigned get_attack();
 
     friend std::ostream& operator<<(std::ostream& o, const Monster& h);
 
-protected:
+private:
     std::string name;
-    unsigned attack;
     unsigned health;
+    unsigned attack;
 };
 
 class Elite_Monster : public Monster {
