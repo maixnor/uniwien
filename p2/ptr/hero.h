@@ -14,7 +14,9 @@ public:
     
     unsigned level_up();
     bool fight(Monster& m);
-    int get_id();
+    bool is_dead();
+    unsigned get_level();
+    unsigned get_id();
     
     friend std::ostream& operator<<(std::ostream& o, const Hero& obj);
 

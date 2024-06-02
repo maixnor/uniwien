@@ -21,7 +21,15 @@ unsigned Hero::level_up() {
     return level;
 }
 
-int Hero::get_id() {
+bool Hero::is_dead() {
+    return current_hp = 0;
+}
+
+unsgined Hero::get_level() {
+    return level;
+}
+
+unsigned Hero::get_id() {
     return id;
 }
 
