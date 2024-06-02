@@ -2,42 +2,6 @@
 #include "hero.h"
 #include "campaign.h"
 
-enum class Hero_Class { BARBARIAN, BARD, CLERIC, DRUID, FIGHTER, MONK, PALADIN, RANGER, ROGUE, SORCERER, WARLOCK, WIZARD };
-enum class Hero_Species { DRAGONBORN, DWARF, ELF, GNOME, HALF_ELF, HALFLING, HALF_ORC, HUMAN, TIEFLING };
-
-std::ostream& operator<<(std::ostream& o, Hero_Class m) {
-    switch (m) {
-        case Hero_Class::BARBARIAN: return o << "Barbarian";
-        case Hero_Class::BARD: return o << "Bard";
-        case Hero_Class::CLERIC: return o << "Cleric";
-        case Hero_Class::DRUID: return o << "Druid";
-        case Hero_Class::FIGHTER: return o << "Fighter";
-        case Hero_Class::MONK: return o << "Monk";
-        case Hero_Class::PALADIN: return o << "Paladin";
-        case Hero_Class::RANGER: return o << "Ranger";
-        case Hero_Class::ROGUE: return o << "Rogue";
-        case Hero_Class::SORCERER: return o << "Sorcerer";
-        case Hero_Class::WARLOCK: return o << "Warlock";
-        case Hero_Class::WIZARD: return o << "Wizard";
-    }
-    return o;
-}
-
-std::ostream& operator<<(std::ostream& o, Hero_Species m) {
-    switch (m) {
-        case Hero_Species::DRAGONBORN: return o << "Dragonborn";
-        case Hero_Species::DWARF: return o << "Dwarf";
-        case Hero_Species::ELF: return o << "Elf";
-        case Hero_Species::GNOME: return o << "Gnome";
-        case Hero_Species::HALF_ELF: return o << "Half-Elf";
-        case Hero_Species::HALFLING: return o << "Halfling";
-        case Hero_Species::HALF_ORC: return o << "Half-Orc";
-        case Hero_Species::HUMAN: return o << "Human";
-        case Hero_Species::TIEFLING: return o << "Tiefling";
-    }
-    return o;
-}
-
 Player::Player(const std::string& first_name, const std::string& last_name)
     : first_name(first_name), last_name(last_name) {
     if (first_name.empty() || last_name.empty()) throw std::runtime_error("Player name cannot be empty");

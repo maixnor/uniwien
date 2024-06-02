@@ -6,8 +6,6 @@
 #include <memory>
 #include <stdexcept>
 
-class Hero; // Forward declaration
-
 class Campaign {
 public:
     Campaign(const std::string& name, unsigned min_level);

@@ -1,15 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-enum class Hero_Class { BARBARIAN, BARD, CLERIC, DRUID, FIGHTER, MONK, PALADIN, RANGER, ROGUE, SORCERER, WARLOCK, WIZARD };
-enum class Hero_Species { DRAGONBORN, DWARF, ELF, GNOME, HALF_ELF, HALFLING, HALF_ORC, HUMAN, TIEFLING };
-
 #include <string>
 #include <map>
 #include <memory>
-
-class Hero; // Forward declaration
-class Campaign; // Forward declaration
+#include "hero.h"
+#include "campaign.h"
 
 class Player {
 public:

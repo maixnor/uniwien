@@ -5,8 +5,10 @@
 #include <map>
 #include <iostream>
 #include <stdexcept>
+#include "monster.h"
 
-class Monster; // Forward declaration
+enum class Hero_Class { BARBARIAN, BARD, CLERIC, DRUID, FIGHTER, MONK, PALADIN, RANGER, ROGUE, SORCERER, WARLOCK, WIZARD };
+enum class Hero_Species { DRAGONBORN, DWARF, ELF, GNOME, HALF_ELF, HALFLING, HALF_ORC, HUMAN, TIEFLING };
 
 class Hero {
 public:
@@ -19,6 +21,8 @@ public:
     unsigned get_id();
     
     friend std::ostream& operator<<(std::ostream& o, const Hero& obj);
+    friend std::ostream& operator<<(std::ostream& o, const Hero_Class& obj);
+    friend std::ostream& operator<<(std::ostream& o, const Hero_Species& obj);
 
 private:
     unsigned id;
