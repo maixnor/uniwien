@@ -310,11 +310,9 @@ class Vector {
 
 template <typename T>
 
-<<<<<<< Updated upstream
 std::ostream& operator<<(std::ostream& o, const Vector<T>& v) {
 	return v.print(o); 
 }
-=======
     // destructor
     ~Vector() { delete[] data_; }
 
@@ -425,7 +423,6 @@ std::ostream& operator<<(std::ostream& o, const Vector<T>& v) {
 
 
 };  
->>>>>>> Stashed changes
 
 #endif
 
