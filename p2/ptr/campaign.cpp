@@ -1,5 +1,6 @@
 #include "campaign.h"
 #include "hero.h"
+#include "monster.h"
 
 Campaign::Campaign(const std::string& name, unsigned min_level) : name(name), min_level(min_level) {
     if (name.empty()) throw std::runtime_error("Campaign name cannot be empty");

@@ -1,5 +1,6 @@
 #include "hero.h"
 #include "monster.h"
+#include "player.h"
 
 unsigned Hero::next_id = 0;
 

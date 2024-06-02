@@ -3,11 +3,9 @@
 #include "monster.h"
 #include "standard_monster.h"
 #include "elite_monster.h"
-#include "hero_info.h"
 #include "tasks.h"
 #include<cstdlib>
 #include<iostream>
-
 
 std::map<std::string,unsigned> abilities(){
     std::map<std::string,unsigned> abilities;
@@ -19,7 +17,6 @@ std::map<std::string,unsigned> abilities(){
     abilities["Charisma"] = rand() % 6 + 8;
     return abilities;
 }
-
 
 using std::shared_ptr;
 using std::weak_ptr;
