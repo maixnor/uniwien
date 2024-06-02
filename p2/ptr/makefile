@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
-OBJS = main.o
+OBJS = campaign.o elite_monster.o hero.o monster.o player.o standard_monster.o tasks.o main.o
 
 all: HeroGame
 

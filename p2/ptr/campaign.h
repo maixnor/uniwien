@@ -5,6 +5,7 @@
 #include <map>
 #include <memory>
 #include <stdexcept>
+#include "hero.h"
 
 class Campaign {
 public:

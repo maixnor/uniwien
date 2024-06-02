@@ -1,3 +1,4 @@
+#include "campaign.h"
 #include "player.h"
 #include "hero.h"
 #include "monster.h"
