@@ -21,6 +21,7 @@ public:
     unsigned get_id();
     
     friend std::ostream& operator<<(std::ostream& o, const Hero& obj);
+
     friend std::ostream& operator<<(std::ostream& o, const Hero_Class& obj);
     friend std::ostream& operator<<(std::ostream& o, const Hero_Species& obj);
 
