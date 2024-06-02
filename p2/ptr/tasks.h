@@ -3,7 +3,6 @@
 
 #include "player.h"
 #include "hero.h"
-#include "hero_info.h"
 #include "player.h"
 #include "monster.h"
 #include <vector>
