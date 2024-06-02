@@ -1,8 +1,6 @@
 #include "player.h"
 #include "hero.h"
 #include "monster.h"
-#include "standard_monster.h"
-#include "elite_monster.h"
 #include "tasks.h"
 #include<cstdlib>
 #include<iostream>

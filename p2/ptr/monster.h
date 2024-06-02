@@ -23,5 +23,24 @@ protected:
     unsigned health;
 };
 
+class Elite_Monster : public Monster {
+public:
+    Elite_Monster(const std::string& name, unsigned health, unsigned attack, unsigned defense);
+
+    unsigned calculate_damage(unsigned dmg) const override;
+    std::string additional_information() const override;
+
+private:
+    unsigned defense;
+};
+
+class Standard_Monster : public Monster {
+public:
+    Standard_Monster(const std::string& name, unsigned health, unsigned attack);
+
+    unsigned calculate_damage(unsigned dmg) const override;
+    std::string additional_information() const override;
+};
+
 #endif // MONSTER_H
 

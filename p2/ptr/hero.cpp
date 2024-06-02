@@ -4,7 +4,7 @@
 
 unsigned Hero::next_id = 0;
 
-std::ostream& operator<<(std::ostream& o, Hero_Class m) {
+std::ostream& operator<<(std::ostream& o, const Hero_Class& m) {
     switch (m) {
         case Hero_Class::BARBARIAN: return o << "Barbarian";
         case Hero_Class::BARD: return o << "Bard";
@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& o, Hero_Class m) {
     return o;
 }
 
-std::ostream& operator<<(std::ostream& o, Hero_Species m) {
+std::ostream& operator<<(std::ostream& o, const Hero_Species& m) {
     switch (m) {
         case Hero_Species::DRAGONBORN: return o << "Dragonborn";
         case Hero_Species::DWARF: return o << "Dwarf";
