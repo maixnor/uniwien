@@ -4,39 +4,6 @@
 
 unsigned Hero::next_id = 0;
 
-std::ostream& operator<<(std::ostream& o, const Hero_Class& m) {
-    switch (m) {
-        case Hero_Class::BARBARIAN: return o << "Barbarian";
-        case Hero_Class::BARD: return o << "Bard";
-        case Hero_Class::CLERIC: return o << "Cleric";
-        case Hero_Class::DRUID: return o << "Druid";
-        case Hero_Class::FIGHTER: return o << "Fighter";
-        case Hero_Class::MONK: return o << "Monk";
-        case Hero_Class::PALADIN: return o << "Paladin";
-        case Hero_Class::RANGER: return o << "Ranger";
-        case Hero_Class::ROGUE: return o << "Rogue";
-        case Hero_Class::SORCERER: return o << "Sorcerer";
-        case Hero_Class::WARLOCK: return o << "Warlock";
-        case Hero_Class::WIZARD: return o << "Wizard";
-    }
-    return o;
-}
-
-std::ostream& operator<<(std::ostream& o, const Hero_Species& m) {
-    switch (m) {
-        case Hero_Species::DRAGONBORN: return o << "Dragonborn";
-        case Hero_Species::DWARF: return o << "Dwarf";
-        case Hero_Species::ELF: return o << "Elf";
-        case Hero_Species::GNOME: return o << "Gnome";
-        case Hero_Species::HALF_ELF: return o << "Half-Elf";
-        case Hero_Species::HALFLING: return o << "Halfling";
-        case Hero_Species::HALF_ORC: return o << "Half-Orc";
-        case Hero_Species::HUMAN: return o << "Human";
-        case Hero_Species::TIEFLING: return o << "Tiefling";
-    }
-    return o;
-}
-
 Hero::Hero(const std::string& name, Hero_Class hero_class, Hero_Species hero_species, unsigned max_hp, const std::map<std::string, unsigned>& abilities)
     : id(next_id++), name(name), hero_class(hero_class), hero_species(hero_species), level(1), max_hp(max_hp), current_hp(max_hp), abilities(abilities) {
     if (name.empty()) throw std::runtime_error("Hero name cannot be empty");
@@ -66,25 +33,69 @@ unsigned Hero::get_id() {
     return id;
 }
 
+std::ostream& Hero::print(std::ostream& o) const{
+    o << "[" << this->id << ", " << this->name << ", (";
+    o << hero_class << ", ";
+    o << hero_species << ", " << this->level << "), {";
+    std::map<std::string, unsigned>help = abilities;
+    auto it =  help.begin();
+    while(it != help.end()) {
+        o << it->second;
+        it++;
+        if(it != help.end()) {
+            o << ", ";
+        }
+    }
+    o << "}, (" << this->current_hp << "/" << this->max_hp << ") HP]";
+    return o;
+}
+
 bool Hero::fight(Monster& m) {
     while (current_hp > 0 && !m.is_dead()) {
         unsigned damage = level * std::max_element(abilities.begin(), abilities.end(),
                                                   [](const auto& a, const auto& b) { return a.second < b.second; })->second;
         m.take_damage(damage);
         if (!m.is_dead()) {
-            current_hp - m.get_attack();
+            current_hp = current_hp - m.get_attack();
         }
     }
     return current_hp > 0;
 }
 
 std::ostream& operator<<(std::ostream& o, const Hero& obj) {
-    o << "[" << obj.id << ", " << obj.name << ", (" << obj.hero_class << ", " << obj.hero_species << ", " << obj.level << "), {";
-    for (const auto& ability : obj.abilities) {
-        o << ability.first << ": " << ability.second << ", ";
+    return obj.print(o);
+}
+
+std::ostream& operator<<(std::ostream& o, const Hero_Class& m) {
+    switch (m) {
+        case Hero_Class::BARBARIAN: o << "Barbarian"; break;
+        case Hero_Class::BARD: o << "Bard"; break;
+        case Hero_Class::CLERIC: o << "Cleric"; break;
+        case Hero_Class::DRUID: o << "Druid"; break;
+        case Hero_Class::FIGHTER: o << "Fighter"; break;
+        case Hero_Class::MONK: o << "Monk"; break;
+        case Hero_Class::PALADIN: o << "Paladin"; break;
+        case Hero_Class::RANGER: o << "Ranger"; break;
+        case Hero_Class::ROGUE: o << "Rogue"; break;
+        case Hero_Class::SORCERER: o << "Sorcerer"; break;
+        case Hero_Class::WARLOCK: o << "Warlock"; break;
+        case Hero_Class::WIZARD: o << "Wizard"; break;
     }
-    o.seekp(-2, std::ios_base::end); // remove last comma and space
-    o << "}, (" << obj.current_hp << "/" << obj.max_hp << ") HP]";
+    return o;
+}
+
+std::ostream& operator<<(std::ostream& o, const Hero_Species& m) {
+    switch (m) {
+        case Hero_Species::DRAGONBORN: o << "Dragonborn"; break;
+        case Hero_Species::DWARF: o << "Dwarf"; break;
+        case Hero_Species::ELF: o << "Elf"; break;
+        case Hero_Species::GNOME: o << "Gnome"; break;
+        case Hero_Species::HALF_ELF: o << "Half-Elf"; break;
+        case Hero_Species::HALFLING: o << "Halfling"; break;
+        case Hero_Species::HALF_ORC: o << "Half-Orc"; break;
+        case Hero_Species::HUMAN: o << "Human"; break;
+        case Hero_Species::TIEFLING: o << "Tiefling"; break;
+    }
     return o;
 }
 
