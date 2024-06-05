@@ -44,5 +44,13 @@ public:
     std::string additional_information() const override;
 };
 
+// Deklaration von Task3
+class Task3 : public Elite_Monster {
+public:
+    Task3(const std::string& name, unsigned health, unsigned attack, unsigned defense);
+
+    unsigned calculate_damage(unsigned dmg) const override;
+};
+
 #endif // MONSTER_H
 

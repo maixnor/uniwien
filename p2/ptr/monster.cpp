@@ -71,3 +71,13 @@ std::string Standard_Monster::additional_information() const {
     return "";
 }
 
+Task3::Task3(const std::string& name, unsigned health, unsigned attack, unsigned defense)
+    : Elite_Monster(name, health, attack, defense) {}
+
+unsigned Task3::calculate_damage(unsigned dmg) const {
+    unsigned base_damage = Elite_Monster::calculate_damage(dmg);
+    if (base_damage % 2 == 0) {
+        return base_damage / 2;
+    }
+    return base_damage;
+}
