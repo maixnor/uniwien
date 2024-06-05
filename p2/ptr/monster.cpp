@@ -20,8 +20,16 @@ bool Monster::is_dead() const {
     return health == 0;
 }
 
+std::string Monster::get_name() const {
+	return name;
+}
+
 unsigned Monster::get_attack() const {
 	return attack;
+}
+
+unsigned Monster::get_health() const {
+	return health;
 }
 
 std::ostream& operator<<(std::ostream& o, const Monster& h) {

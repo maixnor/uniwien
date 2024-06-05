@@ -3,10 +3,7 @@
 
 #include "player.h"
 #include "hero.h"
-<<<<<<< HEAD
-//#include "hero_info.h"
-=======
->>>>>>> 4af7af2f4b8e9cd00a20da0d104494445c8b5879
+#include "hero_info.h"
 #include "player.h"
 #include "monster.h"
 #include <vector>
@@ -15,14 +12,36 @@
 #include <algorithm>
 #include <numeric>
 #include <cctype>
+#include <iostream>
 
 using namespace std;
 
-//vector<shared_ptr<Monster>> task1(const vector<shared_ptr<Monster>>& v){
-//}
+std::vector<std::shared_ptr<Monster>> task1(const std::vector<std::shared_ptr<Monster>>& v) {
+    if (v.empty()) {
+        return {};
+    }
+
+    // Berechne die Summe aller health-Werte
+    unsigned total_health = std::accumulate(v.begin(), v.end(), 0, [](unsigned sum, const std::shared_ptr<Monster>& m) {
+        return sum + m->get_health();
+    });
+
+    // Berechne den maximalen Angriffswert
+    unsigned max_attack = std::max_element(v.begin(), v.end(), [](const std::shared_ptr<Monster>& a, const std::shared_ptr<Monster>& b) {
+        return a->get_attack() < b->get_attack();
+    })->get()->get_attack();
+
+    std::vector<std::shared_ptr<Monster>> result;
+    for (const auto& monster : v) {
+        std::string upper_name = monster->get_name();
+        std::transform(upper_name.begin(), upper_name.end(), upper_name.begin(), ::toupper);
+        result.push_back(std::make_shared<Standard_Monster>(upper_name, total_health, max_attack));
+    }
+
+    return result;
+}
 
 //class Super_Task{
 //};
 
 #endif
-

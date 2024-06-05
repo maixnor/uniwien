@@ -12,7 +12,9 @@ public:
     virtual unsigned calculate_damage(unsigned dmg) const = 0;
     void take_damage(unsigned dmg);
     bool is_dead() const;
+    std::string get_name() const;
     unsigned get_attack() const;
+  	unsigned get_health() const;
     virtual std::string additional_information() const = 0;
 
     friend std::ostream& operator<<(std::ostream& o, const Monster& h);
