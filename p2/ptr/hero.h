@@ -23,6 +23,7 @@ public:
     bool is_dead();
     unsigned get_level();
     unsigned get_id();
+    Hero_Class get_class();
 	  std::ostream& print(std::ostream&) const;
 
 private:

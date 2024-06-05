@@ -41,7 +41,28 @@ std::vector<std::shared_ptr<Monster>> task1(const std::vector<std::shared_ptr<Mo
     return result;
 }
 
-//class Super_Task{
-//};
+class Super_Task {
+private:
+    std::vector<std::weak_ptr<Hero>> heroes;
+
+public:
+    Super_Task(const std::vector<std::shared_ptr<Hero>>& heroes) {
+        this->heroes = std::vector<std::weak_ptr<Hero>>(heroes.begin(), heroes.end());
+    }
+
+    std::vector<std::shared_ptr<Hero>> filtering(const std::vector<Hero_Class>& cl) const {
+        std::vector<std::shared_ptr<Hero>> result;
+
+        for (const auto& weak_hero : heroes) {
+            if (auto hero = weak_hero.lock()) {
+                if (std::find(cl.begin(), cl.end(), hero->get_class()) != cl.end()) {
+                    result.push_back(hero);
+                }
+            }
+        }
+
+        return result;
+    }
+};
 
 #endif

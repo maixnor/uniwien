@@ -34,6 +34,10 @@ unsigned Hero::get_id() {
     return id;
 }
 
+Hero_Class Hero::get_class() {
+    return hero_class;
+}
+
 std::ostream& Hero::print(std::ostream& o) const{
     o << "[" << this->id << ", " << this->name << ", (";
     o << this->hero_class << ", ";
