@@ -5,13 +5,14 @@
 unsigned Hero::next_id = 0;
 
 Hero::Hero(const std::string& name, Hero_Class hero_class, Hero_Species hero_species, unsigned max_hp, const std::map<std::string, unsigned>& abilities)
-    : id(next_id++), name(name), hero_class(hero_class), hero_species(hero_species), level(1), max_hp(max_hp), current_hp(max_hp), abilities(abilities) {
+    : id(next_id), name(name), hero_class(hero_class), hero_species(hero_species), level(1), max_hp(max_hp), current_hp(max_hp), abilities(abilities) {
     if (name.empty()) throw std::runtime_error("Hero name cannot be empty");
     if (max_hp == 0) throw std::runtime_error("Hero max_hp must be greater than 0");
     if (abilities.size() != 6) throw std::runtime_error("Hero must have exactly 6 abilities");
     for (const auto& ability : abilities) {
         if (ability.second == 0 || ability.second > 20) throw std::runtime_error("Ability values must be between 1 and 20");
     }
+    ++next_id;
 }
 
 unsigned Hero::level_up() {
@@ -22,7 +23,7 @@ unsigned Hero::level_up() {
 }
 
 bool Hero::is_dead() {
-    return current_hp = 0;
+    return current_hp <= 0;
 }
 
 unsigned Hero::get_level() {
@@ -35,8 +36,8 @@ unsigned Hero::get_id() {
 
 std::ostream& Hero::print(std::ostream& o) const{
     o << "[" << this->id << ", " << this->name << ", (";
-    o << hero_class << ", ";
-    o << hero_species << ", " << this->level << "), {";
+    o << this->hero_class << ", ";
+    o << this->hero_species << ", " << this->level << "), {";
     std::map<std::string, unsigned>help = abilities;
     auto it =  help.begin();
     while(it != help.end()) {
@@ -56,7 +57,11 @@ bool Hero::fight(Monster& m) {
                                                   [](const auto& a, const auto& b) { return a.second < b.second; })->second;
         m.take_damage(damage);
         if (!m.is_dead()) {
-            current_hp = current_hp - m.get_attack();
+          	if (m.get_attack() > current_hp) {
+              	current_hp = 0;
+            } else {
+            		current_hp = current_hp - m.get_attack();
+            }
         }
     }
     return current_hp > 0;

@@ -1,46 +1,65 @@
-#ifndef MONSTER_H
-#define MONSTER_H
+#include "monster.h"
 
-#include <string>
-#include <ostream>
+Monster::Monster(const std::string& name, unsigned health, unsigned attack)
+    : name(name), health(health), attack(attack) {
+    if (name.empty() || health == 0 || attack == 0) {
+        throw std::runtime_error("Invalid Monster parameters");
+    }
+}
 
-class Monster {
-public:
-    Monster(const std::string& name, unsigned health, unsigned attack);
-    virtual ~Monster() = default;
+void Monster::take_damage(unsigned dmg) {
+    unsigned calculated_damage = calculate_damage(dmg);
+    if (calculated_damage > health) {
+        health = 0;
+    } else {
+        health -= calculated_damage;
+    }
+}
 
-    virtual unsigned calculate_damage(unsigned dmg) const = 0;
-    void take_damage(unsigned dmg);
-    bool is_dead() const;
-    unsigned get_attack() const;
-    virtual std::string additional_information() const = 0;
+bool Monster::is_dead() const {
+    return health == 0;
+}
 
-    friend std::ostream& operator<<(std::ostream& o, const Monster& h);
+unsigned Monster::get_attack() const {
+	return attack;
+}
 
-private:
-    std::string name;
-    unsigned health;
-    unsigned attack;
-};
+std::ostream& operator<<(std::ostream& o, const Monster& h) {
+  	if (h.additional_information() != "") {
+		    o << "[" << h.name << ", " << h.health << " HP, " << h.attack << " ATK" << ", " << h.additional_information() << "]";
+    }
+  	else {
+      	o << "[" << h.name << ", " << h.health << " HP, " << h.attack << " ATK" << "]";
+    }
+    return o;
+}
 
-class Elite_Monster : public Monster {
-public:
-    Elite_Monster(const std::string& name, unsigned health, unsigned attack, unsigned defense);
+Elite_Monster::Elite_Monster(const std::string& name, unsigned health, unsigned attack, unsigned defense)
+    : Monster(name, health, attack), defense(defense) {
+    if (defense == 0) {
+        throw std::runtime_error("Invalid Elite Monster defense");
+    }
+}
 
-    unsigned calculate_damage(unsigned dmg) const override;
-    std::string additional_information() const override;
+unsigned Elite_Monster::calculate_damage(unsigned dmg) const {
+    if (dmg <= defense) {
+        return 0;
+    }
+    return dmg - defense;
+}
 
-private:
-    unsigned defense;
-};
+std::string Elite_Monster::additional_information() const {
+    return std::to_string(defense) + " DEF";
+}
 
-class Standard_Monster : public Monster {
-public:
-    Standard_Monster(const std::string& name, unsigned health, unsigned attack);
+Standard_Monster::Standard_Monster(const std::string& name, unsigned health, unsigned attack)
+    : Monster(name, health, attack) {}
 
-    unsigned calculate_damage(unsigned dmg) const override;
-    std::string additional_information() const override;
-};
+unsigned Standard_Monster::calculate_damage(unsigned dmg) const {
+    return dmg;
+}
 
-#endif // MONSTER_H
+std::string Standard_Monster::additional_information() const {
+    return "";
+}
 

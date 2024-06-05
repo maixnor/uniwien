@@ -45,12 +45,16 @@ unsigned Campaign::remove_dead_and_expired() {
 
 std::ostream& operator<<(std::ostream& o, const Campaign& p) {
     o << "[" << p.name << " Campaign, Min_Level " << p.min_level << ", {";
-    for (const auto& entry : p.heroes) {
-        if (auto hero = entry.second.lock()) {
-            o << *hero << ", ";
+  	bool first = true; // Flag to manage commas between heroes
+    for (auto it = p.heroes.begin(); it != p.heroes.end(); ++it) {
+        if (auto hero = it->second.lock()) {
+            if (!first) {
+                o << ", ";
+            }
+            o << *hero;
+            first = false;
         }
     }
-    o.seekp(-2, std::ios_base::end); // remove last comma and space
     o << "}]";
     return o;
 }

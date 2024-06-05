@@ -71,10 +71,14 @@ std::ostream& Player::print_campaign(std::ostream& o) const {
 
 std::ostream& operator<<(std::ostream& o, const Player& p) {
     o << "[" << p.first_name << " " << p.last_name << ", {";
+  	bool first = true;
     for (const auto& entry : p.heroes) {
-        o << *entry.second << ", ";
+	      if (!first) {
+          o << ", ";
+        }
+        o << *entry.second;
+      	first = false;
     }
-    o.seekp(-2, std::ios_base::end); // remove last comma and space
     o << "}, ";
     p.print_campaign(o);
     o << "]";
