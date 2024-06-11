@@ -18,7 +18,9 @@ public:
     using key_equal = std::equal_to<key_type>;
     using hasher = std::hash<key_type>;
 
-    class const_iterator {
+    class Iterator {
+    private:
+      ADS_set::key_type ptr;
     public:
         using iterator_category = std::forward_iterator_tag;
         using value_type = ADS_set::value_type;
@@ -26,7 +28,7 @@ public:
         using pointer = const value_type*;
         using reference = const value_type&;
 
-        const_iterator(const ADS_set *set = nullptr, size_type bucket = 0, size_type index = 0) 
+        Iterator(const ADS_set *set = nullptr, size_type bucket = 0, size_type index = 0) 
             : set(set), bucket(bucket), index(index) {
             advance_past_empty_buckets();
         }
@@ -34,20 +36,20 @@ public:
         reference operator*() const { return set->buckets[bucket].data[index]; }
         pointer operator->() const { return &set->buckets[bucket].data[index]; }
 
-        const_iterator &operator++() {
+        Iterator &operator++() {
             ++index;
             advance_past_empty_buckets();
             return *this;
         }
 
-        const_iterator operator++(int) {
-            const_iterator temp = *this;
+        Iterator operator++(int) {
+            Iterator temp = *this;
             ++*this;
             return temp;
         }
 
         friend bool operator==(const const_iterator &lhs, const const_iterator &rhs) {
-            return lhs.set == rhs.set && lhs.bucket == rhs.bucket && lhs.index == rhs.index;
+            return lhs.ptr == rhs.ptr;
         }
 
         friend bool operator!=(const const_iterator &lhs, const const_iterator &rhs) {
@@ -66,6 +68,9 @@ public:
             }
         }
     };
+
+    using iterator = Iterator;
+    using const_iterator = Iterator;
 
     ADS_set();
     ADS_set(std::initializer_list<key_type> ilist);
@@ -98,7 +103,7 @@ public:
     friend bool operator==(const ADS_set &lhs, const ADS_set &rhs) {
         if (lhs.table_size != rhs.table_size) return false;
         for (size_type i = 0; i < lhs.table_size; ++i) {
-            if (lhs.buckets[i].size != rhs.buckets[i].size) return false;
+            if (lhs.buckets[i].size != rhs.buckets[i].size) return false; //TODO delete if functionally identical
             for (size_type j = 0; j < lhs.buckets[i].size; ++j) {
                 if (!rhs.find(lhs.buckets[i].data[j])) return false;
             }
@@ -110,9 +115,6 @@ public:
         return !(lhs == rhs);
     }
 
-
-    using iterator = const_iterator;
-    using const_iterator = const_iterator;
 
     const_iterator begin() const { return const_iterator(this); }
     const_iterator end() const { return const_iterator(this, table_size); }
@@ -142,7 +144,7 @@ private:
 
         void remove(const key_type &key) {
             for (size_type i = 0; i < size; ++i) {
-                if (data[i] == key) {
+                if (key_equal {}(data[i], key)) {
                     data[i] = data[--size];
                     return;
                 }
