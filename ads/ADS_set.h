@@ -88,13 +88,19 @@ public:
 
     std::pair<const_iterator, bool> insert(const key_type &key) {
         size_type index = bucket_index(key);
-        if (buckets[index].contains(key)) return {const_iterator(this, index, buckets[index].find(key), false};
+        if (buckets[index].contains(key)) {
+            // Find the exact position of the existing key
+            size_type position = 0;
+            for (; position < buckets[index].size; ++position) {
+                if (key_equal{}(buckets[index].data[position], key)) break;
+            }
+            return {const_iterator(this, index, position), false};
+        }
         buckets[index].add(key);
         ++num_elements;
         if (num_elements > table_size * 2) rehash();
-        return {const_iterator(this, ++index), true};
+        return {const_iterator(this, index, buckets[index].size - 1), true};
     }
-
 
     void clear();
     size_type erase(const key_type &key);
@@ -103,7 +109,12 @@ public:
     size_type count(const key_type &key) const;
     const_iterator find(const key_type &key) const {
         size_type index = bucket_index(key);
-        return const_iterator(this, index * num_elements + bucket_index(key));
+        for (size_type i = 0; i < buckets[index].size; ++i) {
+            if (key_equal{}(buckets[index].data[i], key)) {
+                return const_iterator(this, index, i);
+            }
+        }
+        return end();
     }
 
     void swap(ADS_set &other);
@@ -125,8 +136,18 @@ public:
         return !(lhs == rhs);
     }
 
-    const_iterator begin() const { return const_iterator(this); }
-    const_iterator end() const { return const_iterator(this, table_size); }
+    const_iterator begin() const {
+        for (size_type i = 0; i < table_size; ++i) {
+            if (buckets[i].size > 0) {
+                return const_iterator(this, i, 0);
+            }
+        }
+        return end();
+    }
+
+    const_iterator end() const {
+        return const_iterator(this, table_size, 0);
+    }
 
 private:
     struct Bucket {
@@ -270,7 +291,12 @@ typename ADS_set<Key, N>::size_type ADS_set<Key, N>::erase(const key_type &key) 
 template <typename Key, size_t N>
 typename ADS_set<Key, N>::size_type ADS_set<Key, N>::erase(const_iterator pos) {
     if (pos == end()) return 0;
-    return erase(*pos);
+    size_type index = pos.bucket;
+    size_type position = pos.index;
+    if (index >= table_size || position >= buckets[index].size) return 0;
+    buckets[index].remove(buckets[index].data[position]);
+    --num_elements;
+    return 1;
 }
 
 template <typename Key, size_t N>
