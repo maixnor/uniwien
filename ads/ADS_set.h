@@ -1,13 +1,13 @@
 #ifndef ADS_SET_H
 #define ADS_SET_H
 
-#include <functional>
 #include <iostream>
 #include <stdexcept>
 #include <iterator>
-#include <vector>
+#include <initializer_list>
+#include <functional>
 
-template <typename Key, size_t N = 16>
+template <typename Key, size_t N = 16, size_t BucketSize = 4>
 class ADS_set {
 public:
     using value_type = Key;
@@ -20,17 +20,6 @@ public:
     using hasher = std::hash<key_type>;
 
     class Iterator {
-    private:
-        const ADS_set *set;
-        size_type bucket;
-        size_type index;
-
-        void advance_past_empty_buckets() {
-            while (bucket < set->table_size && (!set->buckets[bucket] || index >= set->buckets[bucket]->data.size())) {
-                ++bucket;
-                index = 0;
-            }
-        }
     public:
         using iterator_category = std::forward_iterator_tag;
         using value_type = ADS_set::value_type;
@@ -66,6 +55,17 @@ public:
             return !(lhs == rhs);
         }
 
+    private:
+        const ADS_set *set;
+        size_type bucket;
+        size_type index;
+
+        void advance_past_empty_buckets() {
+            while (bucket < set->table_size && (!set->buckets[bucket] || index >= set->buckets[bucket]->size)) {
+                ++bucket;
+                index = 0;
+            }
+        }
     };
 
     using iterator = Iterator;
@@ -117,25 +117,57 @@ public:
 
 private:
     struct Bucket {
-        std::vector<key_type> data;
+        key_type data[BucketSize];
+        size_type size;
+        Bucket* overflow;
+
+        Bucket() : size(0), overflow(nullptr) {}
+
+        ~Bucket() { delete overflow; }
 
         void add(const key_type &key) {
-            data.push_back(key);
+            if (size < BucketSize) {
+                data[size++] = key;
+            } else {
+                if (!overflow) {
+                    overflow = new Bucket;
+                }
+                overflow->add(key);
+            }
         }
 
         void remove(const key_type &key) {
-            auto it = std::remove(data.begin(), data.end(), key);
-            if (it != data.end()) data.erase(it, data.end());
+            for (size_type i = 0; i < size; ++i) {
+                if (key_equal{}(data[i], key)) {
+                    for (size_type j = i; j < size - 1; ++j) {
+                        data[j] = data[j + 1];
+                    }
+                    --size;
+                    return;
+                }
+            }
+            if (overflow) {
+                overflow->remove(key);
+                if (overflow->size == 0) {
+                    delete overflow;
+                    overflow = nullptr;
+                }
+            }
         }
 
         bool contains(const key_type &key) const {
-            return std::find(data.begin(), data.end(), key) != data.end();
+            for (size_type i = 0; i < size; ++i) {
+                if (key_equal{}(data[i], key)) {
+                    return true;
+                }
+            }
+            return overflow ? overflow->contains(key) : false;
         }
     };
 
     size_type table_size;
     size_type num_elements;
-    std::vector<Bucket*> buckets;
+    Bucket **buckets;
 
     void rehash();
     size_type bucket_index(const key_type &key) const {
@@ -143,76 +175,83 @@ private:
     }
 };
 
-template <typename Key, size_t N>
-ADS_set<Key, N>::ADS_set() : table_size(N), num_elements(0), buckets(N, nullptr) {}
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize>::ADS_set() : table_size(N), num_elements(0), buckets(new Bucket*[N]) {
+    for (size_type i = 0; i < N; ++i) {
+        buckets[i] = nullptr;
+    }
+}
 
-template <typename Key, size_t N>
-ADS_set<Key, N>::ADS_set(std::initializer_list<key_type> ilist) : ADS_set() {
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize>::ADS_set(std::initializer_list<key_type> ilist) : ADS_set() {
     insert(ilist.begin(), ilist.end());
 }
 
-template <typename Key, size_t N>
+template <typename Key, size_t N, size_t BucketSize>
 template<typename InputIt>
-ADS_set<Key, N>::ADS_set(InputIt first, InputIt last) : ADS_set() {
+ADS_set<Key, N, BucketSize>::ADS_set(InputIt first, InputIt last) : ADS_set() {
     insert(first, last);
 }
 
-template <typename Key, size_t N>
-ADS_set<Key, N>::ADS_set(const ADS_set &other) : table_size(other.table_size), num_elements(other.num_elements), buckets(other.table_size, nullptr) {
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize>::ADS_set(const ADS_set &other) : table_size(other.table_size), num_elements(other.num_elements), buckets(new Bucket*[other.table_size]) {
     for (size_type i = 0; i < table_size; ++i) {
         if (other.buckets[i]) {
             buckets[i] = new Bucket(*other.buckets[i]);
+        } else {
+            buckets[i] = nullptr;
         }
     }
 }
 
-template <typename Key, size_t N>
-ADS_set<Key, N>::~ADS_set() {
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize>::~ADS_set() {
     clear();
+    delete[] buckets;
 }
 
-template <typename Key, size_t N>
-ADS_set<Key, N> &ADS_set<Key, N>::operator=(const ADS_set &other) {
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize> &ADS_set<Key, N, BucketSize>::operator=(const ADS_set &other) {
     if (this == &other) return *this;
     ADS_set tmp(other);
     swap(tmp);
     return *this;
 }
 
-template <typename Key, size_t N>
-ADS_set<Key, N> &ADS_set<Key, N>::operator=(std::initializer_list<key_type> ilist) {
+template <typename Key, size_t N, size_t BucketSize>
+ADS_set<Key, N, BucketSize> &ADS_set<Key, N, BucketSize>::operator=(std::initializer_list<key_type> ilist) {
     clear();
     insert(ilist);
     return *this;
 }
 
-template <typename Key, size_t N>
-typename ADS_set<Key, N>::size_type ADS_set<Key, N>::size() const {
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::size() const {
     return num_elements;
 }
 
-template <typename Key, size_t N>
-bool ADS_set<Key, N>::empty() const {
+template <typename Key, size_t N, size_t BucketSize>
+bool ADS_set<Key, N, BucketSize>::empty() const {
     return num_elements == 0;
 }
 
-template <typename Key, size_t N>
-void ADS_set<Key, N>::insert(std::initializer_list<key_type> ilist) {
-    for (const auto &key : ilist) {
-        insert(key);
+template <typename Key, size_t N, size_t BucketSize>
+void ADS_set<Key, N, BucketSize>::insert(std::initializer_list<key_type> ilist) {
+    for (size_type i = 0; i < ilist.size(); ++i) {
+        insert(*(ilist.begin() + i));
     }
 }
 
-template <typename Key, size_t N>
+template <typename Key, size_t N, size_t BucketSize>
 template<typename InputIt>
-void ADS_set<Key, N>::insert(InputIt first, InputIt last) {
+void ADS_set<Key, N, BucketSize>::insert(InputIt first, InputIt last) {
     for (InputIt it = first; it != last; ++it) {
         insert(*it);
     }
 }
 
-template <typename Key, size_t N>
-std::pair<typename ADS_set<Key, N>::const_iterator, bool> ADS_set<Key, N>::insert(const key_type &key) {
+template <typename Key, size_t N, size_t BucketSize>
+std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Key, N, BucketSize>::insert(const key_type &key) {
     size_type index = bucket_index(key);
     if (!buckets[index]) {
         buckets[index] = new Bucket;
@@ -227,17 +266,22 @@ std::pair<typename ADS_set<Key, N>::const_iterator, bool> ADS_set<Key, N>::inser
     return {const_iterator(this, index), true};
 }
 
-template <typename Key, size_t N>
-void ADS_set<Key, N>::clear() {
+template <typename Key, size_t N, size_t BucketSize>
+void ADS_set<Key, N, BucketSize>::clear() {
     for (size_type i = 0; i < table_size; ++i) {
-        delete buckets[i];
+        Bucket *current = buckets[i];
+        while (current) {
+            Bucket *next = current->overflow;
+            delete current;
+            current = next;
+        }
         buckets[i] = nullptr;
     }
     num_elements = 0;
 }
 
-template <typename Key, size_t N>
-typename ADS_set<Key, N>::size_type ADS_set<Key, N>::erase(const key_type &key) {
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::erase(const key_type &key) {
     size_type index = bucket_index(key);
     if (!buckets[index] || !buckets[index]->contains(key)) return 0;
     buckets[index]->remove(key);
@@ -245,68 +289,82 @@ typename ADS_set<Key, N>::size_type ADS_set<Key, N>::erase(const key_type &key) 
     return 1;
 }
 
-template <typename Key, size_t N>
-typename ADS_set<Key, N>::size_type ADS_set<Key, N>::erase(const_iterator pos) {
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::erase(const_iterator pos) {
     if (pos == end()) return 0;
     return erase(*pos);
 }
 
-template <typename Key, size_t N>
-typename ADS_set<Key, N>::size_type ADS_set<Key, N>::count(const key_type &key) const {
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::count(const key_type &key) const {
     size_type index = bucket_index(key);
     return buckets[index] && buckets[index]->contains(key) ? 1 : 0;
 }
 
-template <typename Key, size_t N>
-typename ADS_set<Key, N>::const_iterator ADS_set<Key, N>::find(const key_type &key) const {
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::find(const key_type &key) const {
     size_type index = bucket_index(key);
     if (buckets[index] && buckets[index]->contains(key)) {
-        for (size_type i = 0; i < buckets[index]->data.size(); ++i) {
-            if (key_equal{}(buckets[index]->data[i], key)) {
-                return const_iterator(this, index, i);
+        size_type i = 0;
+        for (Bucket *bucket = buckets[index]; bucket; bucket = bucket->overflow) {
+            for (; i < bucket->size; ++i) {
+                if (key_equal{}(bucket->data[i], key)) {
+                    return const_iterator(this, index, i);
+                }
             }
         }
     }
     return end();
 }
 
-template <typename Key, size_t N>
-void ADS_set<Key, N>::swap(ADS_set &other) {
+template <typename Key, size_t N, size_t BucketSize>
+void ADS_set<Key, N, BucketSize>::swap(ADS_set &other) {
     std::swap(table_size, other.table_size);
     std::swap(num_elements, other.num_elements);
     std::swap(buckets, other.buckets);
 }
 
-template <typename Key, size_t N>
-void ADS_set<Key, N>::dump(std::ostream &o) const {
+template <typename Key, size_t N, size_t BucketSize>
+void ADS_set<Key, N, BucketSize>::dump(std::ostream &o) const {
     for (size_type i = 0; i < table_size; ++i) {
         o << "Bucket " << i << ": ";
-        if (buckets[i]) {
-            for (const auto &key : buckets[i]->data) {
-                o << key << " ";
+        for (Bucket *bucket = buckets[i]; bucket; bucket = bucket->overflow) {
+            for (size_type j = 0; j < bucket->size; ++j) {
+                o << bucket->data[j] << " ";
+            }
+            if (bucket->overflow) {
+                o << "-> ";
             }
         }
         o << "\n";
     }
 }
 
-template <typename Key, size_t N>
-void ADS_set<Key, N>::rehash() {
+template <typename Key, size_t N, size_t BucketSize>
+void ADS_set<Key, N, BucketSize>::rehash() {
     size_type new_table_size = table_size * 2;
-    std::vector<Bucket*> new_buckets(new_table_size, nullptr);
+    Bucket **new_buckets = new Bucket*[new_table_size];
+    for (size_type i = 0; i < new_table_size; ++i) {
+        new_buckets[i] = nullptr;
+    }
+
     for (size_type i = 0; i < table_size; ++i) {
-        if (buckets[i]) {
-            for (const auto &key : buckets[i]->data) {
+        for (Bucket *bucket = buckets[i]; bucket; ) {
+            for (size_type j = 0; j < bucket->size; ++j) {
+                const key_type &key = bucket->data[j];
                 size_type new_index = hasher{}(key) % new_table_size;
                 if (!new_buckets[new_index]) {
                     new_buckets[new_index] = new Bucket();
                 }
                 new_buckets[new_index]->add(key);
             }
-            delete buckets[i];
+            Bucket *old_bucket = bucket;
+            bucket = bucket->overflow;
+            delete old_bucket;
         }
     }
-    buckets.swap(new_buckets);
+    delete[] buckets;
+    buckets = new_buckets;
     table_size = new_table_size;
 }
 
