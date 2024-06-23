@@ -29,6 +29,7 @@ public class Scroll extends MagicItem {
 	 */
 	@Override
 	public String additionalOutputString() {
+		
 	}
 
 	/**

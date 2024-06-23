@@ -224,6 +224,11 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean provideMana(MagicLevel levelNeeded, int manaAmount) {
+		if (isDead()) return false;
+		if (level < levelNeeded) return false;
+		if (MP < manaAmount) return false;
+		MP -= manaAmount;
+		return true;
 	}
 
 	//Trader Interface
@@ -235,6 +240,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean possesses(Tradeable item) {
+		return inventory.contains(item);
 	}
 
 	/**
@@ -244,6 +250,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean canAfford(int amount) {
+		return money >= amount;
 	}
 
 	/**
@@ -254,6 +261,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean hasCapacity(int weight) {
+		return inventoryTotalWeight() + weight <= carryingCapacity;
 	}
 
 	/**
@@ -265,6 +273,10 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean pay(int amount) {
+		if (isDead()) return false;
+		if (!canAfford(amount)) return false;
+		money -= amount;
+		return true;
 	}
 	    
 	/**
@@ -275,10 +287,13 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean earn(int amount) {
+		if (isDead()) return false;
+		money += amount;
+		return true;
 	}
 	    
 	/**
-	 * Edd item to inventory if carryingCapacity is sufficient.
+	 * Add item to inventory if carryingCapacity is sufficient.
 	 * returns true, if item is successfully added, false otherwise
 	 * (carrying capacity exceeded or item is already in the inventory)
 	 * @param item item to be added to object's inventory
@@ -286,6 +301,10 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean addToInventory(Tradeable item) {
+		if (isDead()) return false;
+		if (!hasCapacity(item.weight)) return false;
+		inventory.add(item);
+		return true;
 	}
 
 	/**
@@ -297,6 +316,9 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean removeFromInventory(Tradeable item) {
+		if (isDead()) return false;
+		if (!inventory.contains(item)) return false;
+		return inventory.remove(item);
 	}
 	
 	/**
@@ -305,6 +327,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean canSteal() {
+		return HP > 0;
 	}
 	
 	/**
@@ -322,6 +345,10 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean steal(Trader thief) {
+		if (thief == null) throw new IllegalArgumentException();
+		if (!thief.canSteal()) return false;
+		if (inventory.isEmpty()) return false;
+
 	}
 
 	/**
@@ -330,6 +357,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean isLootable() {
+		return HP > 0;
 	}
 
 	/**
@@ -338,6 +366,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean canLoot() {
+		return HP > 0;
 	}
 	
 	/**
@@ -355,6 +384,15 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean loot(Trader looter) {
+		if (looter == null) throw new IllegalArgumentException();
+		if (!looter.canLoot()) return false;
+		if (!isLootable()) return false;
+		if (inventory.isEmpty()) return false;
+		for (Tradeable item : inventory) {
+			looter.addToInventory(item);
+		}
+		inventory.clear();
+		return true;
 	}
 	  
 	//MagicEffectRealization Interface
