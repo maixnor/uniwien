@@ -53,5 +53,6 @@ public class HealingSpell extends Spell {
 	 */
 	@Override
 	public String additionalOutputString() {
+    return "; +"+amount+" "+percentage+" "+HPorMP+"";
 	}
 }

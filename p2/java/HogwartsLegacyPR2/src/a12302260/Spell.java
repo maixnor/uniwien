@@ -24,6 +24,9 @@ public abstract class Spell {
 	 * @param levelNeeded levelNeeded to cast the spell
 	 */
 	public Spell(String name, int manaCost, MagicLevel levelNeeded) {
+    this.name = name;
+    this.manaCost = manaCost;
+    this.levelNeeded = levelNeeded;
 	}
 	  
 	/**
@@ -35,6 +38,8 @@ public abstract class Spell {
 	 * @param target target of the spell
 	 */
 	public void cast(MagicSource source, MagicEffectRealization target) {
+    if (!source.provideMana()) retrurn;
+    doEffect(target);
 	}
 	  
 	/**

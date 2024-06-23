@@ -102,7 +102,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	public boolean learn(Spell s) {
     if (s == null) throw new IllegalArgumentException();
     if (isDead()) return false;
-    return knowSpells.add(s);
+    return knownSpells.add(s);
 	}
 	  
 	/**
@@ -116,7 +116,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	public boolean forget(Spell s) {
     if (s == null) throw new IllegalArgumentException();
     if (isDead()) return false;
-    return knowSpells.remove(s);
+    return knownSpells.remove(s);
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	public boolean castSpell(Spell s, MagicEffectRealization target) {
     if (s == null) throw new IllegalArgumentException();
     if (isDead()) return false;
-    return knowSpells.remove(s); // TODO
+    return knownSpells.remove(s); // TODO
 	}
 	  
 	/**
@@ -157,7 +157,14 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 * @return true, if useOn was called, false otherwise
 	 */
 	public boolean useItem(Tradeable item, MagicEffectRealization target) {
-	}
+    if (item == null) throw new IllegalArgumentException();
+    if (target == null) throw new IllegalArgumentException();
+
+    if (isDead()) return false;
+    if (!hasInInventory(item)) return false;
+    try { item.useOn(target); } catch (Exception e) {return false;}
+    return true;
+  }
 
 	/**
 	 * If this object's inventory is empty, return false;
@@ -182,6 +189,12 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 * otherwise.
 	 */ 
 	public boolean sellItem(Tradeable item, Trader target) {
+    if (item == null) throw new IllegalArgumentException();
+    if (target == null) throw new IllegalArgumentException();
+
+    if (isDead()) return false;
+    if (!hasInInventory(item)) return false;
+    item.purchase(this, target);
 	}
 
 	/**
@@ -208,7 +221,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	@Override
 	public String toString() {
     String inventoryString = "[]";
-    return  "['"+name+"'('"+level+"'): '"+HP+"'/'"+basicHP+"' '"+MP+"'/'"+basicMP+"'; '"+money+"' '"+((money > 1) ? "Knuts" : "Knut")+"'; knows '"+knownSpells+"'; carries '"+inventoryString+"']";
+    return  "["+name+"("+level+"): "+HP+"/"+basicHP+" "+MP+"/"+basicMP+"; "+money+" "+((money > 1) ? "Knuts" : "Knut")+"; knows "+knownSpells+"; carries "+inventoryString+"]";
 	}
 	
 	//MagicSource Interface
@@ -348,7 +361,12 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 		if (thief == null) throw new IllegalArgumentException();
 		if (!thief.canSteal()) return false;
 		if (inventory.isEmpty()) return false;
-
+    boolean hasFailed = false;
+    for (Tradeable item : inventory) {
+      inventory.remove(item);
+      if (!thief.addToInventory(item)) { hasFailed = true; continue; }
+    }
+    return !hasFailed;
 	}
 
 	/**
@@ -404,6 +422,8 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public void takeDamage(int amount) {
+    if (HP <= amount) { HP = 0; return; }
+    HP -= amount;
 	}
 	    
 	/**
@@ -414,6 +434,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public void takeDamagePercent(int percentage) {
+
 	}
 	    
 	/**
@@ -423,6 +444,8 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public void weakenMagic(int amount) {
+    if (MP <= amount) { HP = 0; return; }
+    MP -= amount;
 	}
 	  
 	/**
@@ -441,6 +464,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public void heal(int amount) {
+    HP += amount;
 	}
 	    
 	/**
@@ -478,6 +502,9 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public boolean isProtected(Spell s) {
+    if (!protectedFrom.contains(s)) return false;
+    protectedFrom.remove(s);
+    return true;
 	}
 	    
 	/**
@@ -486,6 +513,9 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 */
 	@Override
 	public void setProtection(Set<AttackingSpell> attacks) {
+    for (AttackingSpell item : attacks) {
+      protectedFrom.add(item);
+    }
 	}
 
 	/**
@@ -493,5 +523,9 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
 	 * @param attacks spells against which protection is removed 
 	 */
 	@Override
-	public void removeProtection(Set<AttackingSpell> attacks) {}
+	public void removeProtection(Set<AttackingSpell> attacks) {
+    for (AttackingSpell item : attacks) {
+      protectedFrom.remove(item);
+    }
+  }
 }

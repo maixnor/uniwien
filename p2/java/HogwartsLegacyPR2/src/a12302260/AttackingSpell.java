@@ -36,6 +36,10 @@ public class AttackingSpell extends Spell {
 	 * @param amount amount
 	 */
 	public AttackingSpell(String name,	int manaCost, MagicLevel levelNeeded, boolean type, boolean percentage, int amount) {
+    super(name, manaCost, levelNeeded);
+    this.type = type;
+    this.precentage = percentage;
+    this.amount = amount;
 	}
 
 	/**
@@ -47,6 +51,20 @@ public class AttackingSpell extends Spell {
 	*/
 	@Override
 	public void doEffect(MagicEffectRealization target) {
+    if (target.isProtected()) { target.removeProtection(this); return; }
+    if (type) { // HP
+      if (percentage) { 
+        target.takeDamagePercent(amount); 
+      } else {
+        target.takeDamage(amount);
+      }
+    } else { // MP
+      if (percentage) { 
+        target.weakenMagicPercent(amount); 
+      } else {
+        target.weakenMagic(amount);
+      }
+    }
 	}
 
 	/**
@@ -58,5 +76,6 @@ public class AttackingSpell extends Spell {
 	 */
 	@Override
 	public String additionalOutputString() {
+    return  "; -"+amount+" "+((percentage) ? "%" : "")+" "+((type) ? "HP" : "MP")+"";
 	}
 }
