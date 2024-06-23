@@ -1,4 +1,5 @@
-import a12302260.*;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

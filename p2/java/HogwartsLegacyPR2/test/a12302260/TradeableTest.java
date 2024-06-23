@@ -1,7 +1,5 @@
-import a12302260.MagicEffectRealization;
-import a12302260.MagicLevel;
-import a12302260.Tradeable;
-import a12302260.Wizard;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

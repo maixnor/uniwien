@@ -4,6 +4,6 @@ run:
 
 test:
   javac -cp lib/junit-jupyter-api-5.10.2.jar:src -d test/ \
-      test/WizardTest.java
+      test/a12302260/WizardTest.java
   java -cp test:bin:junit-jupyter-5.10.2.jar org.junit.runner.JUnitCore \
-      WizardTest \
+      a12302260.WizardTest

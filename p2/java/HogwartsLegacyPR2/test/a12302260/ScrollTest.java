@@ -1,13 +1,10 @@
-import a12302260.*;
-import org.junit.jupiter.api.AfterEach;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ScrollTest {
     static AttackingSpell fireball = new AttackingSpell("Fire Ball", 3, MagicLevel.STUDENT, true, false, 3);

@@ -1,12 +1,11 @@
-import a12302260.*;
+package a12302260;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PotionTest {
     static PotionTestClass tmp;

@@ -1,11 +1,7 @@
-import a12302260.Tradeable;
-import a12302260.Trader;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+package a12302260;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class TraderTest {
     static TraderTestClass tester = new TraderTestClass();

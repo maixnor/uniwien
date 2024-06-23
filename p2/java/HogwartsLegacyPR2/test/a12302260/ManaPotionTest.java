@@ -1,15 +1,9 @@
-import a12302260.HealthPotion;
-import a12302260.MagicLevel;
-import a12302260.ManaPotion;
-import a12302260.Wizard;
-import org.junit.jupiter.api.AfterEach;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ManaPotionTest {
     static ManaPotion pot = new ManaPotion("Potion", 10, 1, 1, 3);

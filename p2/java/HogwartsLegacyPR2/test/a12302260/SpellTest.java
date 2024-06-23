@@ -1,12 +1,9 @@
-import a12302260.*;
-import org.junit.jupiter.api.AfterEach;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SpellTest {
     static SpellTestClass tmp = new SpellTestClass("TMP", 3, MagicLevel.ADEPT);

@@ -1,10 +1,6 @@
-import a12302260.AttackingSpell;
-import a12302260.Concoction;
-import a12302260.MagicLevel;
-import a12302260.Wizard;
-import org.junit.jupiter.api.AfterEach;
+package a12302260;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
