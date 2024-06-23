@@ -1,23 +1,5 @@
 package a12302260;
 
-import a12302260.AttackingSpell;
-import a12302260.Concoction;
-import a12302260.HealingSpell;
-import a12302260.HealthPotion;
-import a12302260.MagicEffectRealization;
-import a12302260.MagicItem;
-import a12302260.MagicLevel;
-import a12302260.MagicSource;
-import a12302260.Main;
-import a12302260.ManaPotion;
-import a12302260.Potion;
-import a12302260.ProtectingSpell;
-import a12302260.Scroll;
-import a12302260.Spell;
-import a12302260.Tradeable;
-import a12302260.Trader;
-import a12302260.Wizard;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

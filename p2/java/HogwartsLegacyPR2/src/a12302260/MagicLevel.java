@@ -20,4 +20,8 @@ public enum MagicLevel {
     public int getLevel() {
         return level;
     }
+
+	public int toMana() {
+		return level;
+	}
 }

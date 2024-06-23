@@ -1,0 +1,9 @@
+run:
+  javac -d bin/ -cp src src/a12302260/Main.java
+  java -cp bin a12302260.Main
+
+test:
+  javac -cp lib/junit-jupyter-api-5.10.2.jar:src -d test/ \
+      test/WizardTest.java
+  java -cp test:bin:junit-jupyter-5.10.2.jar org.junit.runner.JUnitCore \
+      WizardTest \
