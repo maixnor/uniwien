@@ -3,8 +3,8 @@ package a12302260;
 import java.util.List;
 
 /**
- * Concoctions can affect health and mana of the target at the same time and additionally
- * cast any number of spells
+ * Concoctions can affect health and mana of the target at the same time and
+ * additionally cast any number of spells
  * <p>
  * It is not allowed for health and mana to be both 0 and spells to be empty.
  * The concoction must at least have one effect
@@ -25,23 +25,24 @@ public class Concoction extends Potion {
 	private List<Spell> spells;
 
 	/**
-	 * @param name name
+	 * @param name   name
 	 * @param usages number of usages still left
-	 * @param price price
+	 * @param price  price
 	 * @param weight weight
 	 * @param health change of health on target
-	 * @param mana change of mana on target
-	 * @param spells list of spells that are cast when consuming the concoction 
+	 * @param mana   change of mana on target
+	 * @param spells list of spells that are cast when consuming the concoction
 	 */
-	public Concoction(String name,	int usages, int price, int weight, int health, int mana, List<Spell> spells) {
-    if (health == 0 && mana == 0 && spells.isEmpty()) throw new IllegalArgumentException();
+	public Concoction(String name, int usages, int price, int weight, int health, int mana, List<Spell> spells) {
+		if (health == 0 && mana == 0 && spells.isEmpty())
+			throw new IllegalArgumentException();
 
-    super(name, usages, price, weight);
-    this.health = health;
-    this.mana = mana;
-    this.spells = spells;
+		super(name, usages, price, weight);
+		this.health = health;
+		this.mana = mana;
+		this.spells = spells;
 	}
-	
+
 	/**
 	 * Returns "; '+/-''health' HP; '+/-''mana' MP; cast 'spells' ";
 	 * here '+/-' denotes the appropriate sign, spells will be a bracketed list
@@ -73,20 +74,28 @@ public class Concoction extends Potion {
   }
 
 	/**
-	 * If usages is greater than 0 reduce usages by 1 (tryUsage method) and
-	 * change HP of target by health (call method heal(health) or takeDamage(health)
-	 * depending on sign of health) and
-	 * change MP of target by mana (call method enforceMagic(mana) or weakenMagic(mana)
-	 * depending on sign of mana) and
-	 * call cast Method for every spell in spells.
+	 * If usages is greater than 0 reduce usages by 1 (tryUsage method) and change
+	 * HP of target by health (call method heal(health) or takeDamage(health)
+	 * depending on sign of health) and change MP of target by mana (call method
+	 * enforceMagic(mana) or weakenMagic(mana) depending on sign of mana) and call
+	 * cast Method for every spell in spells.
+	 * 
 	 * @param target target that takes the magic effects
 	 */
-	@Override  
+	@Override
 	public void useOn(MagicEffectRealization target) {
-    if (health < 0) { target.takeDamage(health); } else { target.heal(health); }
-    if (mana < 0 ) { target.weakenMagic(mana); } else { target.enforceMagic(mana); }
-    for (Spell item : spells) {
-      item.cast(target);
-    }
+		if (health < 0) {
+			target.takeDamage(health);
+		} else {
+			target.heal(health);
+		}
+		if (mana < 0) {
+			target.weakenMagic(mana);
+		} else {
+			target.enforceMagic(mana);
+		}
+		for (Spell item : spells) {
+			item.cast(target);
+		}
 	}
 }
