@@ -16,8 +16,12 @@ class ManaPotionTest {
 
     @Test
     void constructor() {
-        Assertions.assertDoesNotThrow(() -> {ManaPotion tmp = new ManaPotion("Potion", 10, 1, 1, 0);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {ManaPotion tmp = new ManaPotion("Potion", 10, 1, 1, -1);});
+        Assertions.assertDoesNotThrow(() -> {
+            ManaPotion tmp = new ManaPotion("Potion", 10, 1, 1, 0);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            ManaPotion tmp = new ManaPotion("Potion", 10, 1, 1, -1);
+        });
     }
 
     @Test

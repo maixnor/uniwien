@@ -16,6 +16,7 @@ class WizardTest {
     static ManaPotion potMP = new ManaPotion("Mana Potion", 10, 1, 10, 3);
     static Wizard dude;
     static Wizard prey;
+
     @BeforeEach
     void setUp() {
         dude = new Wizard("Dude", MagicLevel.ADEPT, 100, 3, 100, 3, 100,
@@ -28,48 +29,76 @@ class WizardTest {
 
     @Test
     void constructor() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard(null, MagicLevel.NOOB,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("", MagicLevel.NOOB,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", null,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                -1, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, -1, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, -1, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.ADEPT,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, -1, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, 50, -1, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, 50, 10, null,
-                new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                null, 10, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), -1, new HashSet<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                new HashSet<>(Collections.singleton(fireball)), 10, null);});
-        Assertions.assertDoesNotThrow(() -> {Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                0, 0, 50, 0, 0, new HashSet<>(),
-                new HashSet<>(), 0, new HashSet<>());});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard(null, MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("", MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", null,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    -1, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, -1, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, -1, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.ADEPT,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, -1, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, 50, -1, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, null,
+                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    null, 10, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), -1, new HashSet<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
+                    new HashSet<>(Collections.singleton(fireball)), 10, null);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
+                    0, 0, 50, 0, 0, new HashSet<>(),
+                    new HashSet<>(), 0, new HashSet<>());
+        });
     }
 
     @Test
@@ -127,7 +156,7 @@ class WizardTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> dude.useItem(potHP, null));
         Assertions.assertFalse(dude.useItem(potHP, prey));
         dude.addToInventory(potHP);
-        Assertions.assertTrue(dude.useItem(potHP,dude));
+        Assertions.assertTrue(dude.useItem(potHP, dude));
         dude.takeDamage(5);
         Assertions.assertFalse(dude.isDead());
         dude.takeDamage(1);
@@ -316,7 +345,7 @@ class WizardTest {
         deaddude.takeDamage(999);
         Assertions.assertTrue(deaddude.loot(dude));
         Assertions.assertTrue(deaddude.hasCapacity(12));
-        if(dude.hasCapacity(1)) {
+        if (dude.hasCapacity(1)) {
             Assertions.assertTrue(dude.possesses(potHP));
             Assertions.assertFalse(dude.possesses(potMP));
         } else {

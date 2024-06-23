@@ -8,6 +8,23 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TraderTest {
+    static TraderTestClass tester = new TraderTestClass();
+
+    @Test
+    void canSteal() {
+        Assertions.assertFalse(tester.canSteal());
+    }
+
+    @Test
+    void isLootable() {
+        Assertions.assertFalse(tester.isLootable());
+    }
+
+    @Test
+    void canLoot() {
+        Assertions.assertFalse(tester.canLoot());
+    }
+
     static class TraderTestClass implements Trader {
 
         @Override
@@ -54,21 +71,5 @@ class TraderTest {
         public boolean loot(Trader looter) {
             return false;
         }
-    }
-    static TraderTestClass tester = new TraderTestClass();
-
-    @Test
-    void canSteal() {
-        Assertions.assertFalse(tester.canSteal());
-    }
-
-    @Test
-    void isLootable() {
-        Assertions.assertFalse(tester.isLootable());
-    }
-
-    @Test
-    void canLoot() {
-        Assertions.assertFalse(tester.canLoot());
     }
 }

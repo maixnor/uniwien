@@ -20,8 +20,12 @@ class ScrollTest {
 
     @Test
     void constructor() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Scroll tmp = new Scroll("a", 3, 1, 1, null);});
-        Assertions.assertDoesNotThrow(() -> {Scroll tmp = new Scroll("a", 3, 1, 1, fireball);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Scroll tmp = new Scroll("a", 3, 1, 1, null);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            Scroll tmp = new Scroll("a", 3, 1, 1, fireball);
+        });
     }
 
     @Test

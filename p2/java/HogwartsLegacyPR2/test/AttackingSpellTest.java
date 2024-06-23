@@ -15,13 +15,27 @@ class AttackingSpellTest {
 
     @Test
     void constructor() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, -1);});
-        Assertions.assertDoesNotThrow(() -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, 0);});
-        Assertions.assertDoesNotThrow(() -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, 101);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, -1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 101);});
-        Assertions.assertDoesNotThrow(() -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 100);});
-        Assertions.assertDoesNotThrow(() -> {AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 0);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, -1);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, 0);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, false, 101);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 101);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 100);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            AttackingSpell tmp = new AttackingSpell("a", 3, MagicLevel.NOOB, false, true, 0);
+        });
     }
 
     @Test
@@ -44,7 +58,7 @@ class AttackingSpellTest {
         Assertions.assertTrue(manadude.provideMana(MagicLevel.NOOB, 50 - 3));
         manadude.enforceMagic(50);
         timedextraction.doEffect(manadude);
-        Assertions.assertTrue(manadude.provideMana(MagicLevel.NOOB,  (50 - ((int)(50.0 * 50.0 / 100.0)))));
+        Assertions.assertTrue(manadude.provideMana(MagicLevel.NOOB, (50 - ((int) (50.0 * 50.0 / 100.0)))));
     }
 
     @Test

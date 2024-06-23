@@ -1,1 +1,612 @@
-memberSearchIndex = [{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealthPotion","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"ManaPotion","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"ProtectingSpell","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Scroll","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"additionalOutputString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"addToInventory(Tradeable)","u":"addToInventory(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"addToInventory(Tradeable)","u":"addToInventory(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"amount"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"amount"},{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"AttackingSpell(String, int, MagicLevel, boolean, boolean, int)","u":"%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,boolean,boolean,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"ProtectingSpell","l":"attacks"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"basicHP"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"basicMP"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"canAfford(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"canAfford(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"canLoot()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"canLoot()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"canSteal()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"canSteal()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"carryingCapacity"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"cast(MagicSource, MagicEffectRealization)","u":"cast(a12345678.change.to.your.matriculation.number.MagicSource,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"castRandomSpell(MagicEffectRealization)","u":"castRandomSpell(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"castSpell(Spell, MagicEffectRealization)","u":"castSpell(a12345678.change.to.your.matriculation.number.Spell,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"Concoction(String, int, int, int, int, int, List<Spell>)","u":"%3Cinit%3E(java.lang.String,int,int,int,int,int,java.util.List)"},{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"doEffect(MagicEffectRealization)","u":"doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"doEffect(MagicEffectRealization)","u":"doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"ProtectingSpell","l":"doEffect(MagicEffectRealization)","u":"doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"doEffect(MagicEffectRealization)","u":"doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Potion","l":"drink(Wizard)","u":"drink(a12345678.change.to.your.matriculation.number.Wizard)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"earn(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"earn(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"enforceMagic(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"enforceMagic(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"enforceMagicPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"enforceMagicPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"forget(Spell)","u":"forget(a12345678.change.to.your.matriculation.number.Spell)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"getPrice()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"getPrice()"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"getUsages()"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"getWeight()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"getWeight()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"give(Trader, Trader)","u":"give(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"hasCapacity(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"hasCapacity(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"heal(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"heal(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"HealingSpell(String, int, MagicLevel, boolean, boolean, int)","u":"%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,boolean,boolean,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"healPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"healPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"health"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealthPotion","l":"health"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealthPotion","l":"HealthPotion(String, int, int, int, int)","u":"%3Cinit%3E(java.lang.String,int,int,int,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"HP"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"inventory"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"inventoryTotalWeight()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"isDead()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"isLootable()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"isLootable()"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"isProtected(Spell)","u":"isProtected(a12345678.change.to.your.matriculation.number.Spell)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"isProtected(Spell)","u":"isProtected(a12345678.change.to.your.matriculation.number.Spell)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"knownSpells"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"learn(Spell)","u":"learn(a12345678.change.to.your.matriculation.number.Spell)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"level"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"levelNeeded"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"loot(Trader)","u":"loot(a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"loot(Trader)","u":"loot(a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"MagicItem(String, int, int, int)","u":"%3Cinit%3E(java.lang.String,int,int,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicLevel","l":"MagicLevel()","u":"%3Cinit%3E()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"mana"},{"p":"a12345678.change.to.your.matriculation.number","c":"ManaPotion","l":"mana"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"manaCost"},{"p":"a12345678.change.to.your.matriculation.number","c":"ManaPotion","l":"ManaPotion(String, int, int, int, int)","u":"%3Cinit%3E(java.lang.String,int,int,int,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"money"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"MP"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"name"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"name"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"name"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"pay(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"pay(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"percentage"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"percentage"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"possesses(Tradeable)","u":"possesses(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"possesses(Tradeable)","u":"possesses(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Potion","l":"Potion(String, int, int, int)","u":"%3Cinit%3E(java.lang.String,int,int,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"price"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"protectedFrom"},{"p":"a12345678.change.to.your.matriculation.number","c":"ProtectingSpell","l":"ProtectingSpell(String, int, MagicLevel, Set<AttackingSpell>)","u":"%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,java.util.Set)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"provideMana(MagicLevel, int)","u":"provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicSource","l":"provideMana(MagicLevel, int)","u":"provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"provideMana(MagicLevel, int)","u":"provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"purchase(Trader, Trader)","u":"purchase(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"removeFromInventory(Tradeable)","u":"removeFromInventory(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"removeFromInventory(Tradeable)","u":"removeFromInventory(a12345678.change.to.your.matriculation.number.Tradeable)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"removeProtection(Set<AttackingSpell>)","u":"removeProtection(java.util.Set)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"removeProtection(Set<AttackingSpell>)","u":"removeProtection(java.util.Set)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Scroll","l":"Scroll(String, int, int, int, Spell)","u":"%3Cinit%3E(java.lang.String,int,int,int,a12345678.change.to.your.matriculation.number.Spell)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"sellItem(Tradeable, Trader)","u":"sellItem(a12345678.change.to.your.matriculation.number.Tradeable,a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"sellRandomItem(Trader)","u":"sellRandomItem(a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"setProtection(Set<AttackingSpell>)","u":"setProtection(java.util.Set)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"setProtection(Set<AttackingSpell>)","u":"setProtection(java.util.Set)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Scroll","l":"spell"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"Spell(String, int, MagicLevel)","u":"%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"spells"},{"p":"a12345678.change.to.your.matriculation.number","c":"Trader","l":"steal(Trader)","u":"steal(a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"steal(Trader)","u":"steal(a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"takeDamage(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"takeDamage(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"takeDamagePercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"takeDamagePercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"takeDamagePercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"toString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Spell","l":"toString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"toString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"transfer(Trader, Trader)","u":"transfer(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"tryUsage()"},{"p":"a12345678.change.to.your.matriculation.number","c":"AttackingSpell","l":"type"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealingSpell","l":"type"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"usages"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"usageString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Potion","l":"usageString()"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"useItem(Tradeable, MagicEffectRealization)","u":"useItem(a12345678.change.to.your.matriculation.number.Tradeable,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Concoction","l":"useOn(MagicEffectRealization)","u":"useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"HealthPotion","l":"useOn(MagicEffectRealization)","u":"useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"ManaPotion","l":"useOn(MagicEffectRealization)","u":"useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Scroll","l":"useOn(MagicEffectRealization)","u":"useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Tradeable","l":"useOn(MagicEffectRealization)","u":"useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"useRandomItem(MagicEffectRealization)","u":"useRandomItem(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicLevel","l":"valueOf(String)","u":"valueOf(java.lang.String)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicLevel","l":"values()"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"weakenMagic(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"weakenMagic(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicEffectRealization","l":"weakenMagicPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"weakenMagicPercent(int)"},{"p":"a12345678.change.to.your.matriculation.number","c":"MagicItem","l":"weight"},{"p":"a12345678.change.to.your.matriculation.number","c":"Wizard","l":"Wizard(String, MagicLevel, int, int, int, int, int, Set<Spell>, Set<AttackingSpell>, int, Set<Tradeable>)","u":"%3Cinit%3E(java.lang.String,a12345678.change.to.your.matriculation.number.MagicLevel,int,int,int,int,int,java.util.Set,java.util.Set,int,java.util.Set)"}];updateSearchResults();
+memberSearchIndex = [{
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealthPotion",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ManaPotion",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ProtectingSpell",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Scroll",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "additionalOutputString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "addToInventory(Tradeable)",
+    "u": "addToInventory(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "addToInventory(Tradeable)",
+    "u": "addToInventory(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "amount"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "amount"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "AttackingSpell(String, int, MagicLevel, boolean, boolean, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,boolean,boolean,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ProtectingSpell",
+    "l": "attacks"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "basicHP"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "basicMP"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "canAfford(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "canAfford(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "canLoot()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "canLoot()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "canSteal()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "canSteal()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "carryingCapacity"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "cast(MagicSource, MagicEffectRealization)",
+    "u": "cast(a12345678.change.to.your.matriculation.number.MagicSource,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "castRandomSpell(MagicEffectRealization)",
+    "u": "castRandomSpell(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "castSpell(Spell, MagicEffectRealization)",
+    "u": "castSpell(a12345678.change.to.your.matriculation.number.Spell,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "Concoction(String, int, int, int, int, int, List<Spell>)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int,int,int,java.util.List)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "doEffect(MagicEffectRealization)",
+    "u": "doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "doEffect(MagicEffectRealization)",
+    "u": "doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ProtectingSpell",
+    "l": "doEffect(MagicEffectRealization)",
+    "u": "doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "doEffect(MagicEffectRealization)",
+    "u": "doEffect(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Potion",
+    "l": "drink(Wizard)",
+    "u": "drink(a12345678.change.to.your.matriculation.number.Wizard)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "earn(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "earn(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "enforceMagic(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "enforceMagic(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "enforceMagicPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "enforceMagicPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "forget(Spell)",
+    "u": "forget(a12345678.change.to.your.matriculation.number.Spell)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "getPrice()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "getPrice()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "getUsages()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "getWeight()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "getWeight()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "give(Trader, Trader)",
+    "u": "give(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "hasCapacity(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "hasCapacity(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "heal(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "heal(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "HealingSpell(String, int, MagicLevel, boolean, boolean, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,boolean,boolean,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "healPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "healPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "health"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealthPotion",
+    "l": "health"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealthPotion",
+    "l": "HealthPotion(String, int, int, int, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "HP"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "inventory"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "inventoryTotalWeight()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "isDead()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "isLootable()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "isLootable()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "isProtected(Spell)",
+    "u": "isProtected(a12345678.change.to.your.matriculation.number.Spell)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "isProtected(Spell)",
+    "u": "isProtected(a12345678.change.to.your.matriculation.number.Spell)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "knownSpells"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "learn(Spell)",
+    "u": "learn(a12345678.change.to.your.matriculation.number.Spell)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "level"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "levelNeeded"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "loot(Trader)",
+    "u": "loot(a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "loot(Trader)",
+    "u": "loot(a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "MagicItem(String, int, int, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicLevel",
+    "l": "MagicLevel()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "mana"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ManaPotion",
+    "l": "mana"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "manaCost"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ManaPotion",
+    "l": "ManaPotion(String, int, int, int, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "money"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "MP"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "name"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "name"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "name"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "pay(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "pay(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "percentage"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "percentage"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "possesses(Tradeable)",
+    "u": "possesses(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "possesses(Tradeable)",
+    "u": "possesses(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Potion",
+    "l": "Potion(String, int, int, int)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "price"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "protectedFrom"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ProtectingSpell",
+    "l": "ProtectingSpell(String, int, MagicLevel, Set<AttackingSpell>)",
+    "u": "%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel,java.util.Set)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "provideMana(MagicLevel, int)",
+    "u": "provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicSource",
+    "l": "provideMana(MagicLevel, int)",
+    "u": "provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "provideMana(MagicLevel, int)",
+    "u": "provideMana(a12345678.change.to.your.matriculation.number.MagicLevel,int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "purchase(Trader, Trader)",
+    "u": "purchase(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "removeFromInventory(Tradeable)",
+    "u": "removeFromInventory(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "removeFromInventory(Tradeable)",
+    "u": "removeFromInventory(a12345678.change.to.your.matriculation.number.Tradeable)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "removeProtection(Set<AttackingSpell>)",
+    "u": "removeProtection(java.util.Set)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "removeProtection(Set<AttackingSpell>)",
+    "u": "removeProtection(java.util.Set)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Scroll",
+    "l": "Scroll(String, int, int, int, Spell)",
+    "u": "%3Cinit%3E(java.lang.String,int,int,int,a12345678.change.to.your.matriculation.number.Spell)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "sellItem(Tradeable, Trader)",
+    "u": "sellItem(a12345678.change.to.your.matriculation.number.Tradeable,a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "sellRandomItem(Trader)",
+    "u": "sellRandomItem(a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "setProtection(Set<AttackingSpell>)",
+    "u": "setProtection(java.util.Set)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "setProtection(Set<AttackingSpell>)",
+    "u": "setProtection(java.util.Set)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Scroll",
+    "l": "spell"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "Spell(String, int, MagicLevel)",
+    "u": "%3Cinit%3E(java.lang.String,int,a12345678.change.to.your.matriculation.number.MagicLevel)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "spells"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Trader",
+    "l": "steal(Trader)",
+    "u": "steal(a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "steal(Trader)",
+    "u": "steal(a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "takeDamage(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "takeDamage(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "takeDamagePercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "takeDamagePercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "takeDamagePercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "toString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Spell",
+    "l": "toString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "toString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "transfer(Trader, Trader)",
+    "u": "transfer(a12345678.change.to.your.matriculation.number.Trader,a12345678.change.to.your.matriculation.number.Trader)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "tryUsage()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "AttackingSpell",
+    "l": "type"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealingSpell",
+    "l": "type"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "usages"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "usageString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Potion",
+    "l": "usageString()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "useItem(Tradeable, MagicEffectRealization)",
+    "u": "useItem(a12345678.change.to.your.matriculation.number.Tradeable,a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Concoction",
+    "l": "useOn(MagicEffectRealization)",
+    "u": "useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "HealthPotion",
+    "l": "useOn(MagicEffectRealization)",
+    "u": "useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "ManaPotion",
+    "l": "useOn(MagicEffectRealization)",
+    "u": "useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Scroll",
+    "l": "useOn(MagicEffectRealization)",
+    "u": "useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Tradeable",
+    "l": "useOn(MagicEffectRealization)",
+    "u": "useOn(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "useRandomItem(MagicEffectRealization)",
+    "u": "useRandomItem(a12345678.change.to.your.matriculation.number.MagicEffectRealization)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicLevel",
+    "l": "valueOf(String)",
+    "u": "valueOf(java.lang.String)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicLevel",
+    "l": "values()"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "weakenMagic(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "weakenMagic(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicEffectRealization",
+    "l": "weakenMagicPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "weakenMagicPercent(int)"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "MagicItem",
+    "l": "weight"
+}, {
+    "p": "a12345678.change.to.your.matriculation.number",
+    "c": "Wizard",
+    "l": "Wizard(String, MagicLevel, int, int, int, int, int, Set<Spell>, Set<AttackingSpell>, int, Set<Tradeable>)",
+    "u": "%3Cinit%3E(java.lang.String,a12345678.change.to.your.matriculation.number.MagicLevel,int,int,int,int,int,java.util.Set,java.util.Set,int,java.util.Set)"
+}];
+updateSearchResults();

@@ -9,23 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 
 class TradeableTest {
-    static class TradeableTestClass implements Tradeable {
-
-        @Override
-        public int getPrice() {
-            return 3;
-        }
-
-        @Override
-        public int getWeight() {
-            return 3;
-        }
-
-        @Override
-        public void useOn(MagicEffectRealization target) {
-            target.takeDamage(3);
-        }
-    }
     static TradeableTestClass item1 = new TradeableTestClass();
     static TradeableTestClass item2 = new TradeableTestClass();
     Wizard dude1;
@@ -85,5 +68,23 @@ class TradeableTest {
         Assertions.assertFalse(dude1.hasCapacity(1));
         Assertions.assertFalse(dude2.canAfford(1));
         Assertions.assertTrue(dude1.canAfford(6));
+    }
+
+    static class TradeableTestClass implements Tradeable {
+
+        @Override
+        public int getPrice() {
+            return 3;
+        }
+
+        @Override
+        public int getWeight() {
+            return 3;
+        }
+
+        @Override
+        public void useOn(MagicEffectRealization target) {
+            target.takeDamage(3);
+        }
     }
 }

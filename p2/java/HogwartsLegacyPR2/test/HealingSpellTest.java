@@ -14,13 +14,27 @@ class HealingSpellTest {
 
     @Test
     void constructor() {
-        Assertions.assertDoesNotThrow(() -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, 0);});
-        Assertions.assertDoesNotThrow(() -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, 101);});
-        Assertions.assertDoesNotThrow(() -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 0);});
-        Assertions.assertDoesNotThrow(() -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 100);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, -1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, -1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 101);});
+        Assertions.assertDoesNotThrow(() -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, 0);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, 101);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 0);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 100);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, false, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, -1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            HealingSpell tmp = new HealingSpell("a", 3, MagicLevel.NOOB, false, true, 101);
+        });
     }
 
     @Test

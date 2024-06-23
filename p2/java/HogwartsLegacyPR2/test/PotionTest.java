@@ -9,23 +9,6 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PotionTest {
-    static class PotionTestClass extends Potion {
-
-        /**
-         * @param name   name
-         * @param usages number of usages still left
-         * @param price  price
-         * @param weight weight
-         */
-        public PotionTestClass(String name, int usages, int price, int weight) {
-            super(name, usages, price, weight);
-        }
-
-        @Override
-        public void useOn(MagicEffectRealization target) {
-            target.takeDamage(3);
-        }
-    }
     static PotionTestClass tmp;
 
     @BeforeEach
@@ -52,5 +35,23 @@ class PotionTest {
         Assertions.assertEquals("gulp", tmp.usageString());
         Assertions.assertEquals("gulps", bigger.usageString());
         Assertions.assertEquals("gulps", smaller.usageString());
+    }
+
+    static class PotionTestClass extends Potion {
+
+        /**
+         * @param name   name
+         * @param usages number of usages still left
+         * @param price  price
+         * @param weight weight
+         */
+        public PotionTestClass(String name, int usages, int price, int weight) {
+            super(name, usages, price, weight);
+        }
+
+        @Override
+        public void useOn(MagicEffectRealization target) {
+            target.takeDamage(3);
+        }
     }
 }

@@ -8,16 +8,16 @@ package a12302260;
  */
 public enum MagicLevel {
 
-	NOOB(50), ADEPT(100), STUDENT(200), EXPERT(500), MASTER(1000);
+    NOOB(50), ADEPT(100), STUDENT(200), EXPERT(500), MASTER(1000);
 
-	private int level;
+    private int level;
 
-	MagicLevel(int i) {
-		// TODO Auto-generated constructor stub
-		level = i;
-	}
+    MagicLevel(int i) {
+        // TODO Auto-generated constructor stub
+        level = i;
+    }
 
-	public int getLevel() {
-		return level;
-	}
+    public int getLevel() {
+        return level;
+    }
 }

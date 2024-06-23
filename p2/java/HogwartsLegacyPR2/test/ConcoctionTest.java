@@ -14,17 +14,27 @@ import java.util.List;
 
 class ConcoctionTest {
     static AttackingSpell fireball = new AttackingSpell("Fire Ball", 3, MagicLevel.STUDENT, true, false, 3);
-    static Concoction con = new Concoction("Empty", 10, 1, 1, 0,0, new ArrayList<>(List.of(fireball)));
-    static Concoction plus = new Concoction("Plus", 10, 1, 1, 3,10, new ArrayList<>());
-    static Concoction minus = new Concoction("Minus", 10, 1, 1, -3,-10, new ArrayList<>());
+    static Concoction con = new Concoction("Empty", 10, 1, 1, 0, 0, new ArrayList<>(List.of(fireball)));
+    static Concoction plus = new Concoction("Plus", 10, 1, 1, 3, 10, new ArrayList<>());
+    static Concoction minus = new Concoction("Minus", 10, 1, 1, -3, -10, new ArrayList<>());
 
     @Test
     void constructor() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Concoction tmp = new Concoction("a", 10, 1, 1, -3,-10, null);});
-        Assertions.assertDoesNotThrow(() -> {Concoction tmp = new Concoction("a", 10, 1, 1, -3,-10, new ArrayList<>());});
-        Assertions.assertDoesNotThrow(() -> {Concoction tmp = new Concoction("a", 10, 1, 1, 3,10, new ArrayList<>());});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {Concoction tmp = new Concoction("a", 10, 1, 1, 0,0, new ArrayList<>());});
-        Assertions.assertDoesNotThrow(() -> {Concoction tmp = new Concoction("a", 10, 1, 1, 3,10, new ArrayList<>(Collections.singletonList(fireball)));});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Concoction tmp = new Concoction("a", 10, 1, 1, -3, -10, null);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            Concoction tmp = new Concoction("a", 10, 1, 1, -3, -10, new ArrayList<>());
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            Concoction tmp = new Concoction("a", 10, 1, 1, 3, 10, new ArrayList<>());
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Concoction tmp = new Concoction("a", 10, 1, 1, 0, 0, new ArrayList<>());
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            Concoction tmp = new Concoction("a", 10, 1, 1, 3, 10, new ArrayList<>(Collections.singletonList(fireball)));
+        });
     }
 
     @Test

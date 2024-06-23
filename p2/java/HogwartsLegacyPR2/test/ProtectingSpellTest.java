@@ -14,9 +14,15 @@ class ProtectingSpellTest {
 
     @Test
     void constructor() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, null);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, new HashSet<>());});
-        Assertions.assertDoesNotThrow(() -> {ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, new HashSet<>(Arrays.asList(fireball, poison)));});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, null);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, new HashSet<>());
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            ProtectingSpell tmp = new ProtectingSpell("a", 3, MagicLevel.NOOB, new HashSet<>(Arrays.asList(fireball, poison)));
+        });
     }
 
     @Test
@@ -33,6 +39,6 @@ class ProtectingSpellTest {
     @Test
     void additionalOutputString() {
         HashSet<AttackingSpell> tmp = new HashSet<>(Arrays.asList(fireball, poison));
-        Assertions.assertEquals("; protects against " + tmp.toString() , SP.additionalOutputString());
+        Assertions.assertEquals("; protects against " + tmp.toString(), SP.additionalOutputString());
     }
 }

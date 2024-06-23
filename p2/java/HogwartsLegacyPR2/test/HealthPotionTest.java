@@ -13,8 +13,12 @@ class HealthPotionTest {
 
     @Test
     void constructor() {
-        Assertions.assertDoesNotThrow(() -> {HealthPotion tmp = new HealthPotion("Potion", 10, 1, 1, 0);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {HealthPotion tmp = new HealthPotion("Potion", 10, 1, 1, -1);});
+        Assertions.assertDoesNotThrow(() -> {
+            HealthPotion tmp = new HealthPotion("Potion", 10, 1, 1, 0);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            HealthPotion tmp = new HealthPotion("Potion", 10, 1, 1, -1);
+        });
     }
 
     @Test

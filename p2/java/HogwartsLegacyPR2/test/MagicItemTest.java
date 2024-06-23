@@ -7,23 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class MagicItemTest {
 
-    static class MagicItemTestClass extends MagicItem {
-
-        /**
-         * @param name   name
-         * @param usages number of usages still left
-         * @param price  price
-         * @param weight weight
-         */
-        public MagicItemTestClass(String name, int usages, int price, int weight) {
-            super(name, usages, price, weight);
-        }
-
-        @Override
-        public void useOn(MagicEffectRealization target) {
-        }
-    }
     static MagicItemTestClass tmp;
+
     @BeforeEach
     void setUp() {
         tmp = new MagicItemTestClass("TMP", 1, 1, 1);
@@ -31,12 +16,24 @@ class MagicItemTest {
 
     @Test
     void constructor() {
-        Assertions.assertDoesNotThrow(() -> {MagicItemTestClass tmp = new MagicItemTestClass("Potion", 0, 0, 0);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {MagicItemTestClass tmp = new MagicItemTestClass("", 10, 1, 1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {MagicItemTestClass tmp = new MagicItemTestClass(null, 10, 1, 1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {MagicItemTestClass tmp = new MagicItemTestClass("a", -1, 1, 1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {MagicItemTestClass tmp = new MagicItemTestClass("a", 10, -1, 1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {MagicItemTestClass tmp = new MagicItemTestClass("a", 10, 1, -1);});
+        Assertions.assertDoesNotThrow(() -> {
+            MagicItemTestClass tmp = new MagicItemTestClass("Potion", 0, 0, 0);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MagicItemTestClass tmp = new MagicItemTestClass("", 10, 1, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MagicItemTestClass tmp = new MagicItemTestClass(null, 10, 1, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MagicItemTestClass tmp = new MagicItemTestClass("a", -1, 1, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MagicItemTestClass tmp = new MagicItemTestClass("a", 10, -1, 1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            MagicItemTestClass tmp = new MagicItemTestClass("a", 10, 1, -1);
+        });
     }
 
     @Test
@@ -94,15 +91,44 @@ class MagicItemTest {
     @Test
     void takeDamagePercent() {
         MagicItemTestClass bigger = new MagicItemTestClass("a", 10, 1, 1);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {tmp.takeDamagePercent(-1);});
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {tmp.takeDamagePercent(101);});
-        Assertions.assertDoesNotThrow(() -> {bigger.takeDamagePercent(0);});
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            tmp.takeDamagePercent(-1);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            tmp.takeDamagePercent(101);
+        });
+        Assertions.assertDoesNotThrow(() -> {
+            bigger.takeDamagePercent(0);
+        });
         Assertions.assertEquals(10, bigger.getUsages());
-        Assertions.assertDoesNotThrow(() -> {bigger.takeDamagePercent(20);});
+        Assertions.assertDoesNotThrow(() -> {
+            bigger.takeDamagePercent(20);
+        });
         Assertions.assertEquals(8, bigger.getUsages());
-        Assertions.assertDoesNotThrow(() -> {bigger.takeDamagePercent(50);});
+        Assertions.assertDoesNotThrow(() -> {
+            bigger.takeDamagePercent(50);
+        });
         Assertions.assertEquals(4, bigger.getUsages());
-        Assertions.assertDoesNotThrow(() -> {bigger.takeDamagePercent(100);});
+        Assertions.assertDoesNotThrow(() -> {
+            bigger.takeDamagePercent(100);
+        });
         Assertions.assertEquals(0, bigger.getUsages());
+    }
+
+    static class MagicItemTestClass extends MagicItem {
+
+        /**
+         * @param name   name
+         * @param usages number of usages still left
+         * @param price  price
+         * @param weight weight
+         */
+        public MagicItemTestClass(String name, int usages, int price, int weight) {
+            super(name, usages, price, weight);
+        }
+
+        @Override
+        public void useOn(MagicEffectRealization target) {
+        }
     }
 }
