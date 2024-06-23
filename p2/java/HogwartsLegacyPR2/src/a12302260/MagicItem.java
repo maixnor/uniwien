@@ -29,6 +29,7 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
 	 * @param weight weight
 	 */
 	public MagicItem(String name, int usages, int price, int weight) {
+		super(name, usages, price, weight);
 	}
 
     /**

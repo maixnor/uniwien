@@ -1,7 +1,7 @@
-import a12224609.HealthPotion;
-import a12224609.MagicLevel;
-import a12224609.ManaPotion;
-import a12224609.Wizard;
+import a12302260.HealthPotion;
+import a12302260.MagicLevel;
+import a12302260.ManaPotion;
+import a12302260.Wizard;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

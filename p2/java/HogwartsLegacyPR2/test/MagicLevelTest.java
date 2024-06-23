@@ -1,4 +1,4 @@
-import a12224609.MagicLevel;
+import a12302260.MagicLevel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -17,6 +17,9 @@ public class HealthPotion extends Potion {
 	 * @param health change of health on consumer
 	 */
 	public HealthPotion(String name, int usages, int price, int weight, int health) {
+		super(name, usages, price, weight);
+		if (health < 0) throw new IllegalArgumentException();
+		this.health = health;
 	}
 	
 	/**

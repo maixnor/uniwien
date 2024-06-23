@@ -1,6 +1,6 @@
-import a12224609.HealingSpell;
-import a12224609.MagicLevel;
-import a12224609.Wizard;
+import a12302260.HealingSpell;
+import a12302260.MagicLevel;
+import a12302260.Wizard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

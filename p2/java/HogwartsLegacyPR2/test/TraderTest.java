@@ -1,5 +1,5 @@
-import a12224609.Tradeable;
-import a12224609.Trader;
+import a12302260.Tradeable;
+import a12302260.Trader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
