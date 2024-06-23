@@ -17,6 +17,7 @@ public interface MagicEffectRealization {
      * @param amount amount of damage done
      */
     default void takeDamage(int amount) {
+        if (amount < 0) throw new IllegalArgumentException();
     }
 
     /**
@@ -29,6 +30,7 @@ public interface MagicEffectRealization {
      * @param percentage percentage of damage relative to object's basic HP value
      */
     default void takeDamagePercent(int percentage) {
+        if (percentage < 0 || percentage > 100) throw new IllegalArgumentException();
     }
 
     /**
@@ -39,6 +41,7 @@ public interface MagicEffectRealization {
      * @param amount amount of damage done
      */
     default void weakenMagic(int amount) {
+        if (amount < 0) throw new IllegalArgumentException();
     }
 
     /**
@@ -51,6 +54,7 @@ public interface MagicEffectRealization {
      * @param percentage percentage of damage relative to object's basic MP value
      */
     default void weakenMagicPercent(int percentage) {
+        if (percentage < 0 || percentage > 100) throw new IllegalArgumentException();
     }
 
     /**
@@ -60,6 +64,7 @@ public interface MagicEffectRealization {
      * @param amount amount of healing done
      */
     default void heal(int amount) {
+        if (amount < 0) throw new IllegalArgumentException();
     }
 
     /**
@@ -72,6 +77,7 @@ public interface MagicEffectRealization {
      * @param percentage percentage of healing relative to object's basic MP value
      */
     default void healPercent(int percentage) {
+        if (percentage < 0 || percentage > 100) throw new IllegalArgumentException();
     }
 
     /**
@@ -81,6 +87,7 @@ public interface MagicEffectRealization {
      * @param amount amount to increase mana
      */
     default void enforceMagic(int amount) {
+        if (amount < 0) throw new IllegalArgumentException();
     }
 
     /**
@@ -94,6 +101,7 @@ public interface MagicEffectRealization {
      *                   value
      */
     default void enforceMagicPercent(int percentage) {
+        if (percentage < 0 || percentage > 100) throw new IllegalArgumentException();
     }
 
     /**
@@ -104,6 +112,7 @@ public interface MagicEffectRealization {
      * @return true if object is protected against spell s
      */
     default boolean isProtected(Spell s) {
+        if (s == null) throw new IllegalArgumentException();
         return false;
     }
 
@@ -116,6 +125,7 @@ public interface MagicEffectRealization {
      *                against
      */
     default void setProtection(Set<AttackingSpell> attacks) {
+        if (attacks == null || attacks.isEmpty()) throw new IllegalArgumentException();
     }
 
     /**
@@ -127,5 +137,6 @@ public interface MagicEffectRealization {
      *                against
      */
     default void removeProtection(Set<AttackingSpell> attacks) {
+        if (attacks == null || attacks.isEmpty()) throw new IllegalArgumentException();
     }
 }

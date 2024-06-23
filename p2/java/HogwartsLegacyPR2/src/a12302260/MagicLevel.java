@@ -12,13 +12,20 @@ public enum MagicLevel {
 
     private int level;
 
-    MagicLevel(int i) {
-        // TODO Auto-generated constructor stub
-        level = i;
+    MagicLevel(int level) {
+        this.level = level;
     }
 
-    public int getLevel() {
-        return level;
+    @Override
+    public String toString() {
+        return switch (toMana()) {
+            case 50 -> "*";
+            case 100 -> "**";
+            case 200 -> "***";
+            case 500 -> "****";
+            case 1000 -> "*****";
+            default -> throw new AssertionError();
+        };
     }
 
 	public int toMana() {

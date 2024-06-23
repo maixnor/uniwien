@@ -20,6 +20,7 @@ public class ProtectingSpell extends Spell {
      */
     public ProtectingSpell(String name, int manaCost, MagicLevel levelNeeded, Set<AttackingSpell> attacks) {
       super(name, manaCost, levelNeeded);
+      if (attacks == null || attacks.isEmpty()) throw new IllegalArgumentException();
       this.attacks = attacks;
     }
 
@@ -47,9 +48,8 @@ public class ProtectingSpell extends Spell {
       boolean first = true;
       for (AttackingSpell item : attacks) {
         if (!first) attackString += ", ";
-        attackString += "[";
         attackString += item.toString();
-        attackString += "]";
+        first = false;
       }
       return "; protects against ["+attackString+"]";
     }

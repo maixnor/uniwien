@@ -84,5 +84,10 @@ class TradeableTest {
         public void useOn(MagicEffectRealization target) {
             target.takeDamage(3);
         }
+
+        @Override
+        public String toString() {
+            return "Item";
+        }
     }
 }

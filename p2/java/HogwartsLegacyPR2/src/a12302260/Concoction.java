@@ -35,8 +35,8 @@ public class Concoction extends Potion {
      */
     public Concoction(String name, int usages, int price, int weight, int health, int mana, List<Spell> spells) {
         super(name, usages, price, weight);
-        if (health == 0 && mana == 0 && spells.isEmpty())
-            throw new IllegalArgumentException();
+        if (spells == null) throw new IllegalArgumentException();
+        if (health == 0 && mana == 0 && spells.isEmpty()) throw new IllegalArgumentException();
         this.health = health;
         this.mana = mana;
         this.spells = spells;
@@ -56,10 +56,10 @@ public class Concoction extends Potion {
     public String additionalOutputString() {
         String output = "";
         if (health != 0) { // HP
-            output += "; "+((health < 0) ? "-" : "+")+health+"' HP";
+            output += "; "+((health < 0) ? "" : "+")+health+" HP";
         }
         if (mana != 0) { // MP
-            output += "; "+((mana < 0) ? "-" : "+")+mana+"' MP";
+            output += "; "+((mana < 0) ? "" : "+")+mana+" MP";
         }
         if (!spells.isEmpty()) { // Spells
             output += "; cast [";
@@ -85,12 +85,12 @@ public class Concoction extends Potion {
     @Override
     public void useOn(MagicEffectRealization target) {
         if (health < 0) {
-            target.takeDamage(health);
+            target.takeDamage(-1 * health);
         } else {
             target.heal(health);
         }
         if (mana < 0) {
-            target.weakenMagic(mana);
+            target.weakenMagic(-1 * mana);
         } else {
             target.enforceMagic(mana);
         }

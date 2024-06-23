@@ -18,6 +18,7 @@ public class ManaPotion extends Potion {
      */
     public ManaPotion(String name, int usages, int price, int weight, int mana) {
       super(name, usages, price, weight);
+      if (mana < 0) throw new IllegalArgumentException();
       this.mana = mana;
     }
 
@@ -29,7 +30,7 @@ public class ManaPotion extends Potion {
      */
     @Override
     public String additionalOutputString() {
-      return "; "+mana+" MP";
+      return "; +"+mana+" MP";
     }
 
     /**

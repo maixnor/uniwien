@@ -25,6 +25,10 @@ public abstract class Spell {
      * @param levelNeeded levelNeeded to cast the spell
      */
     public Spell(String name, int manaCost, MagicLevel levelNeeded) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException();
+        if (manaCost < 0) throw new IllegalArgumentException();
+        if (levelNeeded == null) throw new IllegalArgumentException();
+
         this.name = name;
         this.manaCost = manaCost;
         this.levelNeeded = levelNeeded;
@@ -71,6 +75,6 @@ public abstract class Spell {
      */
     @Override
     public String toString() {
-        return "["+name+"("+levelNeeded+"): "+manaCost+" mana"+additionalOutputString()+"]";
+        return "["+name+"("+levelNeeded.toString()+"): "+manaCost+" mana"+additionalOutputString()+"]";
     }
 }

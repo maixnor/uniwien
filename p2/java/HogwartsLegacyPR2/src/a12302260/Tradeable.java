@@ -30,9 +30,9 @@ public interface Tradeable {
      * @return true, if transfer succeeds, false otherwise
      */
     private boolean transfer(Trader from, Trader to) {
-        boolean fromCheck = from.removeFromInventory(this);
         boolean toCheck = to.addToInventory(this);
-        return fromCheck && toCheck;
+        if (!toCheck) return false;
+        return from.removeFromInventory(this);
     }
 
     /**
@@ -55,7 +55,7 @@ public interface Tradeable {
     default boolean give(Trader giver, Trader taker) {
         if (giver == null || taker == null || giver == taker) throw new IllegalArgumentException();
         if (!giver.possesses(this)) return false;
-        if (!giver.hasCapacity(getWeight())) return false;
+        if (!taker.hasCapacity(getWeight())) return false;
 
         return transfer(giver, taker);
     }
@@ -82,7 +82,8 @@ public interface Tradeable {
         if (seller == null || buyer == null || seller == buyer) throw new IllegalArgumentException();
         if (!buyer.canAfford(getPrice())) return false;
 
-        if (!give(seller, buyer)) return false;
+        boolean hasBeenGiven = give(seller, buyer);
+        if (!hasBeenGiven) return false;
         buyer.pay(getPrice());
         seller.earn(getPrice());
         return true;
@@ -96,4 +97,5 @@ public interface Tradeable {
      *               the magic effects)
      */
     void useOn(MagicEffectRealization target);
+
 }

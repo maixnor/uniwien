@@ -30,6 +30,6 @@ public abstract class Potion extends MagicItem {
      */
     @Override
     public String usageString() {
-        return (getUsages() > 1) ? "gulps" : "gulp";
+        return (getUsages() == 1) ? "gulp" : "gulps";
     }
 }

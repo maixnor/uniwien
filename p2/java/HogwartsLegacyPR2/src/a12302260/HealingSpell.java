@@ -38,6 +38,8 @@ public class HealingSpell extends Spell {
     public HealingSpell(String name, int manaCost, MagicLevel levelNeeded, boolean type, boolean percentage,
                         int amount) {
       super(name, manaCost, levelNeeded);
+      if (amount < 0) throw new IllegalArgumentException();
+      if (percentage && amount > 100) throw new IllegalArgumentException();
       this.type = type;
       this.percentage = percentage;
       this.amount = amount;
@@ -76,6 +78,6 @@ public class HealingSpell extends Spell {
      */
     @Override
     public String additionalOutputString() {
-        return "; +" + amount + " " + percentage + " " + ((type) ? "HP" : "MP") + "";
+        return "; +" + amount + " " + ((percentage) ? "% " : "") + ((type) ? "HP" : "MP") + "";
     }
 }

@@ -20,6 +20,7 @@ public class Scroll extends MagicItem {
      */
     public Scroll(String name, int usages, int price, int weight, Spell spell) {
       super(name, usages, price, weight);
+      if (spell == null) throw new IllegalArgumentException();
       this.spell = spell;
     }
 

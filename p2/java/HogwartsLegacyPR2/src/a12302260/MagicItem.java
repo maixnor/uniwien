@@ -30,6 +30,11 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
      * @param weight weight
      */
     public MagicItem(String name, int usages, int price, int weight) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException();
+        if (usages < 0) throw new IllegalArgumentException();
+        if (price < 0) throw new IllegalArgumentException();
+        if (weight < 0) throw new IllegalArgumentException();
+
         this.name = name;
         this.usages = usages;
         this.price = price;
@@ -63,7 +68,7 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
      * @return "use" or "uses" depending on the value of usages
      */
     public String usageString() {
-        return (usages > 1) ? "uses" : "use";
+        return (usages == 1) ? "use" : "uses";
     }
 
     /**
@@ -87,8 +92,8 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
      */
     @Override
     public String toString() {
-        return "['" + name + "'; '" + weight + "' g; '" + price + "' '" + ((price > 1) ? "Knuts" : "Knut") + "'; '"
-                + usages + "' '" + usageString() + "''" + additionalOutputString() + "']";
+        return "[" + name + "; " + weight + " g; " + price + " " + ((price == 1) ? "Knut" : "Knuts") + "; "
+                + usages + " " + usageString() + "" + additionalOutputString() + "]";
     }
 
     // Tradeable Interface:
@@ -120,6 +125,7 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
      */
     @Override
     public boolean provideMana(MagicLevel levelNeeded, int amount) {
+        if (levelNeeded == null || amount < 0) throw new IllegalArgumentException();
         return true;
     }
 
@@ -130,6 +136,7 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
      */
     @Override
     public void takeDamagePercent(int percentage) {
+        if (percentage < 0 || percentage > 100) throw new IllegalArgumentException();
         usages = (int) (((double) usages) * (1.0 - (percentage / 100.)));
     }
 }
