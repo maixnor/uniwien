@@ -125,15 +125,15 @@ private:
 
         ~Bucket() { delete overflow; }
 
-        void add(const key_type &key) {
+        size_type add(const key_type &key) {
             if (size < BucketSize) {
                 data[size++] = key;
-            } else {
-                if (!overflow) {
-                    overflow = new Bucket;
-                }
-                overflow->add(key);
+                return size;
             }
+            if (!overflow) {
+                overflow = new Bucket;
+            }
+            return overflow->add(key);
         }
 
         void remove(const key_type &key) {
@@ -156,12 +156,16 @@ private:
         }
 
         bool contains(const key_type &key) const {
+            return at(key) != (size_type)-1;
+        }
+
+        size_type at(const key_type &key) const {
             for (size_type i = 0; i < size; ++i) {
                 if (key_equal{}(data[i], key)) {
-                    return true;
+                    return i;
                 }
             }
-            return overflow ? overflow->contains(key) : false;
+            return overflow ? overflow->contains(key) : ((size_type)-1);
         }
     };
 
@@ -257,13 +261,14 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
         buckets[index] = new Bucket;
     }
     Bucket* bucket = buckets[index];
-    if (bucket->contains(key)) {
-        return {const_iterator(this, index), false};
+    size_type idx = bucket->at(key);
+    if (idx != (size_type)-1) {
+        return {const_iterator(this, index, idx), false};
     }
-    bucket->add(key);
+    idx = bucket->add(key);
     ++num_elements;
     if (num_elements > table_size * 2) rehash();
-    return {const_iterator(this, index), true};
+    return {const_iterator(this, index, idx), true};
 }
 
 template <typename Key, size_t N, size_t BucketSize>
@@ -271,7 +276,13 @@ void ADS_set<Key, N, BucketSize>::clear() {
     for (size_type i = 0; i < table_size; ++i) {
         Bucket *current = buckets[i];
         while (current) {
+            if (!current->overflow) {
+              current = nullptr;
+              delete current;
+              break;
+            }
             Bucket *next = current->overflow;
+            current = nullptr;
             delete current;
             current = next;
         }
@@ -304,14 +315,16 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::cou
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::find(const key_type &key) const {
     size_type index = bucket_index(key);
-    if (buckets[index] && buckets[index]->contains(key)) {
+    if (buckets[index] && buckets[index]->contains(key) > 0) {
         size_type i = 0;
-        for (Bucket *bucket = buckets[index]; bucket; bucket = bucket->overflow) {
+        Bucket *bucket = buckets[index]; 
+        while (bucket) {
             for (; i < bucket->size; ++i) {
                 if (key_equal{}(bucket->data[i], key)) {
                     return const_iterator(this, index, i);
                 }
             }
+            bucket = bucket->overflow;
         }
     }
     return end();
@@ -349,7 +362,8 @@ void ADS_set<Key, N, BucketSize>::rehash() {
     }
 
     for (size_type i = 0; i < table_size; ++i) {
-        for (Bucket *bucket = buckets[i]; bucket; ) {
+        Bucket *bucket = buckets[i];
+        while (bucket) {
             for (size_type j = 0; j < bucket->size; ++j) {
                 const key_type &key = bucket->data[j];
                 size_type new_index = hasher{}(key) % new_table_size;
@@ -358,8 +372,13 @@ void ADS_set<Key, N, BucketSize>::rehash() {
                 }
                 new_buckets[new_index]->add(key);
             }
+            if (!bucket->overflow) {
+              bucket = nullptr;
+              continue;
+            }
             Bucket *old_bucket = bucket;
             bucket = bucket->overflow;
+            old_bucket = nullptr;
             delete old_bucket;
         }
     }
