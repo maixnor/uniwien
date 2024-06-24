@@ -13,7 +13,6 @@
           inherit system;
         };
       in pkgs.mkShell {
-
         buildInputs = with pkgs; [
           gcc
         ];

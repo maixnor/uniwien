@@ -55,6 +55,10 @@ public:
             return !(lhs == rhs);
         }
 
+        void print() {
+          std::cout << bucket << ":" << index << ";";
+        }
+
     private:
         const ADS_set *set;
         size_type bucket;
@@ -125,10 +129,15 @@ private:
 
         ~Bucket() { delete overflow; }
 
+        bool isFull() {
+            return size == BucketSize;
+        }
+
         size_type add(const key_type &key) {
             if (size < BucketSize) {
-                data[size++] = key;
-                return size;
+                data[size] = key;
+                size++;
+                return size - 1;
             }
             if (!overflow) {
                 overflow = new Bucket;
@@ -149,8 +158,8 @@ private:
             if (overflow) {
                 overflow->remove(key);
                 if (overflow->size == 0) {
-                    delete overflow;
                     overflow = nullptr;
+                    delete overflow;
                 }
             }
         }
@@ -256,6 +265,9 @@ void ADS_set<Key, N, BucketSize>::insert(InputIt first, InputIt last) {
 
 template <typename Key, size_t N, size_t BucketSize>
 std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Key, N, BucketSize>::insert(const key_type &key) {
+    if (num_elements > table_size * 2) { 
+        rehash(); 
+    }
     size_type index = bucket_index(key);
     if (!buckets[index]) {
         buckets[index] = new Bucket;
@@ -267,8 +279,7 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     }
     idx = bucket->add(key);
     ++num_elements;
-    if (num_elements > table_size * 2) rehash();
-    return {const_iterator(this, index, idx), true};
+    return {const_iterator(this, bucket_index(key), idx), true};
 }
 
 template <typename Key, size_t N, size_t BucketSize>

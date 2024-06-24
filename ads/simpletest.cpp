@@ -266,8 +266,10 @@
  void test_insert(const Key &k, ads_set *c, reference_set *r, bool verbose = false) {
    auto r_rc {r->insert(k)};
    auto c_rc {c->insert(k)};
-   if (!(c_rc.first == c->find(k))) 
+   if (!(c_rc.first == c->find(k))) {
      std::cout << "\n ERROR for " << k << ", returned iterator not equal (==) to iterator returned by find(" << k << ")\n";
+     std::cout << "insert: "; c_rc.first.print(); std::cout << "; find: "; c->find(k).print();
+   }
    else if (!it_equal(*r, r_rc.first, *c, c_rc.first) || r_rc.second != c_rc.second) 
      std::cout << "\n ERROR for " << k << ", returns {" << it2str(*c, c_rc.first) << ", " << c_rc.second
        << "}, should be {" << it2str(*r, r_rc.first) << ", " << r_rc.second << "}\n";
