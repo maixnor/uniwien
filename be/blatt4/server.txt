@@ -4,4 +4,5 @@
 # die ganze Antwort in eine Zeile.
 #
 # Wie heißt die C-Konstante für einen setsockopt(2)-Syscall, die es erlaubt, eine lokale Adresse für bind(2) wiederzuverwenden, solange kein Socket im LISTENING-Zustand an die Adresse gebunden ist?
+SO_REUSEADDR
 

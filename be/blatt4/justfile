@@ -1,7 +1,7 @@
 server:
-  g++ echo-server.cpp -o server -Wall -Werror -pedantic -std=c++20
+  g++ server.cpp -o server -Wall -Werror -pedantic -std=c++20
   ./server
  
 client:
-  g++ sending-client.cpp -o client -Wall -Werror -pedantic -std=c++20
+  g++ client.cpp -o client -Wall -Werror -pedantic -std=c++20
   ./client

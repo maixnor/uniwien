@@ -4,4 +4,5 @@
 # die ganze Antwort in eine Zeile.
 #
 # Wie heißt die C-Konstante fuer das Protokoll aus der Internet Protocol-Implementierung (vorkommend im IP-Header), die als Default-Wert beim Erstellen eines Sockets angenommen wird mit domain-Parameter AF_INET, type-Parameter SOCK_STREAM und protocol-Parameter 0?
+IPPROTO_TCP
 
