@@ -14,11 +14,8 @@ extern "C" {
 #include <sys/time.h>
 #include "proto.h"
 
-int get_random_uint32() {
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(1,6);
-    int dice_roll = distribution(generator);
-    return dice_roll;
+int random_int() {
+    return rand() % std::numeric_limits<int>::max();
 }
 
 void generate_challenge(int connfd) {
@@ -28,10 +25,14 @@ void generate_challenge(int connfd) {
     msg.msg_type = CHALLENGE;
     msg.server_info = 0;
 
-    challenge.op = get_random_uint32() % OP_END;
-    challenge.lhs = get_random_uint32();
-    challenge.rhs = get_random_uint32();
+    challenge.op = random_int() % OP_END;
+    challenge.lhs = random_int();
+    challenge.rhs = random_int();
     challenge.answer = 0;
+
+    uint32_t op = challenge.op;
+    uint32_t lhs = challenge.lhs;
+    uint32_t rhs = challenge.rhs;
 
     if (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
         std::cerr << "Failed to send message unit." << std::endl;
@@ -60,7 +61,7 @@ void generate_challenge(int connfd) {
         msg.msg_type = SERVER_INFO;
         msg.server_info = WRONG;
 
-        while (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
+        if (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
             std::cerr << "Failed to send challenge msg_type server info." << std::endl;
         }
 
@@ -74,8 +75,21 @@ void generate_challenge(int connfd) {
         msg.msg_type = SERVER_INFO;
         msg.server_info = WRONG;
 
-        while (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
+        if (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
             std::cerr << "Failed to send challenge sizeof server info." << std::endl;
+        }
+
+        return;
+    }
+
+    if (challenge.op != op || challenge.lhs != lhs || challenge.rhs != rhs) {
+        std::cerr << "client did some wonky stuff with the challenge variables!" << std::endl;
+
+        msg.msg_type = SERVER_INFO;
+        msg.server_info = WRONG;
+
+        if (send(connfd, &msg, sizeof(msg), MSG_NOSIGNAL) == -1) {
+            std::cerr << "failed to send" << std::endl;
         }
 
         return;
@@ -152,6 +166,7 @@ int create_server_socket(std::uint16_t port) {
 }
 
 int main() {
+    srand(69420);
     constexpr std::uint16_t port = 1234;
 
     int sockfd = create_server_socket(port);
@@ -159,8 +174,12 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    int i = 0;
     while (true) {
+        std::cout << "pre handle " << i << std::endl;
         accept_and_handle(sockfd);
+        std::cout << "post handle " << i << std::endl;
+        i++;
     }
 
     std::cout << "exit loop unexpectedly";
