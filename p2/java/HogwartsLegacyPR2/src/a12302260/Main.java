@@ -62,12 +62,9 @@ public class Main {
     // name level HP basicHP MP basicMP money knownSpells protectedFrom
     // carryingCapacity inventory
     private static ArrayList<Wizard> wizardsList = new ArrayList<>(Arrays.asList(
-            new Wizard("Harry", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123, new HashSet<Spell>(spellsList),
-                    new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>()),
-            new Wizard("Hermione", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123, new HashSet<Spell>(spellsList),
-                    new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>()),
-            new Wizard("Voldemort", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123, new HashSet<Spell>(spellsList),
-                    new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>())));
+            new WizardBuilder().setName("Harry").setLevel(MagicLevel.EXPERT).setBasicHP(1000).setHP(1000).setBasicMP(1000).setMP(1000).setMoney(123).setKnownSpells(new HashSet<Spell>(spellsList)).setProtectedFrom(new HashSet<AttackingSpell>()).setCarryingCapacity(100).setInventory(new HashSet<Tradeable>()).createWizard(),
+            new WizardBuilder().setName("Hermione").setLevel(MagicLevel.EXPERT).setBasicHP(1000).setHP(1000).setBasicMP(1000).setMP(1000).setMoney(123).setKnownSpells(new HashSet<Spell>(spellsList)).setProtectedFrom(new HashSet<AttackingSpell>()).setCarryingCapacity(100).setInventory(new HashSet<Tradeable>()).createWizard(),
+            new WizardBuilder().setName("Voldemort").setLevel(MagicLevel.EXPERT).setBasicHP(1000).setHP(1000).setBasicMP(1000).setMP(1000).setMoney(123).setKnownSpells(new HashSet<Spell>(spellsList)).setProtectedFrom(new HashSet<AttackingSpell>()).setCarryingCapacity(100).setInventory(new HashSet<Tradeable>()).createWizard()));
     // Methoden für Beispiel 3 Ende
 
     static {
