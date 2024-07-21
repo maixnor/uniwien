@@ -20,85 +20,53 @@ class WizardTest {
 
     @BeforeEach
     void setUp() {
-        dude = new Wizard("Dude", MagicLevel.ADEPT, 100, 3, 100, 3, 100,
-                new HashSet<>(Collections.singleton(fireball)), new HashSet<>(Collections.singleton(poison)),
-                10, new HashSet<>());
-        prey = new Wizard("Prey", MagicLevel.ADEPT, 100, 3, 100, 3, 100,
-                new HashSet<>(Collections.singleton(fireball)), new HashSet<>(Collections.singleton(poison)),
-                10, new HashSet<>());
+        dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(100).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
+        prey = new WizardBuilder().setName("Prey").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(100).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
     }
 
     @Test
     void constructor() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard(null, MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName(null).setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("", MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", null,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(null).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    -1, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(-1).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, -1, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(-1).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, -1, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(-1).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.ADEPT,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.ADEPT).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, -1, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(-1).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, 50, -1, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(-1).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, null,
-                    new HashSet<>(Collections.singleton(fireball)), 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(null).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    null, 10, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(null).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), -1, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(-1).setInventory(new HashSet<>()).createWizard();
         });
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    10, 10, 50, 50, 10, new HashSet<>(Collections.singleton(fireball)),
-                    new HashSet<>(Collections.singleton(fireball)), 10, null);
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(10).setBasicMP(50).setMP(50).setMoney(10).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(fireball))).setCarryingCapacity(10).setInventory(null).createWizard();
         });
         Assertions.assertDoesNotThrow(() -> {
-            Wizard tmp = new Wizard("a", MagicLevel.NOOB,
-                    0, 0, 50, 0, 0, new HashSet<>(),
-                    new HashSet<>(), 0, new HashSet<>());
+            Wizard tmp = new WizardBuilder().setName("a").setLevel(MagicLevel.NOOB).setBasicHP(0).setHP(0).setBasicMP(50).setMP(0).setMoney(0).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(0).setInventory(new HashSet<>()).createWizard();
         });
     }
 
@@ -141,9 +109,7 @@ class WizardTest {
 
     @Test
     void castRandomSpell() {
-        Wizard clone = new Wizard("Clone", MagicLevel.ADEPT, 100, 3, 100, 3, 100,
-                new HashSet<>(), new HashSet<>(Collections.singleton(poison)),
-                10, new HashSet<>());
+        Wizard clone = new WizardBuilder().setName("Clone").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(100).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(10).setInventory(new HashSet<>()).createWizard();
         Assertions.assertThrows(IllegalArgumentException.class, () -> dude.castRandomSpell(null));
         Assertions.assertFalse(clone.castRandomSpell(prey));
         Assertions.assertTrue(dude.castRandomSpell(prey));
@@ -202,13 +168,9 @@ class WizardTest {
     @Test
     void testToString() {
         Assertions.assertEquals("[Dude(**): 3/100 3/100; 100 Knuts; knows [" + fireball.toString() + "]; carries []]", dude.toString());
-        dude = new Wizard("Dude", MagicLevel.ADEPT, 100, 3, 100, 3, 1,
-                new HashSet<>(Collections.singleton(fireball)), new HashSet<>(Collections.singleton(poison)),
-                1, new HashSet<>());
+        dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(1).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(1).setInventory(new HashSet<>()).createWizard();
         Assertions.assertEquals("[Dude(**): 3/100 3/100; 1 Knut; knows [" + fireball.toString() + "]; carries []]", dude.toString());
-        dude = new Wizard("Dude", MagicLevel.ADEPT, 100, 3, 100, 3, 0,
-                new HashSet<>(Collections.singleton(fireball)), new HashSet<>(Collections.singleton(poison)),
-                0, new HashSet<>());
+        dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(0).setKnownSpells(new HashSet<>(Collections.singleton(fireball))).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(0).setInventory(new HashSet<>()).createWizard();
         Assertions.assertEquals("[Dude(**): 3/100 3/100; 0 Knuts; knows [" + fireball.toString() + "]; carries []]", dude.toString());
     }
 
@@ -333,9 +295,7 @@ class WizardTest {
 
     @Test
     void loot() {
-        Wizard deaddude = new Wizard("Dead Dude", MagicLevel.ADEPT, 100, 3, 100, 3, 100,
-                new HashSet<>(), new HashSet<>(Collections.singleton(poison)),
-                12, new HashSet<>());
+        Wizard deaddude = new WizardBuilder().setName("Dead Dude").setLevel(MagicLevel.ADEPT).setBasicHP(100).setHP(3).setBasicMP(100).setMP(3).setMoney(100).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>(Collections.singleton(poison))).setCarryingCapacity(12).setInventory(new HashSet<>()).createWizard();
         deaddude.addToInventory(potHP);
         deaddude.addToInventory(potMP);
         Assertions.assertThrows(IllegalArgumentException.class, () -> deaddude.loot(null));

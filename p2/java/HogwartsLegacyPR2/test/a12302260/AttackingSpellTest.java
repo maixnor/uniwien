@@ -39,13 +39,9 @@ class AttackingSpellTest {
 
     @Test
     void doEffect() {
-        Wizard protector = new Wizard("Protector", MagicLevel.STUDENT, 3, 3, 999, 999,
-                999, new HashSet<>(), new HashSet<>(Arrays.asList(fireball, poison, extraction, timedextraction)),
-                999, new HashSet<>());
-        Wizard die = new Wizard("Die", MagicLevel.STUDENT, 6, 3, 999, 999,
-                999, new HashSet<>(), new HashSet<>(), 999, new HashSet<>());
-        Wizard manadude = new Wizard("Mana Dude", MagicLevel.NOOB, 999, 999, 50, 50,
-                999, new HashSet<>(), new HashSet<>(), 999, new HashSet<>());
+        Wizard protector = new WizardBuilder().setName("Protector").setLevel(MagicLevel.STUDENT).setBasicHP(3).setHP(3).setBasicMP(999).setMP(999).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>(Arrays.asList(fireball, poison, extraction, timedextraction))).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
+        Wizard die = new WizardBuilder().setName("Die").setLevel(MagicLevel.STUDENT).setBasicHP(6).setHP(3).setBasicMP(999).setMP(999).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
+        Wizard manadude = new WizardBuilder().setName("Mana Dude").setLevel(MagicLevel.NOOB).setBasicHP(999).setHP(999).setBasicMP(50).setMP(50).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
         fireball.doEffect(protector);
         Assertions.assertFalse(protector.isProtected(fireball));
         Assertions.assertFalse(protector.isDead());

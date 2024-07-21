@@ -14,10 +14,8 @@ class TradeableTest {
 
     @BeforeEach
     void setUp() {
-        dude1 = new Wizard("Dude", MagicLevel.ADEPT, 10, 3, 100, 3,
-                3, new HashSet<>(), new HashSet<>(), 3, new HashSet<>());
-        dude2 = new Wizard("Dude", MagicLevel.ADEPT, 10, 3, 100, 3,
-                3, new HashSet<>(), new HashSet<>(), 6, new HashSet<>());
+        dude1 = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(10).setHP(3).setBasicMP(100).setMP(3).setMoney(3).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(3).setInventory(new HashSet<>()).createWizard();
+        dude2 = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(10).setHP(3).setBasicMP(100).setMP(3).setMoney(3).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(6).setInventory(new HashSet<>()).createWizard();
         dude2.addToInventory(item2);
     }
 

@@ -54,8 +54,7 @@ class ConcoctionTest {
 
     @Test
     void useOn() {
-        Wizard dude = new Wizard("Dude", MagicLevel.NOOB, 3, 3, 50, 50,
-                999, new HashSet<>(), new HashSet<>(), 999, new HashSet<>());
+        Wizard dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.NOOB).setBasicHP(3).setHP(3).setBasicMP(50).setMP(50).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
         con.useOn(dude);
         Assertions.assertTrue(dude.isDead());
         plus.useOn(dude);

@@ -28,8 +28,7 @@ class ProtectingSpellTest {
 
     @Test
     void doEffect() {
-        Wizard dude = new Wizard("Dude", MagicLevel.NOOB, 10, 1, 50, 0,
-                999, new HashSet<>(), new HashSet<>(), 999, new HashSet<>());
+        Wizard dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.NOOB).setBasicHP(10).setHP(1).setBasicMP(50).setMP(0).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
         SP.doEffect(dude);
         Assertions.assertTrue(dude.isProtected(fireball));
         Assertions.assertTrue(dude.isProtected(poison));

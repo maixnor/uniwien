@@ -29,8 +29,7 @@ class SpellTest {
 
     @Test
     void cast() {
-        Wizard dude = new Wizard("Dude", MagicLevel.ADEPT, 10, 3, 100, 3,
-                999, new HashSet<>(), new HashSet<>(), 999, new HashSet<>());
+        Wizard dude = new WizardBuilder().setName("Dude").setLevel(MagicLevel.ADEPT).setBasicHP(10).setHP(3).setBasicMP(100).setMP(3).setMoney(999).setKnownSpells(new HashSet<>()).setProtectedFrom(new HashSet<>()).setCarryingCapacity(999).setInventory(new HashSet<>()).createWizard();
         Assertions.assertDoesNotThrow(() -> tmp.cast(dude, dude));
         Assertions.assertTrue(dude.isDead());
     }
