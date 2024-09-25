@@ -48,6 +48,7 @@ public abstract class Spell {
         doEffect(target);
     }
 
+
     /**
      * The actual effect of the spell on target must be implemented by the
      * subclasses

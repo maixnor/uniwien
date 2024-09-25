@@ -3,15 +3,7 @@ package a12302260;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -82,24 +74,22 @@ public class Main {
         // Hier die Aufgaben dekommentieren, die implementiert wurden
         // und geprüft werden sollen.
         // Nur dekommentierte Aufgaben werden beurteilt!
-        // checkTask1(); //Aufgabe 1
-        // checkTask2(); //Aufgabe 2
-        // checkTask3(); //Aufgabe 3
-        // checkTask4(); //Aufgabe 4
+        checkTask1(); //Aufgabe 1
+        checkTask2(); //Aufgabe 2
+        checkTask3(); //Aufgabe 3
+        checkTask4(); //Aufgabe 4
     }
 
     public static List<MagicItem> filterItems(List<MagicItem> items, int digit) {
-        return null;
+        return items.stream().filter(t -> Integer.toString(t.getPrice()).contains(Integer.toString(digit))).toList();
     }
 
     // Methoden für Beispiel 2
     public static Potion[] sortPotions(List<Potion> potions) {
-        return null;
     }
 
     // Methoden für Beispiel 3
     public static Map<Integer, Set<Wizard>> mapWizardsPerNoSpells(List<Wizard> wizards) {
-        return null;
     }
 
     private static void checkTask1() {
@@ -236,7 +226,7 @@ public class Main {
         String result = tm.entrySet().stream().map(
                         o -> o.getKey().toString() + ": " + resultTask3ToString(o.getValue(), wizNameField, wizKnownSpells))
                 .collect(Collectors.joining("\n\t"));
-        String expectedResult = "15: [Harry; 15], [Hermione; 15], [Voldemort; 15]";
+        String expectedResult = "13: [Harry; 13], [Hermione; 13], [Voldemort; 13]";
         if (!checkTask3Result(result, expectedResult))
             return;
         wizardsList.get(0).forget(spellsList.get(0));
@@ -249,7 +239,7 @@ public class Main {
         result = tm.entrySet().stream().map(
                         o -> o.getKey().toString() + ": " + resultTask3ToString(o.getValue(), wizNameField, wizKnownSpells))
                 .collect(Collectors.joining("\n\t"));
-        expectedResult = "12: [Voldemort; 12]\n\t" + "13: [Hermione; 13]\n\t" + "14: [Harry; 14]";
+        expectedResult = "10: [Voldemort; 10]\n\t" + "11: [Hermione; 11]\n\t" + "12: [Harry; 12]";
         if (!checkTask3Result(result, expectedResult))
             return;
         wizardsList.get(2).learn(spellsList.get(4));
@@ -257,7 +247,7 @@ public class Main {
         result = tm.entrySet().stream().map(
                         o -> o.getKey().toString() + ": " + resultTask3ToString(o.getValue(), wizNameField, wizKnownSpells))
                 .collect(Collectors.joining("\n\t"));
-        expectedResult = "13: [Hermione; 13], [Voldemort; 13]\n\t" + "14: [Harry; 14]";
+        expectedResult = "11: [Hermione; 11], [Voldemort; 11]\n\t" + "12: [Harry; 12]";
         if (!checkTask3Result(result, expectedResult))
             return;
         System.out.println("OK \u2713");
@@ -288,9 +278,9 @@ public class Main {
     private static void checkTask4() {
         System.out.println("\nÜberprüfung Aufgabe 4");
         Wizard harry = new Wizardy("Harry", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123,
-                new HashSet<Spell>(spellsList), new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>());
+                new HashSet<Spell>(spellsList), new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>(), new HashSet<>());
         Wizard vold = new Wizardy("Voldemort", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123,
-                new HashSet<Spell>(spellsList), new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>());
+                new HashSet<Spell>(spellsList), new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>(), new HashSet<>());
         Class<?> spellClass = Spell.class;
         Field spellNameField = Main.getFieldForClass(spellClass, "name");
         if (spellNameField == null)
@@ -331,12 +321,12 @@ public class Main {
         if (!checkTask4Result(inputThis, inputTarget, result, expectedResult))
             return;
         harry = new Wizardy("Harry", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123, new HashSet<Spell>(spellsList),
-                new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>());
+                new HashSet<AttackingSpell>(), 100, new HashSet<Tradeable>(), new HashSet<>());
         vold = new Wizardy("Voldemort", MagicLevel.EXPERT, 1000, 1000, 1000, 1000, 123, new HashSet<Spell>(spellsList),
                 new HashSet<AttackingSpell>(
                         Arrays.asList((AttackingSpell) spellsList.get(1), (AttackingSpell) spellsList.get(3),
                                 (AttackingSpell) spellsList.get(6), (AttackingSpell) spellsList.get(7))),
-                100, new HashSet<Tradeable>());
+                100, new HashSet<Tradeable>(), new HashSet<>());
         inputThis = getKnownSpells(harry, wizNameField, wizKnownSpells, spellNameField);
         inputTarget = getCurProtections(vold, wizNameField, wizProtectedFrom, spellNameField);
         try {
@@ -473,8 +463,8 @@ class Wizardy extends Wizard {
     Map<String, String> castSpells = new TreeMap<String, String>();
 
     Wizardy(String name, MagicLevel level, int basicHP, int HP, int basicMP, int MP, int money, Set<Spell> knownSpells,
-            Set<AttackingSpell> protectedFrom, int carryingCapacity, Set<Tradeable> inventory) {
-        super(name, level, basicHP, HP, basicMP, MP, money, knownSpells, protectedFrom, carryingCapacity, inventory);
+            Set<AttackingSpell> protectedFrom, int carryingCapacity, Set<Tradeable> inventory, Set<State> states) {
+        super(name, level, basicHP, HP, basicMP, MP, money, knownSpells, protectedFrom, carryingCapacity, inventory, states);
     }
 
     @Override

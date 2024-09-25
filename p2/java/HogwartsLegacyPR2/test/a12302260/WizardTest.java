@@ -16,7 +16,7 @@ class WizardTest {
     static HealthPotion potHP = new HealthPotion("Potion", 10, 1, 1, 3);
     static ManaPotion potMP = new ManaPotion("Mana Potion", 10, 1, 10, 3);
     static Wizard dude;
-    static Wizard prey;
+    static Wizard prey;     
 
     @BeforeEach
     void setUp() {
@@ -463,5 +463,20 @@ class WizardTest {
         Assertions.assertFalse(dude.isProtected(fireball));
         Assertions.assertFalse(dude.isProtected(timedextraction));
         Assertions.assertTrue(dude.isProtected(extraction));
+    }
+
+    @Test
+    void clumsyState() {
+        dude.addEffect(State.CLUMSY);
+        Assertions.assertFalse(dude.castSpell(fireball, prey));
+        Assertions.assertFalse(dude.forget(fireball));
+    }
+
+    @Test
+    void determinedStat() {
+        dude.addEffect(State.DETERMINED);
+        Assertions.assertFalse(dude.castRandomSpell(prey));
+        Assertions.assertFalse(dude.sellRandomItem(prey));
+        Assertions.assertFalse(dude.useRandomItem(prey));
     }
 }

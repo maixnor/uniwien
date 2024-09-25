@@ -14,6 +14,7 @@ public class WizardBuilder {
     private Set<AttackingSpell> protectedFrom;
     private int carryingCapacity;
     private Set<Tradeable> inventory;
+    private Set<State> states;
 
     public WizardBuilder setName(String name) {
         this.name = name;
@@ -70,7 +71,12 @@ public class WizardBuilder {
         return this;
     }
 
+    public WizardBuilder setStates(Set<State> states) {
+        this.states = states;
+        return this;
+    }
+
     public Wizard createWizard() {
-        return new Wizard(name, level, basicHP, hp, basicMP, mp, money, knownSpells, protectedFrom, carryingCapacity, inventory);
+        return new Wizard(name, level, basicHP, hp, basicMP, mp, money, knownSpells, protectedFrom, carryingCapacity, inventory, states);
     }
 }

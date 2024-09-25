@@ -1,8 +1,6 @@
 package a12302260;
 
-import java.util.Set;
-import java.util.Collection;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Wizard class objects are the primary actors in the game. They can use and
@@ -55,6 +53,10 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
      * inventory may never exceed carryingCapacity
      */
     private Set<Tradeable> inventory;
+    /**
+     * Zusatz: State
+     */
+    private Set<State> states;
 
     /**
      * @param name             name
@@ -70,7 +72,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
      * @param inventory        set of items the object is currently carrying
      */
     public Wizard(String name, MagicLevel level, int basicHP, int HP, int basicMP, int MP, int money,
-                  Set<Spell> knownSpells, Set<AttackingSpell> protectedFrom, int carryingCapacity, Set<Tradeable> inventory) {
+                  Set<Spell> knownSpells, Set<AttackingSpell> protectedFrom, int carryingCapacity, Set<Tradeable> inventory, Set<State> states) {
         if (name == null || name.isEmpty()) throw new IllegalArgumentException();
         if (level == null) throw new IllegalArgumentException();
         if (basicHP < 0) throw new IllegalArgumentException();
@@ -82,6 +84,8 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
         if (protectedFrom == null) throw new IllegalArgumentException();
         if (carryingCapacity < 0) throw new IllegalArgumentException();
         if (inventory == null) throw new IllegalArgumentException();
+
+        this.states = (states == null) ? new HashSet<>() : states;
 
         if (level.toMana() > basicMP) throw new IllegalArgumentException();
 
@@ -165,6 +169,11 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
      * @return true, if cast was called, false otherwise;
      */
     public boolean castSpell(Spell s, MagicEffectRealization target) {
+        if (states.contains(State.CLUMSY)) {
+            forget(s);
+            states.remove(State.CLUMSY);
+            return false;
+        }
         if (s == null || target == null)
             throw new IllegalArgumentException();
         if (isDead())
@@ -179,6 +188,7 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
     }
 
     private <E> E randomElement(Collection<E> collection) {
+        if (states.contains(State.DETERMINED)) return null;
         if (collection.isEmpty()) return null;
         int random = new Random().nextInt(collection.size());
         for (E obj : collection) {
@@ -682,5 +692,9 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
         for (AttackingSpell item : attacks) {
             protectedFrom.remove(item);
         }
+    }
+
+    public void addEffect(State effect) {
+        states.add(effect);
     }
 }
