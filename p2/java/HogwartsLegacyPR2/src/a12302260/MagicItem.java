@@ -50,6 +50,10 @@ public abstract class MagicItem implements Tradeable, MagicEffectRealization, Ma
         return usages;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * If usages > 0 reduce usage by 1 and return true, otherwise return false
      *

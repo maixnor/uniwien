@@ -47,6 +47,9 @@ public class AttackingSpell extends Spell {
         this.amount = amount;
     }
 
+    @Override
+    public boolean isAttack() { return true; }
+
     /**
      * If the target is protected against this spell (isProtected), then protection
      * against exactly this spell is removed (removeProtection). Otherwise use one

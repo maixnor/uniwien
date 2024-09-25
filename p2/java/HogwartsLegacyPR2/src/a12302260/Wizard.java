@@ -697,4 +697,16 @@ public class Wizard implements MagicSource, Trader, MagicEffectRealization {
     public void addEffect(State effect) {
         states.add(effect);
     }
+
+    public int getNumberOfKnownSpells() {
+        return knownSpells.size();
+    }
+
+    public void senseAttack(Wizard target) {
+        List<Spell> attackingSpells = this.knownSpells.stream().filter(t -> t.isAttack()).toList();
+        List<Spell> unprotected = attackingSpells.stream().filter(t -> !target.isProtected(t)).toList();
+        for (Spell spell : unprotected) {
+            castSpell(spell, target);
+        }
+    }
 }

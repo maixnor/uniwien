@@ -86,10 +86,19 @@ public class Main {
 
     // Methoden für Beispiel 2
     public static Potion[] sortPotions(List<Potion> potions) {
+        Potion[] out = potions.toArray(new Potion[0]);
+        Arrays.sort(out, Comparator.comparing(Potion::getName).reversed().thenComparing(p -> p.getPrice() + p.getWeight()));
+        return out;
     }
 
     // Methoden für Beispiel 3
     public static Map<Integer, Set<Wizard>> mapWizardsPerNoSpells(List<Wizard> wizards) {
+        Set<Integer> knownSpells = wizards.stream().map(Wizard::getNumberOfKnownSpells).collect(Collectors.toSet());
+        Map<Integer, Set<Wizard>> out = new HashMap<>();
+        for (int knownSpell : knownSpells) {
+            out.put(knownSpell, wizards.stream().filter(w -> w.getNumberOfKnownSpells() == knownSpell).collect(Collectors.toSet()));
+        }
+        return out;
     }
 
     private static void checkTask1() {
