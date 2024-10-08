@@ -35,6 +35,7 @@
                 matplotlib
                 sympy
                 # Add any additional Python packages here
+                seaborn # a dataset library
               ]
             ))
             vscodium
@@ -45,6 +46,7 @@
               export PYTHONPATH="${pkgs.python3}/${pkgs.python3.sitePackages}"
               export JUPYTER_PATH="${pkgs.python3}/${pkgs.python3.sitePackages}"
               echo "Starting Jupyter server without a password..."
+              pwd
               jupyter lab --no-browser --ip=127.0.0.1 --port=8888 --NotebookApp.token="" &
               JUPYTER_PID=$!
               echo "Jupyter server started with PID $JUPYTER_PID"
@@ -52,7 +54,7 @@
                 echo "Stopping Jupyter server..."
                 kill $JUPYTER_PID
 
-                git add ./notebooks
+                git add .
                 git commit -m "snapshot notebooks"
               }
               trap cleanup EXIT
