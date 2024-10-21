@@ -13,8 +13,7 @@
       flake-utils,
       ...
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
@@ -23,7 +22,9 @@
             allowUnfree = true;
           };
         };
-        jupyterEnv = pkgs.mkShell {
+      in
+      {
+        devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             (python3.withPackages (
               ps: with ps; [
@@ -39,6 +40,8 @@
               ]
             ))
             vscodium
+            octave
+            gnuplot
           ];
           shellHook = ''
               git pull --all
@@ -46,7 +49,6 @@
               export PYTHONPATH="${pkgs.python3}/${pkgs.python3.sitePackages}"
               export JUPYTER_PATH="${pkgs.python3}/${pkgs.python3.sitePackages}"
               echo "Starting Jupyter server without a password..."
-              pwd
               jupyter lab --no-browser --ip=127.0.0.1 --port=8888 --NotebookApp.token="" &
               JUPYTER_PID=$!
               echo "Jupyter server started with PID $JUPYTER_PID"
@@ -65,9 +67,6 @@
               exit
           '';
         };
-      in
-      {
-        devShell = jupyterEnv;
       }
     );
 }
