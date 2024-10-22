@@ -35,6 +35,8 @@
                 pandas
                 matplotlib
                 sympy
+                scipy
+                statsmodels
                 # Add any additional Python packages here
                 seaborn # a dataset library
               ]
