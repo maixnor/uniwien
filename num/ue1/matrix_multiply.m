@@ -1,5 +1,4 @@
-function result = matrix_matrix(A, B)
-    % Task 10: Multiply Matrix-Vector or Matrix-Matrix
+function result = matrix_multiply(A, B)  % Ändere den Funktionsnamen
     % Check if dimensions are compatible for multiplication
     [rows_A, cols_A] = size(A);
     [rows_B, cols_B] = size(B);
@@ -13,10 +12,11 @@ function result = matrix_matrix(A, B)
     end
 end
 
-% direct eintippen bei octave REPL
-A = [1 2; 3 4];       % 2x2 Matrix
-B = [5 6; 7 8];       % 2x2 Matrix
-matrix_matrix(A, B);  % Aufruf der Funktion
-B = [1; 2];
-matrix_matrix(A, B);
+A = [1 2; 3 4];  % 2x2 Matrix
+B = [5 6; 7 8];  % 2x2 Matrix
+
+% Aufruf der Funktion:
+result = matrix_multiply(A, B);
+
+disp(result)
 
