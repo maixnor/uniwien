@@ -41,7 +41,7 @@
                 seaborn # a dataset library
               ]
             ))
-            vscodium
+            vscode
             octave
             gnuplot
           ];
