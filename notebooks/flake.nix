@@ -64,8 +64,8 @@
               trap cleanup EXIT
 
               # --wait for the process to not exit immediately
-              codium --install-extension ms-toolsai.jupyter
-              codium . --wait
+              code --install-extension ms-toolsai.jupyter
+              code . --wait
               exit
           '';
         };
