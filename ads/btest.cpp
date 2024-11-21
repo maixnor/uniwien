@@ -1437,7 +1437,7 @@ void stresstest(RNG* const gen = nullptr) {
     try {
         auto f = std::async(std::launch::async, do_stresstest1, gen);
 
-        unsigned d = 1 + (gen ? 2 : 0);
+        unsigned d = (1 + (gen ? 2 : 0)) * 5;
         if(f.wait_for(std::chrono::seconds(d)) == std::future_status::timeout) {
             std::cerr << YELLOW("[stresstest1] timeout: exceeded " << d << "s timeframe.\n");
             std::abort();

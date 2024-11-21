@@ -29,6 +29,7 @@
             (python3.withPackages (
               ps: with ps; [
                 ipython
+                ipykernel
                 notebook
                 jupyterlab
                 numpy
@@ -41,7 +42,6 @@
                 seaborn # a dataset library
               ]
             ))
-            vscode
             octave
             gnuplot
           ];
