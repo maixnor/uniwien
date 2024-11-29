@@ -3,19 +3,7 @@
 #ifndef ADS_SET_H
 #define ADS_SET_H
 
-<<<<<<< Updated upstream
 template <typename Key, size_t N = 16, size_t BucketSize = 4>
-=======
-#include <cstddef> // for size_t
-#include <functional> // for std::hash, std::equal_to
-#include <utility> // for std::pair
-#include <initializer_list>
-
-// Linear Hashing implementation as an ADS_set container.
-// This is designed based on the given requirements.
-
-template <typename Key, size_t N = 8>
->>>>>>> Stashed changes
 class ADS_set {
 private:
     struct Node {
