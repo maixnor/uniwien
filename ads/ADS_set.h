@@ -1,5 +1,3 @@
-// ADS_set.h
-
 #ifndef ADS_SET_H
 #define ADS_SET_H
 
@@ -205,18 +203,6 @@ public:
         return find(key) != end() ? 1 : 0;
     }
 
-    Node* find(const key_type &key) const {
-        size_t index = hash(key, (1 << level) + split_pointer);
-        Node* node = table[index];
-        while (node) {
-            if (key_equal{}(node->key, key)) {
-                return node;
-            }
-            node = node->next;
-        }
-        return nullptr;
-    }
-
     class const_iterator {
     public:
         using value_type = Key;
@@ -301,6 +287,18 @@ public:
             }
             o << "nullptr\n";
         }
+    }
+
+    const_iterator find(const key_type &key) const {
+        size_t index = hash(key, (1 << level) + split_pointer);
+        Node* node = table[index];
+        while (node) {
+            if (key_equal{}(node->key, key)) {
+                return const_iterator(table, index, node);
+            }
+            node = node->next;
+        }
+        return end();
     }
 };
 
