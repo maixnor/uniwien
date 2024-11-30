@@ -1,12 +1,15 @@
 
 simple-string:
-  g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=std::string -DSIZE=1 simpletest.cpp -o simpletest
+  \g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=std::string -DSIZE=1 simpletest.cpp -o simpletest
   ./simpletest
+  touch ADS_set.h
 
 simple-person:
-  g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=Person -DSIZE=1 simpletest.cpp -o simpletest
+  \g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=Person -DSIZE=1 simpletest.cpp -o simpletest
   ./simpletest
+  touch ADS_set.h
 
 btest:
   \g++ -Wall -Wextra -Og -g -std=c++17 -pedantic-errors -pthread -DPH2 btest.cpp -o btest
   ./btest -b
+  touch ADS_set.h

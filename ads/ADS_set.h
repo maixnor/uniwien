@@ -185,7 +185,7 @@ private:
                 }
             }
             if (overflow) {
-                return overflow->contains(key) ? 1 : static_cast<size_type>(-1);
+                return overflow->at(key);
             }
             return static_cast<size_type>(-1);
         }
@@ -278,7 +278,7 @@ void ADS_set<Key, N, BucketSize>::insert(InputIt first, InputIt last) {
 
 template <typename Key, size_t N, size_t BucketSize>
 std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Key, N, BucketSize>::insert(const key_type &key) {
-    if (num_elements >= table_size * 0.75) { 
+    if (num_elements >= table_size * 2) {
         rehash(); 
     }
     size_type index = bucket_index(key);
@@ -383,23 +383,19 @@ void ADS_set<Key, N, BucketSize>::rehash() {
     }
 
     for (size_type i = 0; i < table_size; ++i) {
-        Bucket *bucket = buckets[i];
-        while (bucket) {
+        for (Bucket *bucket = buckets[i]; bucket; bucket = bucket->overflow) {
             for (size_type j = 0; j < bucket->size; ++j) {
-                const key_type &key = bucket->data[j];
+                const key_type& key = bucket->data[j];
                 size_type new_index = hasher{}(key) % new_table_size;
                 if (!new_buckets[new_index]) {
                     new_buckets[new_index] = new Bucket();
                 }
                 new_buckets[new_index]->add(key);
             }
-            Bucket *next_bucket = bucket->overflow;
-            delete bucket;
-            bucket = next_bucket;
+            if (!bucket->overflow) delete bucket;
         }
     }
-    delete[] buckets;
-    buckets = new_buckets;
+    buckets = std::move(new_buckets);
     table_size = new_table_size;
 }
 
