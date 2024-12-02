@@ -19,107 +19,6 @@ public:
     using key_equal = std::equal_to<key_type>;
     using hasher = std::hash<key_type>;
 
-    class Iterator {
-    public:
-        using iterator_category = std::forward_iterator_tag;
-        using value_type = ADS_set::value_type;
-        using difference_type = ADS_set::difference_type;
-        using pointer = const value_type*;
-        using reference = const value_type&;
-
-        Iterator(const ADS_set *set = nullptr, size_type bucket = 0, size_type index = 0) 
-            : set(set), bucket(bucket), index(index) {
-            advance_past_empty_buckets();
-        }
-
-        reference operator*() const { return set->buckets[bucket]->data[index]; }
-        pointer operator->() const { return &set->buckets[bucket]->data[index]; }
-
-        Iterator &operator++() {
-            ++index;
-            advance_past_empty_buckets();
-            return *this;
-        }
-
-        Iterator operator++(int) {
-            Iterator temp = *this;
-            ++*this;
-            return temp;
-        }
-
-        friend bool operator==(const Iterator &lhs, const Iterator &rhs) {
-            return lhs.set == rhs.set && lhs.bucket == rhs.bucket && lhs.index == rhs.index;
-        }
-
-        friend bool operator!=(const Iterator &lhs, const Iterator &rhs) {
-            return !(lhs == rhs);
-        }
-
-        void print() {
-          std::cout << bucket << ":" << index << ";";
-        }
-
-    private:
-        const ADS_set *set;
-        size_type bucket;
-        size_type index;
-
-        void advance_past_empty_buckets() {
-            while (bucket < set->table_size && (!set->buckets[bucket] || index >= set->buckets[bucket]->size)) {
-                ++bucket;
-                index = 0;
-            }
-        }
-    };
-
-    using iterator = Iterator;
-    using const_iterator = Iterator;
-
-    ADS_set();
-    ADS_set(std::initializer_list<key_type> ilist);
-    template<typename InputIt> ADS_set(InputIt first, InputIt last);
-    ADS_set(const ADS_set &other);
-
-    ~ADS_set();
-
-    ADS_set &operator=(const ADS_set &other);
-    ADS_set &operator=(std::initializer_list<key_type> ilist);
-
-    size_type size() const;
-    bool empty() const;
-
-    void insert(std::initializer_list<key_type> ilist);
-    template<typename InputIt> void insert(InputIt first, InputIt last);
-
-    std::pair<const_iterator, bool> insert(const key_type &key);
-
-    void clear();
-    size_type erase(const key_type &key);
-    size_type erase(const_iterator pos);
-
-    size_type count(const key_type &key) const;
-    const_iterator find(const key_type &key) const;
-
-    void swap(ADS_set &other);
-
-    void dump(std::ostream &o = std::cerr) const;
-
-    friend bool operator==(const ADS_set &lhs, const ADS_set &rhs) {
-        if (lhs.num_elements != rhs.num_elements) return false;
-        for (const auto &key : lhs) {
-            if (rhs.count(key) == 0) return false;
-        }
-        return true;
-    }
-
-    friend bool operator!=(const ADS_set &lhs, const ADS_set &rhs) {
-        return !(lhs == rhs);
-    }
-
-    const_iterator begin() const { return const_iterator(this); }
-    const_iterator end() const { return const_iterator(this, table_size); }
-
-private:
     struct Bucket {
         key_type data[BucketSize];
         size_type size;
@@ -191,6 +90,136 @@ private:
         }
     };
 
+    class Iterator {
+    public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = ADS_set::value_type;
+        using difference_type = ADS_set::difference_type;
+        using pointer = const value_type*;
+        using reference = const value_type&;
+
+        Iterator(const ADS_set *set = nullptr, size_type bucket = 0, size_type index = 0, Bucket* current = nullptr) 
+            : set(set), bucket(bucket), index(index), current_bucket(current) {
+            if (set && current_bucket == nullptr && bucket < set->table_size) {
+                current_bucket = set->buckets[bucket];
+                advance_past_empty_buckets();
+            }
+        }
+
+        reference operator*() const { 
+            if (!current_bucket) {
+                throw std::out_of_range("Iterator dereferenced at end");
+            }
+            return current_bucket->data[index]; 
+        }
+
+        pointer operator->() const { 
+            if (!current_bucket) {
+                throw std::out_of_range("Iterator dereferenced at end");
+            }
+            return &(current_bucket->data[index]); 
+        }
+
+        Iterator &operator++() {
+            if (!set || !current_bucket) return *this;
+            ++index;
+            if (index >= current_bucket->size) {
+                if (current_bucket->overflow) {
+                    current_bucket = current_bucket->overflow;
+                    index = 0;
+                } else {
+                    ++bucket;
+                    if (bucket < set->table_size) {
+                        current_bucket = set->buckets[bucket];
+                        index = 0;
+                        advance_past_empty_buckets();
+                    } else {
+                        current_bucket = nullptr;
+                        index = 0;
+                    }
+                }
+            }
+            return *this;
+        }
+
+        Iterator operator++(int) {
+            Iterator temp = *this;
+            ++(*this);
+            return temp;
+        }
+
+        friend bool operator==(const Iterator &lhs, const Iterator &rhs) {
+            return lhs.set == rhs.set && lhs.bucket == rhs.bucket && lhs.index == rhs.index && lhs.current_bucket == rhs.current_bucket;
+        }
+
+        friend bool operator!=(const Iterator &lhs, const Iterator &rhs) {
+            return !(lhs == rhs);
+        }
+
+    private:
+        const ADS_set *set;
+        size_type bucket;
+        size_type index;
+        Bucket* current_bucket;
+
+        void advance_past_empty_buckets() {
+            while (bucket < set->table_size && !current_bucket) {
+                ++bucket;
+                if (bucket < set->table_size) {
+                    current_bucket = set->buckets[bucket];
+                }
+            }
+        }
+    };
+
+    using iterator = Iterator;
+    using const_iterator = Iterator;
+
+    ADS_set();
+    ADS_set(std::initializer_list<key_type> ilist);
+    template<typename InputIt> ADS_set(InputIt first, InputIt last);
+    ADS_set(const ADS_set &other);
+
+    ~ADS_set();
+
+    ADS_set &operator=(const ADS_set &other);
+    ADS_set &operator=(std::initializer_list<key_type> ilist);
+
+    size_type size() const;
+    bool empty() const;
+
+    void insert(std::initializer_list<key_type> ilist);
+    template<typename InputIt> void insert(InputIt first, InputIt last);
+
+    std::pair<const_iterator, bool> insert(const key_type &key);
+
+    void clear();
+    size_type erase(const key_type &key);
+    size_type erase(const_iterator pos);
+
+    size_type count(const key_type &key) const;
+    const_iterator find(const key_type &key) const;
+
+    void swap(ADS_set &other);
+
+    void dump(std::ostream &o = std::cerr) const;
+
+    friend bool operator==(const ADS_set &lhs, const ADS_set &rhs) {
+        if (lhs.num_elements != rhs.num_elements) return false;
+        for (const auto &key : lhs) {
+            if (rhs.count(key) == 0) return false;
+        }
+        return true;
+    }
+
+    friend bool operator!=(const ADS_set &lhs, const ADS_set &rhs) {
+        return !(lhs == rhs);
+    }
+
+    const_iterator begin() const { return const_iterator(this); }
+    const_iterator end() const { return const_iterator(this, table_size, 0, nullptr); }
+
+private:
     size_type table_size;
     size_type num_elements;
     Bucket **buckets;
@@ -214,16 +243,17 @@ ADS_set<Key, N, BucketSize>::ADS_set(std::initializer_list<key_type> ilist) : AD
 }
 
 template <typename Key, size_t N, size_t BucketSize>
-template<typename InputIt>
+template <typename InputIt>
 ADS_set<Key, N, BucketSize>::ADS_set(InputIt first, InputIt last) : ADS_set() {
     insert(first, last);
 }
 
 template <typename Key, size_t N, size_t BucketSize>
-ADS_set<Key, N, BucketSize>::ADS_set(const ADS_set &other) : table_size(other.table_size), num_elements(other.num_elements), buckets(new Bucket*[other.table_size]()) {
+ADS_set<Key, N, BucketSize>::ADS_set(const ADS_set &other)
+    : table_size(other.table_size), num_elements(other.num_elements), buckets(new Bucket*[other.table_size]()) {
     for (size_type i = 0; i < table_size; ++i) {
         if (other.buckets[i]) {
-            buckets[i] = new Bucket(*other.buckets[i]);
+            buckets[i] = new Bucket(*other.buckets[i]); // Deep copy each bucket
         } else {
             buckets[i] = nullptr;
         }
@@ -269,7 +299,7 @@ void ADS_set<Key, N, BucketSize>::insert(std::initializer_list<key_type> ilist) 
 }
 
 template <typename Key, size_t N, size_t BucketSize>
-template<typename InputIt>
+template <typename InputIt>
 void ADS_set<Key, N, BucketSize>::insert(InputIt first, InputIt last) {
     for (InputIt it = first; it != last; ++it) {
         insert(*it);
@@ -288,22 +318,17 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     Bucket* bucket = buckets[index];
     size_type idx = bucket->at(key);
     if (idx != static_cast<size_type>(-1)) {
-        return {const_iterator(this, index, idx), false};
+        return {const_iterator(this, index, idx, bucket), false};
     }
     bucket->add(key);
     ++num_elements;
-    return {const_iterator(this, index, bucket->size - 1), true};
+    return {const_iterator(this, index, bucket->size - 1, bucket), true};
 }
 
 template <typename Key, size_t N, size_t BucketSize>
 void ADS_set<Key, N, BucketSize>::clear() {
     for (size_type i = 0; i < table_size; ++i) {
-        Bucket *current = buckets[i];
-        while (current) {
-            Bucket *next = current->overflow;
-            delete current;
-            current = next;
-        }
+        delete buckets[i];
         buckets[i] = nullptr;
     }
     num_elements = 0;
@@ -335,18 +360,15 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::cou
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::find(const key_type &key) const {
     size_type index = bucket_index(key);
-    if (buckets[index] && buckets[index]->contains(key)) {
-        size_type i = 0;
-        Bucket *bucket = buckets[index];
-        while (bucket) {
-            for (; i < bucket->size; ++i) {
-                if (key_equal{}(bucket->data[i], key)) {
-                    return const_iterator(this, index, i);
-                }
+    Bucket* bucket = buckets[index];
+
+    while (bucket) {
+        for (size_type i = 0; i < bucket->size; ++i) {
+            if (key_equal{}(bucket->data[i], key)) {
+                return const_iterator(this, index, i, bucket);
             }
-            bucket = bucket->overflow;
-            i = 0;
         }
+        bucket = bucket->overflow;
     }
     return end();
 }
