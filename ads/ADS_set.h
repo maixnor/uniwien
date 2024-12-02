@@ -129,12 +129,8 @@ public:
                     index = 0;
                 } else {
                     ++bucket;
-                    if (bucket < set->table_size) {
-                        current_bucket = set->buckets[bucket];
-                        index = 0;
-                    } else {
-                        current_bucket = nullptr;
-                    }
+                    current_bucket = nullptr;
+                    index = 0;
                     advance_past_empty_buckets();
                 }
             }
@@ -162,12 +158,22 @@ public:
         Bucket* current_bucket;
 
         void advance_past_empty_buckets() {
-            while (bucket < set->table_size && !current_bucket) {
-                ++bucket;
-                if (bucket < set->table_size) {
+            while (bucket < set->table_size) {
+                if (set->buckets[bucket]) {
                     current_bucket = set->buckets[bucket];
+                    if (current_bucket->size > 0) {
+                        return;
+                    } else {
+                        current_bucket = current_bucket->overflow;
+                        index = 0;
+                        if (current_bucket && current_bucket->size > 0) {
+                            return;
+                        }
+                    }
                 }
+                ++bucket;
             }
+            current_bucket = nullptr;
         }
     };
 
