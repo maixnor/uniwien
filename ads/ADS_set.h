@@ -123,7 +123,7 @@ public:
         Iterator &operator++() {
             if (!set || !current_bucket) return *this;
             ++index;
-            if (index >= current_bucket->size) {
+            while (current_bucket && index >= current_bucket->size) {
                 if (current_bucket->overflow) {
                     current_bucket = current_bucket->overflow;
                     index = 0;
@@ -132,11 +132,10 @@ public:
                     if (bucket < set->table_size) {
                         current_bucket = set->buckets[bucket];
                         index = 0;
-                        advance_past_empty_buckets();
                     } else {
                         current_bucket = nullptr;
-                        index = 0;
                     }
+                    advance_past_empty_buckets();
                 }
             }
             return *this;
