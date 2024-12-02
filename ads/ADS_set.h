@@ -320,14 +320,33 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     if (!buckets[index]) {
         buckets[index] = new Bucket();
     }
-    Bucket* bucket = buckets[index];
-    size_type idx = bucket->at(key);
-    if (idx != static_cast<size_type>(-1)) {
-        return {const_iterator(this, index, idx, bucket), false};
+    Bucket* current = buckets[index];
+    
+    // Traverse to the appropriate bucket (base or overflow)
+    while (true) {
+        size_type idx = current->at(key);
+        if (idx != static_cast<size_type>(-1)) {
+            return {const_iterator(this, index, idx, current), false};
+        }
+        if (!current->isFull()) {
+            current->add(key);
+            ++num_elements;
+            return {const_iterator(this, index, current->size - 1, current), true};
+        }
+        if (!current->overflow) break;
+        current = current->overflow;
     }
-    bucket->add(key);
+    
+    // Create a new overflow bucket
+    Bucket* next_overflow = new Bucket();
+    next_overflow->add(key);
     ++num_elements;
-    return {const_iterator(this, index, bucket->size - 1, bucket), true};
+    
+    // Link the new overflow bucket
+    current->overflow = next_overflow;
+    current = current->overflow;
+    
+    return {const_iterator(this, index, current->size - 1, current), true};
 }
 
 template <typename Key, size_t N, size_t BucketSize>
