@@ -1,0 +1,3 @@
+
+view:
+  fd .png | fzf | xargs mpv --loop
