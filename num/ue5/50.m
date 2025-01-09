@@ -42,4 +42,3 @@ hold off;
 
 % Speichern als PNG für Teil c
 print('aufgabe_50_plot_c.png', '-dpng');
-

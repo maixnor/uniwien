@@ -1,0 +1,3 @@
+
+init:
+  nix-shell -p octaveFull ghostscript
