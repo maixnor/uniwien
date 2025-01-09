@@ -91,89 +91,81 @@ public:
     };
 
     class Iterator {
+        friend class ADS_set;
+        const ADS_set* set;
+        size_t bucket_idx;
+        size_t elem_idx;
+        Bucket* current_bucket;
+
     public:
         using iterator_category = std::forward_iterator_tag;
-        using value_type = ADS_set::value_type;
-        using difference_type = ADS_set::difference_type;
-        using pointer = const value_type*;
-        using reference = const value_type&;
+        using value_type = Key;
+        using difference_type = std::ptrdiff_t;
+        using pointer = const Key*;
+        using reference = const Key&;
 
-        Iterator(const ADS_set *set = nullptr, size_type bucket = 0, size_type index = 0, Bucket* current = nullptr) 
-            : set(set), bucket(bucket), index(index), current_bucket(current) {
-            if (set && current_bucket == nullptr && bucket < set->table_size) {
-                current_bucket = set->buckets[bucket];
-                advance_past_empty_buckets();
-            }
+        Iterator(const ADS_set* s = nullptr, size_t b_idx = 0, size_t e_idx = 0, Bucket* bucket = nullptr)
+            : set(s), bucket_idx(b_idx), elem_idx(e_idx), current_bucket(bucket) {}
+
+        reference operator*() const {
+            return current_bucket->data[elem_idx];
         }
 
-        reference operator*() const { 
-            if (!current_bucket) {
-                throw std::out_of_range("Iterator dereferenced at end");
-            }
-            return current_bucket->data[index]; 
+        const Key* operator->() const {
+            return &(current_bucket->data[elem_idx]);
         }
 
-        pointer operator->() const { 
-            if (!current_bucket) {
-                throw std::out_of_range("Iterator dereferenced at end");
-            }
-            return &(current_bucket->data[index]); 
-        }
+        Iterator& operator++() {
+            if (!set || !current_bucket) 
+                return *this;
 
-        Iterator &operator++() {
-            if (!set || !current_bucket) return *this;
-            ++index;
-            while (current_bucket && index >= current_bucket->size) {
-                if (current_bucket->overflow) {
-                    current_bucket = current_bucket->overflow;
-                    index = 0;
-                } else {
-                    ++bucket;
-                    current_bucket = nullptr;
-                    index = 0;
-                    advance_past_empty_buckets();
+            // Try next element in current bucket
+            if (elem_idx + 1 < current_bucket->size) {
+                ++elem_idx;
+                return *this;
+            }
+
+            // Try overflow bucket chain
+            if (current_bucket->overflow) {
+                current_bucket = current_bucket->overflow;
+                elem_idx = 0;
+                return *this;
+            }
+
+            // Move to next main bucket
+            ++bucket_idx;
+            while (bucket_idx < set->table_size) {
+                if (set->buckets[bucket_idx] && set->buckets[bucket_idx]->size > 0) {
+                    current_bucket = set->buckets[bucket_idx];
+                    elem_idx = 0;
+                    return *this;
                 }
+                ++bucket_idx;
             }
+
+            // No more elements found, set to end
+            current_bucket = nullptr;
+            elem_idx = 0;
             return *this;
         }
 
         Iterator operator++(int) {
-            Iterator temp = *this;
+            Iterator tmp = *this;
             ++(*this);
-            return temp;
+            return tmp;
         }
 
-        friend bool operator==(const Iterator &lhs, const Iterator &rhs) {
-            return lhs.set == rhs.set && lhs.bucket == rhs.bucket && lhs.index == rhs.index && lhs.current_bucket == rhs.current_bucket;
+        bool operator==(const Iterator& other) const {
+            if (!set && !other.set) return true;
+            if (!set || !other.set) return false;
+            return set == other.set && 
+                bucket_idx == other.bucket_idx && 
+                elem_idx == other.elem_idx && 
+                current_bucket == other.current_bucket;
         }
 
-        friend bool operator!=(const Iterator &lhs, const Iterator &rhs) {
-            return !(lhs == rhs);
-        }
-
-    private:
-        const ADS_set *set;
-        size_type bucket;
-        size_type index;
-        Bucket* current_bucket;
-
-        void advance_past_empty_buckets() {
-            while (bucket < set->table_size) {
-                if (set->buckets[bucket]) {
-                    current_bucket = set->buckets[bucket];
-                    if (current_bucket->size > 0) {
-                        return;
-                    } else {
-                        current_bucket = current_bucket->overflow;
-                        index = 0;
-                        if (current_bucket && current_bucket->size > 0) {
-                            return;
-                        }
-                    }
-                }
-                ++bucket;
-            }
-            current_bucket = nullptr;
+        bool operator!=(const Iterator& other) const {
+            return !(*this == other);
         }
     };
 
@@ -221,8 +213,20 @@ public:
         return !(lhs == rhs);
     }
 
-    const_iterator begin() const { return const_iterator(this); }
-    const_iterator end() const { return const_iterator(this, table_size, 0, nullptr); }
+    const_iterator begin() const {
+        if (num_elements == 0) return end();
+        
+        for (size_t i = 0; i < table_size; ++i) {
+            if (buckets[i] && buckets[i]->size > 0) {
+                return const_iterator(this, i, 0, buckets[i]);
+            }
+        }
+        return end();
+    }
+
+    const_iterator end() const {
+        return const_iterator(this, table_size, 0, nullptr);
+    }
 
 private:
     size_type table_size;
