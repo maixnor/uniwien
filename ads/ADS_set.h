@@ -332,9 +332,6 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     
     // Traverse to the appropriate bucket (base or overflow)
     while (current) {
-        if (current->contains(key)) {
-            return {const_iterator(this, index, current->at(key).first, current), false};
-        }
         if (!current->isFull()) {
             current->add(key);
             ++num_elements;
@@ -356,7 +353,12 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
 template <typename Key, size_t N, size_t BucketSize>
 void ADS_set<Key, N, BucketSize>::clear() {
     for (size_type i = 0; i < table_size; ++i) {
-        delete buckets[i];
+        Bucket *current = buckets[i];
+        while (current) {
+            Bucket *temp = current->overflow;
+            delete current;
+            current = temp;
+        }
         buckets[i] = nullptr;
     }
     num_elements = 0;
@@ -368,9 +370,7 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::era
     Bucket* current = buckets[index];
     if (!current) return 0;
     size_type removed = buckets[index]->remove(key);
-    if (removed > 0) {
-        --num_elements;
-    }
+    num_elements = num_elements - removed;
     return removed;
 }
 
