@@ -35,10 +35,7 @@ public:
             }
         }
 
-        ~Bucket() {
-            delete overflow;
-            overflow = nullptr;
-        }
+        ~Bucket() {}
 
         bool isFull() const {
             return size == BucketSize;
@@ -58,8 +55,9 @@ public:
         size_type remove(const key_type &key) {
             for (size_type i = 0; i < size; ++i) {
                 if (key_equal{}(data[i], key)) {
-                    data[i] = data[size - 1];
-                    data[size - 1] = key_type(); // TODO performance hit
+                    for (size_type j = i; j < size - 1; ++j) {
+                        data[j] = data[j + 1];
+                    }
                     --size;
                     return 1;
                 }
@@ -71,7 +69,7 @@ public:
         }
 
         bool contains(const key_type &key) const {
-            return at(key).first != static_cast<size_type>(-1);
+            return at(key).first != BucketSize + 1;
         }
 
         std::pair<size_type, const Bucket*> at(const key_type &key) const {
@@ -83,7 +81,7 @@ public:
             if (overflow) {
                 return overflow->at(key);
             }
-            return {static_cast<size_type>(-1), this};
+            return {BucketSize + 1, this};
         }
     };
 
@@ -320,6 +318,8 @@ void ADS_set<Key, N, BucketSize>::insert(InputIt first, InputIt last) {
 
 template <typename Key, size_t N, size_t BucketSize>
 std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Key, N, BucketSize>::insert(const key_type &key) {
+    if (count(key))
+        return {find(key), false};
     if (num_elements >= table_size * 2) {
         rehash(); 
     }
@@ -328,29 +328,28 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
         buckets[index] = new Bucket();
     }
     Bucket* current = buckets[index];
+    Bucket* prev = nullptr;
     
     // Traverse to the appropriate bucket (base or overflow)
     while (current) {
-        size_type idx = current->at(key).first;
-        if (idx != static_cast<size_type>(-1)) {
-            return {const_iterator(this, index, idx, current), false};
+        if (current->contains(key)) {
+            return {const_iterator(this, index, current->at(key).first, current), false};
         }
         if (!current->isFull()) {
             current->add(key);
             ++num_elements;
             return {const_iterator(this, index, current->size - 1, current), true};
         }
+        prev = current;
         current = current->overflow;
     }
 
     // all buckets are already full, 
-    // next overflow bucket is initialized
-    
-    // Create a new overflow bucket
-    current = new Bucket();
+    // next overflow bucket is initialized and **linked**
+    current = new Bucket(); 
+    prev->overflow = current;
     current->add(key);
     ++num_elements;
-    
     return {const_iterator(this, index, current->size - 1, current), true};
 }
 
@@ -366,11 +365,8 @@ void ADS_set<Key, N, BucketSize>::clear() {
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::erase(const key_type &key) {
     size_type index = bucket_index(key);
-    if (!buckets[index]) return 0;
-
-    auto location = buckets[index]->at(key);
-    if (location.first == static_cast<size_type>(-1)) return 0; // Key not found
-
+    Bucket* current = buckets[index];
+    if (!current) return 0;
     size_type removed = buckets[index]->remove(key);
     if (removed > 0) {
         --num_elements;
@@ -396,7 +392,7 @@ typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>
     if (!buckets[index]) return end();
 
     std::pair<size_type, const Bucket*> location = buckets[index]->at(key);
-    if (location.first == static_cast<size_type>(-1)) return end(); // Key not found
+    if (location.first == (BucketSize + 1)) return end(); // Key not found
 
     return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
 }
