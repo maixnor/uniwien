@@ -401,7 +401,7 @@ typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>
     if (!buckets[index]) return end();
 
     std::pair<size_type, const Bucket*> location = buckets[index]->at(key);
-    if (location.first < 0) return end(); // Key not found
+    if (location.first == static_cast<size_type>(-1)) return end(); // Key not found
 
     return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
 }
