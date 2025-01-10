@@ -55,8 +55,8 @@ public:
         size_type remove(const key_type &key) {
             for (size_type i = 0; i < size; ++i) {
                 if (key_equal{}(data[i], key)) {
-                    for (size_type j = i; j < size - 1; ++j) {
-                        data[j] = data[j + 1];
+                    for (size_type j = i + 1; j < size - 2; ++j) {
+                        data[j - 1] = data[j];
                     }
                     --size;
                     return 1;
