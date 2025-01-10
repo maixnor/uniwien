@@ -36,10 +36,8 @@ public:
         }
 
         ~Bucket() {
-            if (overflow) {
-                delete overflow;
-                overflow = nullptr;
-            }
+            delete overflow;
+            overflow = nullptr;
         }
 
         bool isFull() const {
@@ -73,19 +71,19 @@ public:
         }
 
         bool contains(const key_type &key) const {
-            return at(key) != static_cast<size_type>(-1);
+            return at(key).first != static_cast<size_type>(-1);
         }
 
-        size_type at(const key_type &key) const {
+        std::pair<size_type, const Bucket*> at(const key_type &key) const {
             for (size_type i = 0; i < size; ++i) {
                 if (key_equal{}(data[i], key)) {
-                    return i;
+                    return {i, this};
                 }
             }
             if (overflow) {
                 return overflow->at(key);
             }
-            return static_cast<size_type>(-1);
+            return {static_cast<size_type>(-1), this};
         }
     };
 
@@ -118,23 +116,22 @@ public:
         }
 
         Iterator& operator++() {
-            if (!set || !current_bucket) 
-                return *this;
+            if (!set || !current_bucket) return *this;
 
-            // Check current bucket
+            // Advance within current bucket
             if (elem_idx + 1 < current_bucket->size) {
                 ++elem_idx;
                 return *this;
             }
 
-            // Check overflow chain
+            // Move to overflow if present
             if (current_bucket->overflow && current_bucket->overflow->size > 0) {
                 current_bucket = current_bucket->overflow;
                 elem_idx = 0;
                 return *this;
             }
 
-            // Find next non-empty bucket
+            // Move to next non-empty bucket
             size_t next_bucket = bucket_idx + 1;
             while (next_bucket < set->table_size) {
                 if (set->buckets[next_bucket] && set->buckets[next_bucket]->size > 0) {
@@ -146,7 +143,7 @@ public:
                 ++next_bucket;
             }
 
-            // Set to end state
+            // End
             bucket_idx = set->table_size;
             current_bucket = nullptr;
             elem_idx = 0;
@@ -162,8 +159,7 @@ public:
         bool operator==(const Iterator& other) const {
             return set == other.set && 
                    bucket_idx == other.bucket_idx && 
-                   elem_idx == other.elem_idx &&
-                   current_bucket == other.current_bucket;
+                   elem_idx == other.elem_idx;
         }
 
         bool operator!=(const Iterator& other) const {
@@ -334,7 +330,7 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     
     // Traverse to the appropriate bucket (base or overflow)
     while (true) {
-        size_type idx = current->at(key);
+        size_type idx = current->at(key).first;
         if (idx != static_cast<size_type>(-1)) {
             return {const_iterator(this, index, idx, current), false};
         }
@@ -371,7 +367,11 @@ void ADS_set<Key, N, BucketSize>::clear() {
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::erase(const key_type &key) {
     size_type index = bucket_index(key);
-    if (!buckets[index] || !buckets[index]->contains(key)) return 0;
+    if (!buckets[index]) return 0;
+    
+    auto location = buckets[index]->at(key);
+    if (location.first < 0) return 0; // could not find key
+    
     size_type removed = buckets[index]->remove(key);
     if (removed > 0) {
         --num_elements;
@@ -393,18 +393,12 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::cou
 
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::find(const key_type &key) const {
+    if (this->empty()) return begin();
     size_type index = bucket_index(key);
-    Bucket* bucket = buckets[index];
-
-    while (bucket) {
-        for (size_type i = 0; i < bucket->size; ++i) {
-            if (key_equal{}(bucket->data[i], key)) {
-                return const_iterator(this, index, i, bucket);
-            }
-        }
-        bucket = bucket->overflow;
-    }
-    return end();
+    Bucket* current = buckets[index];
+    std::pair<size_type, const Bucket*> location = current->at(key);
+    if (location.first == static_cast<size_type>(-1)) return end(); // not found
+    return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
 }
 
 template <typename Key, size_t N, size_t BucketSize>
