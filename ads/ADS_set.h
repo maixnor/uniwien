@@ -159,7 +159,8 @@ public:
         bool operator==(const Iterator& other) const {
             return set == other.set && 
                    bucket_idx == other.bucket_idx && 
-                   elem_idx == other.elem_idx;
+                   elem_idx == other.elem_idx &&
+                   current_bucket == other.current_bucket;
         }
 
         bool operator!=(const Iterator& other) const {
@@ -342,6 +343,9 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
         if (!current->overflow) break;
         current = current->overflow;
     }
+
+    // all buckets are already full, 
+    // next overflow bucket is initialized
     
     // Create a new overflow bucket
     Bucket* next_overflow = new Bucket();
@@ -393,12 +397,12 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::cou
 
 template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::find(const key_type &key) const {
-    if (this->empty()) return begin();
     size_type index = bucket_index(key);
-    Bucket* current = buckets[index];
-    if (!current) return end();
-    std::pair<size_type, const Bucket*> location = current->at(key);
-    if (location.first == static_cast<size_type>(-1)) return end(); // not found
+    if (!buckets[index]) return end();
+
+    std::pair<size_type, const Bucket*> location = buckets[index]->at(key);
+    if (location.first < 0) return end(); // Key not found
+
     return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
 }
 
