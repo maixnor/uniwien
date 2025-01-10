@@ -11,5 +11,5 @@ simple-person:
 
 btest:
   \g++ -Wall -Wextra -Og -g -std=c++17 -pedantic-errors -pthread -DPH2 btest.cpp -o btest
-  ./btest -b
+  ./btest
   touch ADS_set.h

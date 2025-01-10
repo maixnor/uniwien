@@ -330,7 +330,7 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     Bucket* current = buckets[index];
     
     // Traverse to the appropriate bucket (base or overflow)
-    while (true) {
+    while (current) {
         size_type idx = current->at(key).first;
         if (idx != static_cast<size_type>(-1)) {
             return {const_iterator(this, index, idx, current), false};
@@ -340,7 +340,6 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
             ++num_elements;
             return {const_iterator(this, index, current->size - 1, current), true};
         }
-        if (!current->overflow) break;
         current = current->overflow;
     }
 
@@ -348,13 +347,9 @@ std::pair<typename ADS_set<Key, N, BucketSize>::const_iterator, bool> ADS_set<Ke
     // next overflow bucket is initialized
     
     // Create a new overflow bucket
-    Bucket* next_overflow = new Bucket();
-    next_overflow->add(key);
+    current = new Bucket();
+    current->add(key);
     ++num_elements;
-    
-    // Link the new overflow bucket
-    current->overflow = next_overflow;
-    current = current->overflow;
     
     return {const_iterator(this, index, current->size - 1, current), true};
 }
@@ -374,7 +369,7 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::era
     if (!buckets[index]) return 0;
 
     auto location = buckets[index]->at(key);
-    if (location.first < 0) return 0; // Key not found
+    if (location.first == static_cast<size_type>(-1)) return 0; // Key not found
 
     size_type removed = buckets[index]->remove(key);
     if (removed > 0) {
