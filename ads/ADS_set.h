@@ -371,6 +371,11 @@ typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::era
     if (!current) return 0;
     size_type removed = buckets[index]->remove(key);
     num_elements = num_elements - removed;
+    if (current->size == 0) { // current is empty, replace with overflow
+        auto temp = current->overflow;
+        delete current;
+        buckets[index] = temp;
+    }
     return removed;
 }
 
@@ -424,26 +429,28 @@ void ADS_set<Key, N, BucketSize>::dump(std::ostream &o) const {
 
 template <typename Key, size_t N, size_t BucketSize>
 void ADS_set<Key, N, BucketSize>::rehash() {
-    size_type new_table_size = table_size * 2;
+     size_type new_table_size = table_size * 2;
     Bucket **new_buckets = new Bucket*[new_table_size]();
-    for (size_type i = 0; i < new_table_size; ++i) {
-        new_buckets[i] = nullptr;
-    }
-
+    
+    // Copy all keys and delete old buckets
     for (size_type i = 0; i < table_size; ++i) {
-        for (Bucket *bucket = buckets[i]; bucket; bucket = bucket->overflow) {
-            for (size_type j = 0; j < bucket->size; ++j) {
-                const key_type& key = bucket->data[j];
-                size_type new_index = hasher{}(key) % new_table_size;
+        Bucket *current = buckets[i];
+        while (current) {
+            for (size_type j = 0; j < current->size; ++j) {
+                size_type new_index = hasher{}(current->data[j]) % new_table_size;
                 if (!new_buckets[new_index]) {
                     new_buckets[new_index] = new Bucket();
                 }
-                new_buckets[new_index]->add(key);
+                new_buckets[new_index]->add(current->data[j]);
             }
-            if (!bucket->overflow) delete bucket;
+            Bucket *to_delete = current;
+            current = current->overflow;
+            delete to_delete;
         }
     }
-    buckets = std::move(new_buckets);
+    
+    delete[] buckets;
+    buckets = new_buckets;
     table_size = new_table_size;
 }
 
