@@ -35,7 +35,12 @@ public:
             }
         }
 
-        ~Bucket() { delete overflow; }
+        ~Bucket() {
+            if (overflow) {
+                delete overflow;
+                overflow = nullptr;
+            }
+        }
 
         bool isFull() const {
             return size == BucketSize;
@@ -55,20 +60,14 @@ public:
         size_type remove(const key_type &key) {
             for (size_type i = 0; i < size; ++i) {
                 if (key_equal{}(data[i], key)) {
-                    for (size_type j = i; j < size - 1; ++j) {
-                        data[j] = data[j + 1];
-                    }
+                    data[i] = data[size - 1];
+                    data[size - 1] = key_type(); // TODO performance hit
                     --size;
                     return 1;
                 }
             }
             if (overflow) {
-                size_type removed = overflow->remove(key);
-                if (overflow->size == 0) {
-                    delete overflow;
-                    overflow = nullptr;
-                }
-                return removed;
+                return overflow->remove(key);
             }
             return 0;
         }
@@ -112,38 +111,43 @@ public:
         }
 
         const Key* operator->() const {
-            return &(current_bucket->data[elem_idx]);
+            if (current_bucket && elem_idx < current_bucket->size) {
+                return &current_bucket->data[elem_idx];
+            }
+            return nullptr;
         }
 
         Iterator& operator++() {
             if (!set || !current_bucket) 
                 return *this;
 
-            // Try next element in current bucket
+            // Check current bucket
             if (elem_idx + 1 < current_bucket->size) {
                 ++elem_idx;
                 return *this;
             }
 
-            // Try overflow bucket chain
-            if (current_bucket->overflow) {
+            // Check overflow chain
+            if (current_bucket->overflow && current_bucket->overflow->size > 0) {
                 current_bucket = current_bucket->overflow;
                 elem_idx = 0;
                 return *this;
             }
 
-            // Move to next main bucket
-            ++bucket_idx;
-            while (bucket_idx < set->table_size) {
-                if (set->buckets[bucket_idx] && set->buckets[bucket_idx]->size > 0) {
+            // Find next non-empty bucket
+            size_t next_bucket = bucket_idx + 1;
+            while (next_bucket < set->table_size) {
+                if (set->buckets[next_bucket] && set->buckets[next_bucket]->size > 0) {
+                    bucket_idx = next_bucket;
                     current_bucket = set->buckets[bucket_idx];
                     elem_idx = 0;
                     return *this;
                 }
-                ++bucket_idx;
+                ++next_bucket;
             }
 
-            // No more elements found, set to end
+            // Set to end state
+            bucket_idx = set->table_size;
             current_bucket = nullptr;
             elem_idx = 0;
             return *this;
@@ -156,16 +160,18 @@ public:
         }
 
         bool operator==(const Iterator& other) const {
-            if (!set && !other.set) return true;
-            if (!set || !other.set) return false;
             return set == other.set && 
-                bucket_idx == other.bucket_idx && 
-                elem_idx == other.elem_idx && 
-                current_bucket == other.current_bucket;
+                   bucket_idx == other.bucket_idx && 
+                   elem_idx == other.elem_idx &&
+                   current_bucket == other.current_bucket;
         }
 
         bool operator!=(const Iterator& other) const {
             return !(*this == other);
+        }
+
+        void print() const {
+            std::cout << bucket_idx << " " << elem_idx << " " << std::endl;
         }
     };
 
