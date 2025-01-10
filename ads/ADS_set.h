@@ -368,10 +368,10 @@ template <typename Key, size_t N, size_t BucketSize>
 typename ADS_set<Key, N, BucketSize>::size_type ADS_set<Key, N, BucketSize>::erase(const key_type &key) {
     size_type index = bucket_index(key);
     if (!buckets[index]) return 0;
-    
+
     auto location = buckets[index]->at(key);
-    if (location.first < 0) return 0; // could not find key
-    
+    if (location.first < 0) return 0; // Key not found
+
     size_type removed = buckets[index]->remove(key);
     if (removed > 0) {
         --num_elements;
@@ -396,6 +396,7 @@ typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>
     if (this->empty()) return begin();
     size_type index = bucket_index(key);
     Bucket* current = buckets[index];
+    if (!current) return end();
     std::pair<size_type, const Bucket*> location = current->at(key);
     if (location.first == static_cast<size_type>(-1)) return end(); // not found
     return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
@@ -413,9 +414,11 @@ void ADS_set<Key, N, BucketSize>::dump(std::ostream &o) const {
     for (size_type i = 0; i < table_size; ++i) {
         o << "Bucket " << i << ": ";
         for (Bucket *bucket = buckets[i]; bucket; bucket = bucket->overflow) {
+            o << "[ ";
             for (size_type j = 0; j < bucket->size; ++j) {
                 o << bucket->data[j] << " ";
             }
+            o << "] ";
             if (bucket->overflow) {
                 o << "-> ";
             }
