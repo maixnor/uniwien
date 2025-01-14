@@ -38,12 +38,16 @@
                 sympy
                 scipy
                 statsmodels
-                # Add any additional Python packages here
-                seaborn # a dataset library
+                seaborn
               ]
             ))
             gnuplot
             octave
+            R
+            rPackages.tidyverse
+            rPackages.ggplot2
+            rPackages.rmarkdown
+            rPackages.IRkernel
           ];
           shellHook = ''
               git pull --all
@@ -62,6 +66,9 @@
                 git commit -m "snapshot notebooks"
               }
               trap cleanup EXIT
+
+              # Install the R kernel for Jupyter
+              R -e 'IRkernel::installspec()'
 
               # --wait for the process to not exit immediately
               code --install-extension ms-toolsai.jupyter
