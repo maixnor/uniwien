@@ -26,7 +26,7 @@ grid on;
 hold off;
 
 % Speichern als PNG für Teil b
-print('aufgabe_50_plot_b.png', '-dpng');
+print('50b.png', '-dpng');
 
 % c) Grafische Darstellung des erhaltenen Polynoms und der Werte sqrt(t)
 figure;
@@ -41,4 +41,9 @@ grid on;
 hold off;
 
 % Speichern als PNG für Teil c
+<<<<<<< Updated upstream
 print('aufgabe_50_plot_c.png', '-dpng');
+=======
+print('50c.png', '-dpng');
+
+>>>>>>> Stashed changes
