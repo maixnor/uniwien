@@ -105,6 +105,18 @@ public:
         Iterator(const ADS_set* s = nullptr, size_t b_idx = 0, size_t e_idx = 0, Bucket* bucket = nullptr)
             : set(s), bucket_idx(b_idx), elem_idx(e_idx), current_bucket(bucket) {}
 
+        void setFirst(Iterator iter) {
+            first = iter;
+        }
+
+        void setSecond(Iterator iter) {
+            second = iter;
+        }
+
+        void setThird(Iterator iter) {
+            third = iter;
+        }
+
         reference operator*() const {
             return current_bucket->data[elem_idx];
         }
@@ -119,9 +131,24 @@ public:
         Iterator& operator++() {
             if (!set || !current_bucket) return *this;
 
-            if (first) return *first;
-            if (second) return *second;
-            if (third) return *third;
+            if (first) { 
+                auto tmp = first;
+                delete first;
+                first = nullptr;
+                return *first;
+            }
+            if (second) { 
+                auto tmp = second;
+                delete second;
+                second = nullptr;
+                return *second;
+            }
+            if (third) { 
+                auto tmp = third;
+                delete third;
+                third = nullptr;
+                return *third;
+            }
 
             // Advance within current bucket
             if (elem_idx + 1 < current_bucket->size) {
@@ -152,6 +179,7 @@ public:
             bucket_idx = set->table_size;
             current_bucket = nullptr;
             elem_idx = 0;
+
             return *this;
         }
 
@@ -203,6 +231,7 @@ public:
     size_type erase(const_iterator pos);
 
     size_type count(const key_type &key) const;
+    const_iterator y() const;
     const_iterator find(const key_type &key) const;
 
     void swap(ADS_set &other);
@@ -229,6 +258,7 @@ public:
                 return const_iterator(this, i, 0, buckets[i]);
             }
         }
+
         return end();
     }
 
@@ -407,6 +437,22 @@ typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>
     if (location.first == (BucketSize + 1)) return end(); // Key not found
 
     return const_iterator(this, index, location.first, const_cast<Bucket*>(location.second));
+}
+
+template <typename Key, size_t N, size_t BucketSize>
+typename ADS_set<Key, N, BucketSize>::const_iterator ADS_set<Key, N, BucketSize>::y() const {
+    auto result = begin();
+    if (num_elements == 0) return result;
+    auto first = begin();
+    if (num_elements == 1) return result;
+    auto second = first++;
+    if (num_elements == 2) {
+        result.setSecond(first);
+        result.setFirst;
+    }
+    auto third = second++;
+    result.third = *third;
+    return result;
 }
 
 template <typename Key, size_t N, size_t BucketSize>

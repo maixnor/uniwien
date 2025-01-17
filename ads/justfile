@@ -13,3 +13,11 @@ btest:
   \g++ -Wall -Wextra -Og -g -std=c++17 -pedantic-errors -pthread -DPH2 btest.cpp -o btest
   ./btest
   touch ADS_set.h
+
+speziell:
+  \g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=std::string -DSIZE=1 simpletest_speziell.cpp -o simpletest
+  ./simpletest
+  
+stest:
+  \g++ -Wall -Wextra -Werror -O3 -std=c++17 -pedantic-errors -DPH2 -DETYPE=std::string -DSIZE=1 test_speziell.cpp -o stest
+  ./stest
