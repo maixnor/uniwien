@@ -39,6 +39,7 @@
                 scipy
                 statsmodels
                 seaborn
+                cx-oracle
               ]
             ))
             gnuplot
