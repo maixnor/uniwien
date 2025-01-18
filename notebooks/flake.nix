@@ -40,6 +40,7 @@
                 statsmodels
                 seaborn
                 cx-oracle
+                pip
               ]
             ))
             gnuplot
