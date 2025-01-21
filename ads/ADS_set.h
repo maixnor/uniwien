@@ -93,7 +93,6 @@ public:
         Bucket* current_bucket;
         Iterator first = nullptr;
         Iterator second = nullptr;
-        Iterator third = nullptr;
 
     public:
         using iterator_category = std::forward_iterator_tag;
@@ -118,10 +117,6 @@ public:
 
         Iterator& operator++() {
             if (!set || !current_bucket) return *this;
-
-            if (first) return *first;
-            if (second) return *second;
-            if (third) return *third;
 
             // Advance within current bucket
             if (elem_idx + 1 < current_bucket->size) {
