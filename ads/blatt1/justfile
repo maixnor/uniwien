@@ -1,0 +1,5 @@
+p1:
+    g++ -std=c++17 problem1.cpp -o executable
+
+p2:
+    g++ -std=c++17 problem2.cpp -o executable
